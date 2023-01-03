@@ -1,0 +1,30 @@
+Package: rwptool
+Type: Package
+Title: Regional Work Plans Tool
+Version: 0.0.9
+Authors@R: 
+    c(person(given = "Joel",
+             family = "Vigneau",
+             email = "joel.vigneau@ifremer.fr",
+             role = c("aut")),
+     person(given = "Kirsten",
+            family = "Birch Håkansson",
+            email = "kih@aqua.dtu.dk",
+            role = c("aut")),
+     person(given = "Nuno",
+            family = "Prista",
+            email = "nuno.prista@slu.se",
+            role = c("aut")),
+     person(given = "Mathieu",
+            family = "Depetris",
+            email = "mathieu.depetris@ird.fr",
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0001-8080-0531")))
+Description: R toolbox package for the EU Regional Work Plans development.
+Encoding: UTF-8
+LazyData: true
+License: GPL-3 + file LICENSE
+RoxygenNote: 7.2.3
+VignetteBuilder: knitr
+URL: https://github.com/OB7-IRD/rwptool
+BugReports: https://github.com/OB7-IRD/rwptool/issues
