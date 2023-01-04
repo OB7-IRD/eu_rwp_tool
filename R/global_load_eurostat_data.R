@@ -29,11 +29,11 @@ global_load_eurostat_data <- function(path) {
   if (length(x = eurostat_files) != 0) {
     eurostat_files_final <- lapply(X = seq_len(length.out = length(x = eurostat_files)),
                                    FUN = function(eurostat_file_id) {
-                                     eurostat_file_ori <- read.table(file.path(path,
-                                                                               eurostat_files[eurostat_file_id]),
-                                                                     header = TRUE,
-                                                                     sep = '\t',
-                                                                     as.is = TRUE)
+                                     eurostat_file_ori <- utils::read.table(file.path(path,
+                                                                                      eurostat_files[eurostat_file_id]),
+                                                                            header = TRUE,
+                                                                            sep = '\t',
+                                                                            as.is = TRUE)
                                      first_columns <- unlist(x = strsplit(x = names(eurostat_file_ori)[1],
                                                                           split = "[.]"))
                                      first_columns <- first_columns[-length(x = first_columns)]

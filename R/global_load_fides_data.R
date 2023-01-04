@@ -51,10 +51,10 @@ global_load_fides_data <- function(reference_period,
   # process ----
   countries <- c(country,
                  "XEU")
-  fides_file <- read.table(file = file_path,
-                           dec = ".",
-                           sep = ";",
-                           header = TRUE)
+  fides_file <- utils::read.table(file = file_path,
+                                  dec = ".",
+                                  sep = ";",
+                                  header = TRUE)
   tac_final <- dplyr::filter(.data = fides_file,
                              level_code %in% !!countries)
   if (nrow(x = tac_final) == 0) {
