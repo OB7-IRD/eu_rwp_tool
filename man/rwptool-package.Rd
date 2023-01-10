@@ -11,7 +11,7 @@ R toolbox package for the EU Regional Work Plans development.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/OB7-IRD/rwptool}
+  \item \url{https://ob7-ird.github.io/rwptool/}
   \item Report bugs at \url{https://github.com/OB7-IRD/rwptool/issues}
 }
 

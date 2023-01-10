@@ -16,13 +16,6 @@ global_load_fides_data <- function(reference_period,
       " - Start process for load data from FIDES data.\n",
       sep = "")
   # global variables assignement ----
-  year <- NULL
-  Amendment.check <- NULL
-  Year <- NULL
-  Level.Description <- NULL
-  stock_group <- NULL
-  level_description <- NULL
-  adapted_quota_ori <- NULL
   level_code <- NULL
   # global arguments verifications ----
   if (codama::r_type_checking(r_object = reference_period,

@@ -32,7 +32,7 @@ global_load_eurostat_data <- function(path) {
                                      eurostat_file_ori <- utils::read.table(file.path(path,
                                                                                       eurostat_files[eurostat_file_id]),
                                                                             header = TRUE,
-                                                                            sep = '\t',
+                                                                            sep = "\t",
                                                                             as.is = TRUE)
                                      first_columns <- unlist(x = strsplit(x = names(eurostat_file_ori)[1],
                                                                           split = "[.]"))

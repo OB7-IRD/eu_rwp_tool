@@ -1,0 +1,14 @@
+template:
+  params:
+    bootswatch: cerulean
+
+articles:
+- title: Tutorials
+  navbar: ~
+  contents:
+  - rwp_table_2_1_generation
+
+url: https://ob7-ird.github.io/rwptool/
+
+development:
+  mode: auto
