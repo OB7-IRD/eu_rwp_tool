@@ -34,7 +34,7 @@ Imports:
     magrittr,
     stringr (>= 1.5.0),
     tidyr (>= 1.2.1),
-    utils (>= 4.2.1)
+    utils
 Remotes: 
     OB7-IRD/codama
 Suggests: 
