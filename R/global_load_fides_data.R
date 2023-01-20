@@ -7,7 +7,6 @@
 #' @return The function return a {\link[tibble]{tibble}}.
 #' @export
 #' @importFrom dplyr filter
-#' @importFrom codama r_type_checking
 global_load_fides_data <- function(reference_period,
                                    file_path,
                                    country = NULL) {
@@ -17,30 +16,30 @@ global_load_fides_data <- function(reference_period,
       sep = "")
   # global variables assignement ----
   level_code <- NULL
-  # global arguments verifications ----
-  if (codama::r_type_checking(r_object = reference_period,
-                              type = "integer",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = reference_period,
-                                   type = "integer",
-                                   output = "message"))
-  }
-  if (codama::r_type_checking(r_object = file_path,
-                              type = "character",
-                              length = 1L,
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = file_path,
-                                   type = "character",
-                                   length = 1L,
-                                   output = "message"))
-  }
-  if (codama::r_type_checking(r_object = country,
-                              type = "character",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = country,
-                                   type = "character",
-                                   output = "message"))
-  }
+  # # global arguments verifications ----
+  # if (codama::r_type_checking(r_object = reference_period,
+  #                             type = "integer",
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = reference_period,
+  #                                  type = "integer",
+  #                                  output = "message"))
+  # }
+  # if (codama::r_type_checking(r_object = file_path,
+  #                             type = "character",
+  #                             length = 1L,
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = file_path,
+  #                                  type = "character",
+  #                                  length = 1L,
+  #                                  output = "message"))
+  # }
+  # if (codama::r_type_checking(r_object = country,
+  #                             type = "character",
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = country,
+  #                                  type = "character",
+  #                                  output = "message"))
+  # }
   # process ----
   countries <- c(country,
                  "XEU")

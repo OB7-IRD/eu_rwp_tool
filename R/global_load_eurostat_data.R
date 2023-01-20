@@ -4,7 +4,6 @@
 #' @param path {\link[base]{character}} expected. Input path directory where tsv EUROSTAT landings files are located.
 #' @return The function return a {\link[base]{data.frame}}.
 #' @export
-#' @importFrom codama r_type_checking
 #' @importFrom stringr str_detect str_extract
 #' @importFrom tidyr separate
 global_load_eurostat_data <- function(path) {
@@ -13,15 +12,15 @@ global_load_eurostat_data <- function(path) {
       " - Start process for load data from eurostat file(s).\n",
       sep = "")
   # arguments verifications ----
-  if (codama::r_type_checking(r_object = path,
-                              type = "character",
-                              length = as.integer(x = 1),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = path,
-                                   type = "character",
-                                   length = as.integer(x = 1),
-                                   output = "message"))
-  }
+  # if (codama::r_type_checking(r_object = path,
+  #                             type = "character",
+  #                             length = as.integer(x = 1),
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = path,
+  #                                  type = "character",
+  #                                  length = as.integer(x = 1),
+  #                                  output = "message"))
+  # }
   # process ----
   eurostat_files <- list.files(path = path)
   eurostat_files <- eurostat_files[stringr::str_detect(string = eurostat_files,

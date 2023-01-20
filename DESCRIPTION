@@ -29,14 +29,11 @@ VignetteBuilder: knitr
 URL: https://ob7-ird.github.io/rwptool/
 BugReports: https://github.com/OB7-IRD/rwptool/issues
 Imports: 
-    codama (>= 0.9.0),
     dplyr (>= 1.0.10),
     magrittr,
     stringr (>= 1.5.0),
     tidyr (>= 1.2.1),
     utils
-Remotes: 
-    OB7-IRD/codama
 Suggests: 
     knitr (>= 1.39),
     markdown (>= 1.1)

@@ -9,7 +9,6 @@
 #' @param input_path {\link[base]{character}} expected. Input path for input files.
 #' @param output_path {\link[base]{character}} expected. Output path. By default NULL.
 #' @return A list with two elements: "table_2_1_template" and "table_2_1_template_control".
-#' @importFrom codama r_type_checking
 #' @importFrom utils read.table
 #' @importFrom dplyr filter rename select left_join tibble relocate group_by summarise mutate case_when
 #' @export
@@ -41,75 +40,75 @@ rwp_table_2_1_template <- function(reference_period_start,
   tac <- NULL
   share_landing <- NULL
   # arguments verifications ----
-  if (codama::r_type_checking(r_object = reference_period_start,
-                              type = "integer",
-                              length = as.integer(x = 1),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = reference_period_start,
-                                   type = "integer",
-                                   length = as.integer(x = 1),
-                                   output = "message"))
-  }
-  if (codama::r_type_checking(r_object = reference_period_end,
-                              type = "integer",
-                              length = as.integer(x = 1),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = reference_period_end,
-                                   type = "integer",
-                                   length = as.integer(x = 1),
-                                   output = "message"))
-  }
-  if (reference_period_end <= reference_period_start
-      || (reference_period_end - reference_period_start + 1 < 3)) {
-    stop(format(x = Sys.time(),
-                "%Y-%m-%d %H:%M:%S"),
-         " - Error, invalid \"reference_period\" arguments.\n",
-         "\"reference_period_end\" must be less than or equal to \"reference_period_start\" and we must have at least 3 years between the two.\n")
-  }
-  if (codama::r_type_checking(r_object = country,
-                              type = "character",
-                              length = as.integer(x = 1),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = country,
-                                   type = "character",
-                                   length = as.integer(x = 1),
-                                   output = "message"))
-  }
-  if (codama::r_type_checking(r_object = landing_statistics,
-                              type = "character",
-                              length = as.integer(x = 1),
-                              allowed_values = c("eurostat",
-                                                 "rcg_stats"),
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = landing_statistics,
-                                   type = "character",
-                                   length = as.integer(x = 1),
-                                   allowed_values = c("eurostat",
-                                                      "rcg_stats"),
-                                   output = "message"))
-  }
-  if (codama::r_type_checking(r_object = rfmo,
-                              type = "character",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = rfmo,
-                                   type = "character",
-                                   output = "message"))
-  }
-  if (codama::r_type_checking(r_object = input_path,
-                              type = "character",
-                              output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = input_path,
-                                   type = "character",
-                                   output = "message"))
-  }
-  if (! is.null(x = output_path)
-      && codama::r_type_checking(r_object = output_path,
-                                 type = "character",
-                                 output = "logical") != TRUE) {
-    return(codama::r_type_checking(r_object = output_path,
-                                   type = "character",
-                                   output = "message"))
-  }
+  # if (codama::r_type_checking(r_object = reference_period_start,
+  #                             type = "integer",
+  #                             length = as.integer(x = 1),
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = reference_period_start,
+  #                                  type = "integer",
+  #                                  length = as.integer(x = 1),
+  #                                  output = "message"))
+  # }
+  # if (codama::r_type_checking(r_object = reference_period_end,
+  #                             type = "integer",
+  #                             length = as.integer(x = 1),
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = reference_period_end,
+  #                                  type = "integer",
+  #                                  length = as.integer(x = 1),
+  #                                  output = "message"))
+  # }
+  # if (reference_period_end <= reference_period_start
+  #     || (reference_period_end - reference_period_start + 1 < 3)) {
+  #   stop(format(x = Sys.time(),
+  #               "%Y-%m-%d %H:%M:%S"),
+  #        " - Error, invalid \"reference_period\" arguments.\n",
+  #        "\"reference_period_end\" must be less than or equal to \"reference_period_start\" and we must have at least 3 years between the two.\n")
+  # }
+  # if (codama::r_type_checking(r_object = country,
+  #                             type = "character",
+  #                             length = as.integer(x = 1),
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = country,
+  #                                  type = "character",
+  #                                  length = as.integer(x = 1),
+  #                                  output = "message"))
+  # }
+  # if (codama::r_type_checking(r_object = landing_statistics,
+  #                             type = "character",
+  #                             length = as.integer(x = 1),
+  #                             allowed_values = c("eurostat",
+  #                                                "rcg_stats"),
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = landing_statistics,
+  #                                  type = "character",
+  #                                  length = as.integer(x = 1),
+  #                                  allowed_values = c("eurostat",
+  #                                                     "rcg_stats"),
+  #                                  output = "message"))
+  # }
+  # if (codama::r_type_checking(r_object = rfmo,
+  #                             type = "character",
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = rfmo,
+  #                                  type = "character",
+  #                                  output = "message"))
+  # }
+  # if (codama::r_type_checking(r_object = input_path,
+  #                             type = "character",
+  #                             output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = input_path,
+  #                                  type = "character",
+  #                                  output = "message"))
+  # }
+  # if (! is.null(x = output_path)
+  #     && codama::r_type_checking(r_object = output_path,
+  #                                type = "character",
+  #                                output = "logical") != TRUE) {
+  #   return(codama::r_type_checking(r_object = output_path,
+  #                                  type = "character",
+  #                                  output = "message"))
+  # }
   # setup ----
   reference_period <- c(reference_period_start:reference_period_end)
   if (length(x = reference_period) < 3) {
