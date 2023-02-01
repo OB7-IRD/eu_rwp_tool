@@ -282,7 +282,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                              tac = NA,
                                              share_landing = NA,
                                              source_eu = !!source_eu,
-                                             thresh = "None",
+                                             thresh = "Not coded yet",
                                              reg_coord = NA,
                                              covered_length = NA,
                                              selected_bio = NA,
@@ -420,57 +420,59 @@ rwp_table_2_1_template <- function(reference_period_start,
         sep = "")
   }
   # formatting ----
-  table_2_1_information_final <- table_2_1_information_final %>%
-    dplyr::mutate(landings = as.character(x = round(x = landings,
-                                                    0)),
-                  landings = dplyr::case_when(
-                    landings == 0 ~ "None",
-                    TRUE ~ landings),
-                  tac = paste0(round(100 * tac,
-                                     0), "%"),
-                  tac = dplyr::case_when(
-                    tac %in% c("NA%", "NaN%", "Inf%")
-                    | (spp == "Nephrops norvegicus"
-                       & !(grepl(pattern = "TAC",
-                                 x = area))) ~ "None",
-                    tac == "-99900%" ~ NA_character_,
-                    TRUE ~ tac
-                  ),
-                  share_landing = paste0(round(x = 100 * share_landing,
-                                               0),
-                                         "%"),
-                  share_landing = dplyr::case_when(
-                    share_landing %in% c("NA%", "NaN%", "Inf%", "0%") ~ "None",
-                    TRUE ~ share_landing
-                  ),
-                  thresh = dplyr::case_when(
-                    landings == "None"
-                    | tac == "None"
-                    | (share_landing == "None"
-                       & tac == "None")
-                    | (rfmo %in% c("ICCAT",
-                                   "IOTC",
-                                   "WCPFC") & landings > 0)
-                    | (spp == "Anguilla anguilla"
-                       & landings != "None") ~ "None",
-                    TRUE ~ thresh
-                  ),
-                  covered_length = dplyr::case_when(
-                    landings == "None"
-                    | (rfmo %in% c("ICCAT",
-                                   "IOTC",
-                                   "WCPFC") & landings > 0)
-                    | (spp == "Anguilla anguilla"
-                       & landings != "None") ~ "Y",
-                    thresh > 4 ~ "N",
-                    TRUE ~ "-"
-                  ),
-                  selected_bio = "-",
-                  reg_coord = dplyr::case_when(
-                    landings == "None" ~ "-",
-                    TRUE ~ "N"
-                  ))
-  rwp_table_2_1_export = list("table_2_1_template" = table_2_1_information_final,
+
+
+  table_2_1_information_final_2 <- table_2_1_information_final %>%
+    dplyr::mutate(
+      thresh = dplyr::case_when(
+        round(tac, 2) < 0.1 & tac > 0 ~ "TAC < 10%",
+        tac %in% c("NA%", "NaN%", "Inf%",-999) &
+          round(share_landing, 2) < 0.1 &
+          share_landing > 0 ~ "Landings < 10%",
+        round(landings, 0) < 200 ~ "Landings < 200t.",
+        TRUE ~ thresh
+      ),
+      landings = as.character(x = round(x = landings, 0)),
+      landings = dplyr::case_when(landings == 0 ~ "None", TRUE ~ landings),
+      tac = paste0(round(100 * tac, 0), "%"),
+      tac = dplyr::case_when(
+        tac %in% c("NA%", "NaN%", "Inf%")
+        |
+          (spp == "Nephrops norvegicus" # kibi - I don't get this one
+           & !(grepl(
+             pattern = "TAC", x = area
+           ))) ~ "None",
+        tac == "-99900%" ~ NA_character_,
+        TRUE ~ tac
+      ),
+      share_landing = paste0(round(x = 100 * share_landing, 0), "%"),
+      share_landing = dplyr::case_when(
+        share_landing %in% c("NA%", "NaN%", "Inf%", "0%") ~ "None",
+        TRUE ~ share_landing
+      ),
+      thresh = dplyr::case_when(
+        landings == "None"
+        | tac == "None"
+        | (share_landing == "None"
+           & tac == "None")
+        | (rfmo %in% c("ICCAT", "IOTC", "WCPFC") & landings > 0)
+        | (spp == "Anguilla anguilla"
+           & landings != "None") ~ "None",
+        TRUE ~ thresh
+      ),
+      covered_length = dplyr::case_when(
+        landings == "None"
+        | (rfmo %in% c("ICCAT", "IOTC", "WCPFC") & landings > 0)
+        | (spp == "Anguilla anguilla"
+           & landings != "None") ~ "Y",
+        thresh > 4 ~ "N",
+        # kibi - I don't get this one
+        TRUE ~ "-"
+      ),
+      selected_bio = "-",
+      reg_coord = dplyr::case_when(landings == "None" ~ "-", TRUE ~ "N")
+    )
+  rwp_table_2_1_export = list("table_2_1_template" = table_2_1_information_final_2,
                               "table_2_1_template_control" = table_control_final)
   names_export <- names(x = rwp_table_2_1_export)
   for (export_id in seq_len(length.out = length(x = names_export))) {
