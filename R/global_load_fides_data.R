@@ -8,7 +8,10 @@
 #' @export
 #' @importFrom dplyr filter
 global_load_fides_data <- function(reference_period,
-                                   file_path) {
+                                   file_path,
+                                   eu_countries = c("AUT", "BEL","BGR","HRV","CYP","CZE","DNK","EST","FIN","FRA",
+                                                    "DEU","GRC","HUN","IRL","ITA","LVA","LTU","LUX","MLT","NLD",
+                                                    "POL","PRT","ROU","SVK","SVN","ESP","SWE")) {
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
       " - Start process for load data from FIDES data.\n",
@@ -40,14 +43,14 @@ global_load_fides_data <- function(reference_period,
   #                                  output = "message"))
   # }
   # process ----
-  # countries <- c(country,
-  #                "XEU")
-  tac_final <- utils::read.table(file = file_path,
+  countries <- c(country,
+                 "XEU", "TAC")
+  fides_file <- utils::read.table(file = file_path,
                                   dec = ".",
                                   sep = ";",
                                   header = TRUE)
-  # tac_final <- dplyr::filter(.data = fides_file,
-  #                            level_code %in% !!countries)
+  tac_final <- dplyr::filter(.data = fides_file,
+                           level_code %in% !!countries)
   if (nrow(x = tac_final) == 0) {
     stop(format(x = Sys.time(),
                 format = "%Y-%m-%d %H:%M:%S"),
