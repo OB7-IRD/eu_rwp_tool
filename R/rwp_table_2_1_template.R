@@ -167,7 +167,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                              "export_quota_20220204tl.csv"),
                                        country = country)
   # table 2.1 linkage
-  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022.csv",
+  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0.csv",
                                                           package = "rwptool"),
                                        sep = ';',
                                        header = TRUE,
