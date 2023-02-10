@@ -4,14 +4,20 @@
 \alias{global_load_fides_data}
 \title{Load FIDES data}
 \usage{
-global_load_fides_data(reference_period, file_path, country = NULL)
+global_load_fides_data(
+  reference_period,
+  file_path,
+  eu_countries = c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
+    "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "POL", "PRT",
+    "ROU", "SVK", "SVN", "ESP", "SWE")
+)
 }
 \arguments{
 \item{reference_period}{{\link[base]{integer}} expected. Period of reference, in years.}
 
 \item{file_path}{{\link[base]{character}} expected. Input FIDES file path.}
 
-\item{country}{{\link[base]{character}} expected. Country(ies) id(s) for data extraction associated. Use 3-alpha country.}
+\item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.}
 }
 \value{
 The function return a {\link[tibble]{tibble}}.

@@ -3,7 +3,7 @@
 #' @description Process for generation the table 2.1 template, list of required species/stocks, for a Regional Work Plan (RWP).
 #' @param reference_period_start {\link[base]{integer}} expected. Start of reference period. Be careful, the process needs 3 years at least to run.
 #' @param reference_period_end {\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.
-#' @param country {\link[base]{character}} expected. Country of interest. Use 2-alpha country.
+#' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.
 #' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat) or regional database source (use argument "rcg_stats").
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output.
 #' @param input_path {\link[base]{character}} expected. Input path for input files.
@@ -14,7 +14,7 @@
 #' @export
 rwp_table_2_1_template <- function(reference_period_start,
                                    reference_period_end,
-                                   country,
+                                   eu_countries,
                                    landing_statistics,
                                    rfmo,
                                    input_path,
@@ -39,6 +39,7 @@ rwp_table_2_1_template <- function(reference_period_start,
   landings <- NULL
   tac <- NULL
   share_landing <- NULL
+  country <- NULL
   # arguments verifications ----
   # if (codama::r_type_checking(r_object = reference_period_start,
   #                             type = "integer",
@@ -65,11 +66,11 @@ rwp_table_2_1_template <- function(reference_period_start,
   #        " - Error, invalid \"reference_period\" arguments.\n",
   #        "\"reference_period_end\" must be less than or equal to \"reference_period_start\" and we must have at least 3 years between the two.\n")
   # }
-  # if (codama::r_type_checking(r_object = country,
+  # if (codama::r_type_checking(r_object = eu_countries,
   #                             type = "character",
   #                             length = as.integer(x = 1),
   #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = country,
+  #   return(codama::r_type_checking(r_object = eu_countries,
   #                                  type = "character",
   #                                  length = as.integer(x = 1),
   #                                  output = "message"))
@@ -165,7 +166,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        file_path = file.path(input_path,
                                                              "fides",
                                                              "export_quota_20220204tl.csv"),
-                                       country = country)
+                                       eu_countries = country)
   # table 2.1 linkage
   table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0.csv",
                                                           package = "rwptool"),
