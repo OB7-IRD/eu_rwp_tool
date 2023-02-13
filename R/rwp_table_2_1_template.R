@@ -466,9 +466,8 @@ rwp_table_2_1_template <- function(reference_period_start,
         | tac == "None"
         | (share_landing == "None"
            & tac == "None")
-        | (rfmo %in% c("ICCAT", "IOTC", "WCPFC") & landings > 0)
-        | (spp == "Anguilla anguilla"
-           & landings != "None") ~ "None",
+        | (rfmo %in% c("ICCAT", "IOTC", "WCPFC"))
+        | (spp %in% c("Anguilla anguilla", "salmo salar", "salmo trutta ")) ~ "None",
         TRUE ~ thresh
       ),
       covered_length = " ",
