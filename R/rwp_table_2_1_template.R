@@ -350,9 +350,15 @@ rwp_table_2_1_template <- function(reference_period_start,
                                           species_code %in% !!fides_specie
                                           & area_code %in% !!fides_area
                                           & definition_year %in% !!reference_period_fides)
+
+      current_fides_data_not_tac <- dplyr::filter(.data = fides_data,
+                                                   species_code %in% !!fides_specie
+                                                   & area_code %in% !!fides_area
+                                                   & definition_year %in% !!reference_period_fides
+                                                   & level_code != "TAC")
       if (all(! fides_area %in% c("No TAC",
                                   ""))
-          && nrow(x = current_fides_data) > 0) {
+          && nrow(x = current_fides_data_not_tac) > 0) {
         if (length(x = fides_area) != 1) {
           current_fides_data <- current_fides_data %>%
             dplyr::group_by(level_code,
@@ -368,6 +374,8 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        level_code == !!country)$initial_quantity
         fides_eu <- dplyr::filter(.data = current_fides_data_country,
                                   level_code == "XEU")$initial_quantity
+        fides_tac <- dplyr::filter(.data = current_fides_data_country,
+                                   level_code == "TAC")$initial_quantity
         if (length(x = fides_country) == 1) {
           table_2_1_information$tac <- fides_country / fides_eu
         } else {
@@ -379,7 +387,7 @@ rwp_table_2_1_template <- function(reference_period_start,
             && (table_2_1_information$tac < 0.1
                 & table_2_1_information$tac > 0)) {
           table_2_1_information$comment_fides <- sum(dplyr::filter(.data = current_fides_data_country,
-                                                                   total_quota < 0.1)$total_quota)
+                                                                   total_quota < 0.1 & level_code == !!country)$total_quota)
 
         } else {
           table_2_1_information$comment_fides <- NA
