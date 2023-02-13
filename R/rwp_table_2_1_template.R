@@ -387,7 +387,7 @@ rwp_table_2_1_template <- function(reference_period_start,
             && (table_2_1_information$tac < 0.1
                 & table_2_1_information$tac > 0)) {
           table_2_1_information$comment_fides <- sum(dplyr::filter(.data = current_fides_data_country,
-                                                                   total_quota < 0.1 & level_code == !!country)$total_quota)
+                                                                   total_quota < 0.1)$total_quota)
 
         } else {
           table_2_1_information$comment_fides <- NA
