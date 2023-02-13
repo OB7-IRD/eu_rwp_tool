@@ -167,7 +167,8 @@ rwp_table_2_1_template <- function(reference_period_start,
   fides_data <- global_load_fides_data(reference_period = reference_period,
                                        file_path = file.path(input_path,
                                                              "fides",
-                                                             "export_quota_20220204tl.csv"))
+                                                             "export_quota_20220204tl.csv"),
+                                       eu_countries = eu_countries)
   # table 2.1 linkage
   table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0.csv",
                                                           package = "rwptool"),
