@@ -285,7 +285,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                              tac = NA,
                                              share_landing = NA,
                                              source_eu = !!source_eu,
-                                             thresh = "Not coded yet",
+                                             thresh = "None",
                                              reg_coord = NA,
                                              covered_length = NA,
                                              selected_bio = NA,
@@ -462,11 +462,7 @@ rwp_table_2_1_template <- function(reference_period_start,
         TRUE ~ share_landing
       ),
       thresh = dplyr::case_when(
-        landings == "None"
-        | tac == "None"
-        | (share_landing == "None"
-           & tac == "None")
-        | (rfmo %in% c("ICCAT", "IOTC", "WCPFC"))
+        (rfmo %in% c("ICCAT", "IOTC", "WCPFC"))
         | (spp %in% c("Anguilla anguilla", "salmo salar", "salmo trutta ")) ~ "None",
         TRUE ~ thresh
       ),
