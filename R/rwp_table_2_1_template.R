@@ -471,17 +471,9 @@ rwp_table_2_1_template <- function(reference_period_start,
            & landings != "None") ~ "None",
         TRUE ~ thresh
       ),
-      covered_length = dplyr::case_when(
-        landings == "None"
-        | (rfmo %in% c("ICCAT", "IOTC", "WCPFC") & landings > 0)
-        | (spp == "Anguilla anguilla"
-           & landings != "None") ~ "Y",
-        thresh > 4 ~ "N",
-        # kibi - I don't get this one
-        TRUE ~ "-"
-      ),
-      selected_bio = "-",
-      reg_coord = dplyr::case_when(landings == "None" ~ "-", TRUE ~ "N")
+      covered_length = " ",
+      selected_bio = " ",
+      reg_coord = " "
     )
   rwp_table_2_1_export = list("table_2_1_template" = table_2_1_information_final_2,
                               "table_2_1_template_control" = table_control_final)
