@@ -9,7 +9,7 @@
 #' @importFrom dplyr filter
 global_load_fides_data <- function(reference_period,
                                    file_path,
-                                   eu_countries = eu_countries) {
+                                   eu_countries) {
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
       " - Start process for load data from FIDES data.\n",
