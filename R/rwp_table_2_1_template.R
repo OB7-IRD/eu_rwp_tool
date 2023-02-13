@@ -3,7 +3,7 @@
 #' @description Process for generation the table 2.1 template, list of required species/stocks, for a Regional Work Plan (RWP).
 #' @param reference_period_start {\link[base]{integer}} expected. Start of reference period. Be careful, the process needs 3 years at least to run.
 #' @param reference_period_end {\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.
-#' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.
+#' @param eu_countries {\link[base]{character}} default to present 27 MS, but can be changed if needed. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.
 #' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat) or regional database source (use argument "rcg_stats").
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output.
 #' @param input_path {\link[base]{character}} expected. Input path for input files.
@@ -14,7 +14,9 @@
 #' @export
 rwp_table_2_1_template <- function(reference_period_start,
                                    reference_period_end,
-                                   eu_countries,
+                                   eu_countries = c("AUT", "BEL","BGR","HRV","CYP","CZE","DNK","EST","FIN","FRA",
+                                                      "DEU","GRC","HUN","IRL","ITA","LVA","LTU","LUX","MLT","NLD",
+                                                      "POL","PRT","ROU","SVK","SVN","ESP","SWE"),
                                    landing_statistics,
                                    rfmo,
                                    input_path,
@@ -165,8 +167,7 @@ rwp_table_2_1_template <- function(reference_period_start,
   fides_data <- global_load_fides_data(reference_period = reference_period,
                                        file_path = file.path(input_path,
                                                              "fides",
-                                                             "export_quota_20220204tl.csv"),
-                                       eu_countries = country)
+                                                             "export_quota_20220204tl.csv"))
   # table 2.1 linkage
   table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0.csv",
                                                           package = "rwptool"),
