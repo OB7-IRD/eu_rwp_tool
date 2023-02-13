@@ -404,7 +404,7 @@ rwp_table_2_1_template <- function(reference_period_start,
           table_2_1_information$comment_fides_25_rule <- paste0("Sum of MS TAC's below 10% = ",
                                                                 round(x = as.numeric(x = table_2_1_information$comment_fides) * 100,
                                                                       digits = 0),
-                                                                "%")
+                                                                "% of EU TAC")
         } else {
           table_2_1_information$comment_fides_25_rule <- NA
         }
