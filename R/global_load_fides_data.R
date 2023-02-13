@@ -43,10 +43,10 @@ global_load_fides_data <- function(reference_period,
   #                                  output = "message"))
   # }
   # process ----
-  # countries <- c(eu_countries,
-  #                "XEU", "TAC")
   countries <- c(eu_countries,
-                 "XEU")
+                 "XEU", "TAC")
+  # countries <- c(eu_countries,
+  #                "XEU")
   fides_file <- utils::read.table(file = file_path,
                                   dec = ".",
                                   sep = ";",
