@@ -463,7 +463,7 @@ rwp_table_2_1_template <- function(reference_period_start,
       ),
       thresh = dplyr::case_when(
         (rfmo %in% c("ICCAT", "IOTC", "WCPFC"))
-        | (spp %in% c("Anguilla anguilla", "salmo salar", "salmo trutta ")) ~ "None",
+        | (spp %in% c("Anguilla anguilla", "salmo salar", "salmo trutta")) ~ "None",
         TRUE ~ thresh
       ),
       covered_length = " ",
