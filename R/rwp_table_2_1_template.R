@@ -14,9 +14,33 @@
 #' @export
 rwp_table_2_1_template <- function(reference_period_start,
                                    reference_period_end,
-                                   eu_countries = c("AUT", "BEL","BGR","HRV","CYP","CZE","DNK","EST","FIN","FRA",
-                                                      "DEU","GRC","HUN","IRL","ITA","LVA","LTU","LUX","MLT","NLD",
-                                                      "POL","PRT","ROU","SVK","SVN","ESP","SWE"),
+                                   eu_countries = c("AUT",
+                                                    "BEL",
+                                                    "BGR",
+                                                    "HRV",
+                                                    "CYP",
+                                                    "CZE",
+                                                    "DNK",
+                                                    "EST",
+                                                    "FIN",
+                                                    "FRA",
+                                                    "DEU",
+                                                    "GRC",
+                                                    "HUN",
+                                                    "IRL",
+                                                    "ITA",
+                                                    "LVA",
+                                                    "LTU",
+                                                    "LUX",
+                                                    "MLT",
+                                                    "NLD",
+                                                    "POL",
+                                                    "PRT",
+                                                    "ROU",
+                                                    "SVK",
+                                                    "SVN",
+                                                    "ESP",
+                                                    "SWE"),
                                    landing_statistics,
                                    rfmo,
                                    input_path,
@@ -41,7 +65,6 @@ rwp_table_2_1_template <- function(reference_period_start,
   landings <- NULL
   tac <- NULL
   share_landing <- NULL
-  country <- NULL
   # arguments verifications ----
   # if (codama::r_type_checking(r_object = reference_period_start,
   #                             type = "integer",
@@ -186,10 +209,11 @@ rwp_table_2_1_template <- function(reference_period_start,
         table_2_1_linkage_id,
         ".\n",
         sep = "")
+    #browser()
     if (landing_statistics == "eurostat") {
       # from eurostat data ----
       country_name <- dplyr::filter(.data = geo_data,
-                                    level_description %in% !!country)$country
+                                    level_description %in% !!eu_countries)$country
       species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name[table_2_1_linkage_id]),
                                      split = ','))
       region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_bis[table_2_1_linkage_id]),
@@ -201,7 +225,7 @@ rwp_table_2_1_template <- function(reference_period_start,
       if (nrow(x = current_eurostat_data) == 0) {
         current_eurostat_data <- dplyr::tibble(x3a_code = rep(x = table_2_1_linkage[table_2_1_linkage_id, "x3a_code"],
                                                               2),
-                                               geo = c(!!country,
+                                               geo = c(!!eu_countries,
                                                        "EU27_2020"),
                                                area = rep(x = table_2_1_linkage[table_2_1_linkage_id, "area"],
                                                           2),
@@ -209,7 +233,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                            "European union (27 MS)"),
                                                source = TRUE,
                                                level_description = c(dplyr::filter(.data = geo_data,
-                                                                                   level_description %in% !!country)$level_description,
+                                                                                   level_description %in% !!eu_countries)$level_description,
                                                                      "EU27_2020"),
                                                scientific_name = rep(x = table_2_1_linkage$latin_name[table_2_1_linkage_id],
                                                                      2),
@@ -236,7 +260,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                           na.rm = TRUE),
                                                 digits = 4)
       current_eurostat_data_country <- dplyr::filter(.data = current_eurostat_data,
-                                                     level_description %in% !!country)
+                                                     level_description %in% !!eu_countries)
       n_current_eurostat_data_country <- nrow(x = current_eurostat_data_country)
       if (n_current_eurostat_data_country == 0) {
         current_eurostat_data_country <- dplyr::tibble(x3a_code = table_2_1_linkage[table_2_1_linkage_id, "x3a_code"],
@@ -273,7 +297,7 @@ rwp_table_2_1_template <- function(reference_period_start,
         source_national <- ""
       }
       # construction table 2.1 line of information
-      table_2_1_information <- dplyr::tibble(ms = !!country,
+      table_2_1_information <- dplyr::tibble(ms = !!eu_countries,
                                              reference_years = paste0(reference_period_eurostat,
                                                                       collapse = ", "),
                                              region = table_2_1_linkage[table_2_1_linkage_id, "region"],
@@ -307,7 +331,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                               "rfmo"],
                                      spp = table_2_1_linkage[table_2_1_linkage_id,
                                                              "latin_name"],
-                                     geo = rep(!!country,
+                                     geo = rep(!!eu_countries,
                                                each = length(x = reference_period_eurostat)),
                                      area = table_2_1_linkage[table_2_1_linkage_id,
                                                               "area"],
@@ -431,8 +455,6 @@ rwp_table_2_1_template <- function(reference_period_start,
         sep = "")
   }
   # formatting ----
-
-
   table_2_1_information_final_2 <- table_2_1_information_final %>%
     dplyr::mutate(
       thresh = dplyr::case_when(

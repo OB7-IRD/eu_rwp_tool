@@ -4,13 +4,7 @@
 \alias{global_load_fides_data}
 \title{Load FIDES data}
 \usage{
-global_load_fides_data(
-  reference_period,
-  file_path,
-  eu_countries = c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
-    "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "POL", "PRT",
-    "ROU", "SVK", "SVN", "ESP", "SWE")
-)
+global_load_fides_data(reference_period, file_path, eu_countries)
 }
 \arguments{
 \item{reference_period}{{\link[base]{integer}} expected. Period of reference, in years.}

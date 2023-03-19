@@ -7,7 +7,9 @@
 rwp_table_2_1_template(
   reference_period_start,
   reference_period_end,
-  eu_countries,
+  eu_countries = c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
+    "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "POL", "PRT",
+    "ROU", "SVK", "SVN", "ESP", "SWE"),
   landing_statistics,
   rfmo,
   input_path,
@@ -19,7 +21,7 @@ rwp_table_2_1_template(
 
 \item{reference_period_end}{{\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.}
 
-\item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.}
+\item{eu_countries}{{\link[base]{character}} default to present 27 MS, but can be changed if needed. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.}
 
 \item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat) or regional database source (use argument "rcg_stats").}
 
