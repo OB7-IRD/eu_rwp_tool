@@ -11,7 +11,8 @@ rwp_table_2_1_template(
     "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "POL", "PRT",
     "ROU", "SVK", "SVN", "ESP", "SWE"),
   landing_statistics,
-  rfmo,
+  rfmo = c("CCAMLR", "CECAF", "GFCM", "IATTC", "ICCAT", "ICES", "IOTC", "NAFO", "SEAFO",
+    "SPRFMO", "WCPFC", "WECAFC"),
   input_path,
   output_path = NULL
 )
@@ -21,11 +22,11 @@ rwp_table_2_1_template(
 
 \item{reference_period_end}{{\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.}
 
-\item{eu_countries}{{\link[base]{character}} default to present 27 MS, but can be changed if needed. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.}
+\item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default default the 27 member states.}
 
 \item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat) or regional database source (use argument "rcg_stats").}
 
-\item{rfmo}{{\link[base]{character}} expected. RFMO's list to include in output.}
+\item{rfmo}{{\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.}
 
 \item{input_path}{{\link[base]{character}} expected. Input path for input files.}
 
