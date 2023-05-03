@@ -116,8 +116,23 @@
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ob7-ird.github.io/rwptool/">rwptool</a></span><span class="op">)</span></span>
-<span><span class="co"># Next steps example will be added later</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># setup ----</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ob7-ird.github.io/rwptool/">rwptool</a></span><span class="op">)</span></span>
+<span><span class="va">reference_period_start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">reference_period_end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span></span>
+<span><span class="co"># By default countries used are the 27 EU member states, you can change that through the "eu_countries" argument. </span></span>
+<span><span class="co"># By default rfmo used are CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC and WECAFC. You can change that through the "rfmo" argument.</span></span>
+<span><span class="va">landing_statistics</span> <span class="op">&lt;-</span> <span class="st">"eurostat"</span></span>
+<span><span class="co"># You can switch with "rcg_stats" in the "landing_statistics" argument to use regional database source.</span></span>
+<span><span class="va">path_input</span> <span class="op">&lt;-</span> <span class="st">"~/input"</span></span>
+<span><span class="va">output_path</span> <span class="op">&lt;-</span> <span class="st">"~/output"</span></span>
+<span></span>
+<span><span class="co"># process ----</span></span>
+<span><span class="fu"><a href="reference/rwp_table_2_1_template.html">rwp_table_2_1_template</a></span><span class="op">(</span>reference_period_start <span class="op">=</span> <span class="va">reference_period_start</span>,</span>
+<span>                       reference_period_end <span class="op">=</span> <span class="va">reference_period_end</span>,</span>
+<span>                       landing_statistics <span class="op">=</span> <span class="va">landing_statistics</span>,</span>
+<span>                       input_path <span class="op">=</span> <span class="va">path_input</span>,</span>
+<span>                       output_path <span class="op">=</span> <span class="va">output_path</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
