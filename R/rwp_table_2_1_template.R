@@ -3,7 +3,7 @@
 #' @description Process for generation the table 2.1 template, list of required species/stocks, for a Regional Work Plan (RWP).
 #' @param reference_period_start {\link[base]{integer}} expected. Start of reference period. Be careful, the process needs 3 years at least to run.
 #' @param reference_period_end {\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.
-#' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default default the 27 member states.
+#' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.
 #' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.
 #' @param input_path {\link[base]{character}} expected. Input path for input files.
