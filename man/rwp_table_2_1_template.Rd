@@ -24,7 +24,7 @@ rwp_table_2_1_template(
 
 \item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default default the 27 member states.}
 
-\item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat) or regional database source (use argument "rcg_stats").}
+\item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").}
 
 \item{rfmo}{{\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.}
 

@@ -4,7 +4,7 @@
 #' @param reference_period_start {\link[base]{integer}} expected. Start of reference period. Be careful, the process needs 3 years at least to run.
 #' @param reference_period_end {\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.
 #' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default default the 27 member states.
-#' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat) or regional database source (use argument "rcg_stats").
+#' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.
 #' @param input_path {\link[base]{character}} expected. Input path for input files.
 #' @param output_path {\link[base]{character}} expected. Output path. By default NULL.
@@ -64,88 +64,27 @@ rwp_table_2_1_template <- function(reference_period_start,
   geo <- NULL
   geopolitical_entity <- NULL
   fishreg <- NULL
+  country <- NULL
   level_description <- NULL
-  Scientific_name <- NULL
+  scientific_name <- NULL
+  mean_years <- NULL
+  landings <- NULL
   area <- NULL
+  share_landing <- NULL
+  tac <- NULL
+  year <- NULL
+  eurostat_country <- NULL
+  eurostat_eu <-NULL
   species_code <- NULL
   area_code <- NULL
   definition_year <- NULL
   level_code <- NULL
   initial_quantity <- NULL
   total_quota <- NULL
-  landings <- NULL
-  tac <- NULL
-  share_landing <- NULL
+  comment_fides <- NULL
+  comment_fides_bis <-NULL
   # arguments verifications ----
-  # if (codama::r_type_checking(r_object = reference_period_start,
-  #                             type = "integer",
-  #                             length = as.integer(x = 1),
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = reference_period_start,
-  #                                  type = "integer",
-  #                                  length = as.integer(x = 1),
-  #                                  output = "message"))
-  # }
-  # if (codama::r_type_checking(r_object = reference_period_end,
-  #                             type = "integer",
-  #                             length = as.integer(x = 1),
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = reference_period_end,
-  #                                  type = "integer",
-  #                                  length = as.integer(x = 1),
-  #                                  output = "message"))
-  # }
-  # if (reference_period_end <= reference_period_start
-  #     || (reference_period_end - reference_period_start + 1 < 3)) {
-  #   stop(format(x = Sys.time(),
-  #               "%Y-%m-%d %H:%M:%S"),
-  #        " - Error, invalid \"reference_period\" arguments.\n",
-  #        "\"reference_period_end\" must be less than or equal to \"reference_period_start\" and we must have at least 3 years between the two.\n")
-  # }
-  # if (codama::r_type_checking(r_object = eu_countries,
-  #                             type = "character",
-  #                             length = as.integer(x = 1),
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = eu_countries,
-  #                                  type = "character",
-  #                                  length = as.integer(x = 1),
-  #                                  output = "message"))
-  # }
-  # if (codama::r_type_checking(r_object = landing_statistics,
-  #                             type = "character",
-  #                             length = as.integer(x = 1),
-  #                             allowed_values = c("eurostat",
-  #                                                "rcg_stats"),
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = landing_statistics,
-  #                                  type = "character",
-  #                                  length = as.integer(x = 1),
-  #                                  allowed_values = c("eurostat",
-  #                                                     "rcg_stats"),
-  #                                  output = "message"))
-  # }
-  # if (codama::r_type_checking(r_object = rfmo,
-  #                             type = "character",
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = rfmo,
-  #                                  type = "character",
-  #                                  output = "message"))
-  # }
-  # if (codama::r_type_checking(r_object = input_path,
-  #                             type = "character",
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = input_path,
-  #                                  type = "character",
-  #                                  output = "message"))
-  # }
-  # if (! is.null(x = output_path)
-  #     && codama::r_type_checking(r_object = output_path,
-  #                                type = "character",
-  #                                output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = output_path,
-  #                                  type = "character",
-  #                                  output = "message"))
-  # }
+  # to do in the future
   # setup ----
   reference_period <- c(reference_period_start:reference_period_end)
   if (length(x = reference_period) < 3) {
@@ -190,7 +129,7 @@ rwp_table_2_1_template <- function(reference_period_start,
       dplyr::left_join(geo_data,
                        by = "geo") %>%
       dplyr::filter(! is.na(x = country)) %>%
-      dplyr::left_join(asfis[,c(3:6)],
+      dplyr::left_join(asfis[, c(3:6)],
                        by = c("species" = "X3A_CODE"))
   } else if (landing_statistics == "rcg_stats") {
     stop(format(x = Sys.time(),
@@ -220,6 +159,7 @@ rwp_table_2_1_template <- function(reference_period_start,
         table_2_1_linkage_id,
         ".\n",
         sep = "")
+    # check id 118 for special data
     if (landing_statistics == "eurostat") {
       # from eurostat data ----
       country_name <- dplyr::filter(.data = geo_data,
@@ -229,70 +169,81 @@ rwp_table_2_1_template <- function(reference_period_start,
       region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_bis[table_2_1_linkage_id]),
                                     split=','))
       current_eurostat_data <- dplyr::filter(.data = eurostat_data_final,
-                                             Scientific_name %in% !!species
+                                             scientific_name %in% !!species
                                              & fishreg %in% !!region) %>%
         dplyr::filter(level_description != "GBR")
       if (nrow(x = current_eurostat_data) == 0) {
-        current_eurostat_data <- dplyr::tibble(x3a_code = rep(x = table_2_1_linkage[table_2_1_linkage_id, "x3a_code"],
-                                                              2),
-                                               geo = c(!!eu_countries,
+        current_eurostat_data <- dplyr::tibble(species = table_2_1_linkage[table_2_1_linkage_id,
+                                                                           "x3a_code"],
+                                               fishreg = table_2_1_linkage[table_2_1_linkage_id,
+                                                                           "area"],
+                                               geo = c(dplyr::filter(.data = geo_data,
+                                                                     level_description %in% !!eu_countries)$geo,
                                                        "EU27_2020"),
-                                               area = rep(x = table_2_1_linkage[table_2_1_linkage_id, "area"],
-                                                          2),
-                                               country = c(country,
+                                               country = c(!!country_name,
                                                            "European union (27 MS)"),
-                                               source = TRUE,
-                                               level_description = c(dplyr::filter(.data = geo_data,
-                                                                                   level_description %in% !!eu_countries)$level_description,
+                                               level_description = c(!!eu_countries,
                                                                      "EU27_2020"),
-                                               scientific_name = rep(x = table_2_1_linkage$latin_name[table_2_1_linkage_id],
-                                                                     2),
-                                               english_name = rep(x = NA,
-                                                                  2),
-                                               french_name = rep(x = NA,
-                                                                 2))
+                                               scientific_name = table_2_1_linkage$latin_name[table_2_1_linkage_id],
+                                               english_name = NA_character_,
+                                               french_name = NA_character_,
+                                               source = TRUE)
         for (current_year in reference_period_eurostat) {
-          current_expression <- parse(text = paste0("current_eurostat_data[1:2, \"",
+          current_expression <- parse(text = paste0("current_eurostat_data[, \"",
                                                     current_year,
-                                                    "\"] <- as.numeric(x = rep(x = NA, 2))"))
+                                                    "\"] <- NA_real_"))
           eval(expr = current_expression)
         }
-        years_columns <- names(x = current_eurostat_data)[(length(x = current_eurostat_data) - length(x = reference_period_eurostat) + 1):length(x = current_eurostat_data)]
         current_eurostat_data <- dplyr::relocate(.data = current_eurostat_data,
-                                                 !!years_columns,
-                                                 .after = area)
+                                                 !!as.character(x = reference_period_eurostat),
+                                                 .after = geo)
       } else {
         current_eurostat_data$source <- TRUE
       }
-      current_eurostat_data$mean_years <- round(x = apply(X = current_eurostat_data[,4:6],
-                                                          MARGIN = 1,
-                                                          FUN = mean,
-                                                          na.rm = TRUE),
-                                                digits = 4)
+      if (all(is.na(apply(X = current_eurostat_data[,c(as.character(x = reference_period_eurostat))],
+                          MARGIN = 1,
+                          FUN = mean,
+                          na.rm = TRUE)))) {
+        current_eurostat_data$mean_years = NA_real_
+      } else {
+        current_eurostat_data <- dplyr::mutate(.data = current_eurostat_data,
+                                               mean_years = round(x = apply(X = current_eurostat_data[,c(as.character(x = reference_period_eurostat))],
+                                                                            MARGIN = 1,
+                                                                            FUN = mean,
+                                                                            na.rm = TRUE),
+                                                                  digits = 4)) %>%
+          dplyr::filter((! is.na(x = mean_years))
+                        | geo == "EU27_2020")
+      }
       current_eurostat_data_country <- dplyr::filter(.data = current_eurostat_data,
                                                      level_description %in% !!eu_countries)
       n_current_eurostat_data_country <- nrow(x = current_eurostat_data_country)
       if (n_current_eurostat_data_country == 0) {
-        current_eurostat_data_country <- dplyr::tibble(x3a_code = table_2_1_linkage[table_2_1_linkage_id, "x3a_code"],
-                                                       geo = !!country,
-                                                       area = table_2_1_linkage[table_2_1_linkage_id, "area"],
-                                                       mean_years = NA,
-                                                       country = !!country_name,
-                                                       source = TRUE,
-                                                       level_description = !!country,
+        current_eurostat_data_country <- dplyr::tibble(species = table_2_1_linkage[table_2_1_linkage_id,
+                                                                                   "x3a_code"],
+                                                       fishreg = table_2_1_linkage[table_2_1_linkage_id,
+                                                                                   "area"],
+                                                       geo = c(dplyr::filter(.data = geo_data,
+                                                                             level_description %in% !!eu_countries)$geo,
+                                                               "EU27_2020"),
+                                                       country = c(!!country_name,
+                                                                   "European union (27 MS)"),
+                                                       level_description = c(!!eu_countries,
+                                                                             "EU27_2020"),
                                                        scientific_name = table_2_1_linkage$latin_name[table_2_1_linkage_id],
-                                                       english_name = NA,
-                                                       french_name = NA)
+                                                       english_name = NA_character_,
+                                                       french_name = NA_character_,
+                                                       source = TRUE,
+                                                       mean_years = NA_real_)
         for (current_year in reference_period_eurostat) {
-          current_expression <- parse(text = paste0("current_eurostat_data_country[1, \"",
+          current_expression <- parse(text = paste0("current_eurostat_data_country[, \"",
                                                     current_year,
-                                                    "\"] <- as.numeric(x = NA)"))
+                                                    "\"] <- NA_real_"))
           eval(expr = current_expression)
         }
-        years_columns <- names(x = current_eurostat_data_country)[(length(x = current_eurostat_data_country) - length(x = reference_period_eurostat) + 1):length(x = current_eurostat_data_country)]
         current_eurostat_data_country <- dplyr::relocate(.data = current_eurostat_data_country,
-                                                         !!years_columns,
-                                                         .after = area)
+                                                         !!as.character(x = reference_period_eurostat),
+                                                         .after = geo)
       }
       current_eurostat_data_eu <- dplyr::filter(.data = current_eurostat_data,
                                                 geo == "EU27_2020")
@@ -310,30 +261,38 @@ rwp_table_2_1_template <- function(reference_period_start,
       table_2_1_information <- dplyr::tibble(ms = !!eu_countries,
                                              reference_years = paste0(reference_period_eurostat,
                                                                       collapse = ", "),
-                                             region = table_2_1_linkage[table_2_1_linkage_id, "region"],
-                                             rfmo = table_2_1_linkage[table_2_1_linkage_id, "rfmo"],
-                                             spp = table_2_1_linkage[table_2_1_linkage_id, "latin_name"],
-                                             area = table_2_1_linkage[table_2_1_linkage_id, "area"],
-                                             landings = NA,
+                                             region = table_2_1_linkage[table_2_1_linkage_id,
+                                                                        "region"],
+                                             rfmo = table_2_1_linkage[table_2_1_linkage_id,
+                                                                      "rfmo"],
+                                             spp = table_2_1_linkage[table_2_1_linkage_id,
+                                                                     "latin_name"],
+                                             area = table_2_1_linkage[table_2_1_linkage_id,
+                                                                      "area"],
                                              source_national = !!source_national,
-                                             tac = NA,
-                                             share_landing = NA,
                                              source_eu = !!source_eu,
                                              thresh = "None",
-                                             reg_coord = NA,
-                                             covered_length = NA,
-                                             selected_bio = NA,
-                                             comments_eurostat = NA,
-                                             national_stats = NA)
-      if (sum(is.na(x = current_eurostat_data_country$mean_years)) < nrow(x = current_eurostat_data_country)) {
-        table_2_1_information$landings <- sum(current_eurostat_data_country$mean_years,
-                                              na.rm = TRUE)
-        table_2_1_information$share_landing <- table_2_1_information$landings / sum(current_eurostat_data_eu$mean_years,
-                                                                                    na.rm = TRUE)
-      } else {
-        table_2_1_information$landings <- 0
-        table_2_1_information$share_landing <- 0
-      }
+                                             reg_coord = NA_character_,
+                                             covered_length = NA_character_,
+                                             selected_bio = NA_character_,
+                                             comments_eurostat = NA_character_,
+                                             national_stats = NA_character_) %>%
+        dplyr::left_join(dplyr::group_by(.data = current_eurostat_data_country,
+                                         level_description) %>%
+                           dplyr::summarise(landings = sum(mean_years),
+                                            share_landing = round(x = landings / sum(current_eurostat_data_eu$mean_years),
+                                                                  digits = 4)),
+                         by = c("ms" = "level_description")) %>%
+        dplyr::relocate(landings, .after = area) %>%
+        dplyr::relocate(share_landing, .after = tac) %>%
+        dplyr::mutate(landings = dplyr::case_when(
+          is.na(x = landings) ~ 0,
+          TRUE ~ landings
+        ),
+        share_landing = dplyr::case_when(
+          is.na(x = share_landing) ~ 0,
+          TRUE ~ share_landing
+        ))
       # construction of the control table
       table_control <- dplyr::tibble(region = table_2_1_linkage[table_2_1_linkage_id,
                                                                 "region"],
@@ -341,19 +300,34 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                               "rfmo"],
                                      spp = table_2_1_linkage[table_2_1_linkage_id,
                                                              "latin_name"],
-                                     geo = rep(!!eu_countries,
+                                     geo = rep(x = !!eu_countries,
                                                each = length(x = reference_period_eurostat)),
                                      area = table_2_1_linkage[table_2_1_linkage_id,
                                                               "area"],
-                                     year = reference_period_eurostat,
-                                     eurostat_country = apply(current_eurostat_data_country[, as.character(x = reference_period_eurostat)],
-                                                              2,
-                                                              sum,
-                                                              na.rm = TRUE),
-                                     eurostat_eu = apply(current_eurostat_data_eu[, as.character(x = reference_period_eurostat)],
-                                                         2,
-                                                         sum,
-                                                         na.rm = TRUE))
+                                     year = rep(x = reference_period_eurostat,
+                                                times = length(x = eu_countries)),
+                                     eurostat_eu = rep(x = apply(current_eurostat_data_eu[, as.character(x = reference_period_eurostat)],
+                                                                 2,
+                                                                 sum,
+                                                                 na.rm = TRUE),
+                                                       times = length(x = eu_countries))) %>%
+        dplyr::left_join(dplyr::group_by(.data = current_eurostat_data_country[, c("level_description",
+                                                                                   reference_period_eurostat)],
+                                         level_description) %>%
+                           dplyr::summarise(dplyr::across(.cols = dplyr::everything(),
+                                                          .fns = ~ sum(x = .,
+                                                                       na.rm = TRUE))) %>%
+                           tidyr::pivot_longer(cols = !level_description,
+                                               names_to = "year",
+                                               values_to = "eurostat_country") %>%
+                           dplyr::mutate(year = as.integer(x = year)),
+                         by = c("geo" = "level_description",
+                                "year")) %>%
+        dplyr::relocate(eurostat_country, .before = eurostat_eu) %>%
+        dplyr::mutate(eurostat_country = dplyr::case_when(
+          is.na(x = eurostat_country) ~ 0,
+          TRUE ~ eurostat_country
+        ))
     } else if (landing_statistics == "rcg_stats") {
       # from rcg data ----
       stop(format(x = Sys.time(),
@@ -384,12 +358,11 @@ rwp_table_2_1_template <- function(reference_period_start,
                                           species_code %in% !!fides_specie
                                           & area_code %in% !!fides_area
                                           & definition_year %in% !!reference_period_fides)
-
       current_fides_data_not_tac <- dplyr::filter(.data = fides_data,
-                                                   species_code %in% !!fides_specie
-                                                   & area_code %in% !!fides_area
-                                                   & definition_year %in% !!reference_period_fides
-                                                   & level_code != "TAC")
+                                                  species_code %in% !!fides_specie
+                                                  & area_code %in% !!fides_area
+                                                  & definition_year %in% !!reference_period_fides
+                                                  & level_code != "TAC")
       if (all(! fides_area %in% c("No TAC",
                                   ""))
           && nrow(x = current_fides_data_not_tac) > 0) {
@@ -405,53 +378,60 @@ rwp_table_2_1_template <- function(reference_period_start,
           dplyr::summarise(initial_quantity = sum(initial_quantity),
                            .groups = "drop")
         fides_country <- dplyr::filter(.data = current_fides_data_country,
-                                       level_code == !!country)$initial_quantity
+                                       level_code %in% !!eu_countries)
         fides_eu <- dplyr::filter(.data = current_fides_data_country,
                                   level_code == "XEU")$initial_quantity
         fides_tac <- dplyr::filter(.data = current_fides_data_country,
                                    level_code == "TAC")$initial_quantity
-        if (length(x = fides_country) == 1) {
-          table_2_1_information$tac <- fides_country / fides_eu
+        if (nrow(x = fides_country) >= 1) {
+          table_2_1_information <- dplyr::left_join(x = table_2_1_information,
+                                                    y = (dplyr::mutate(.data = fides_country,
+                                                                       tac = round(x = initial_quantity / !!fides_eu,
+                                                                                   digits = 4),
+                                                                       comment_fides_bis = paste0("FIDES initial quantity mean = ",
+                                                                                                  round(x = initial_quantity / length(x = !!reference_period_fides),
+                                                                                                        digits = 1))) %>%
+                                                           dplyr::select(-initial_quantity)),
+                                                    by = c("ms" = "level_code"))
         } else {
-          table_2_1_information$tac <- NA
+          table_2_1_information <- dplyr::mutate(.data = table_2_1_information,
+                                                 tac = NA_real_,
+                                                 comment_fides_bis = NA_character_)
         }
         current_fides_data_country <- dplyr::mutate(.data = current_fides_data_country,
                                                     total_quota = initial_quantity / !!fides_eu)
-        if (! is.na(x = table_2_1_information$tac)
-            && (table_2_1_information$tac < 0.1
-                & table_2_1_information$tac > 0)) {
-          table_2_1_information$comment_fides <- sum(dplyr::filter(.data = current_fides_data_country,
-                                                                   total_quota < 0.1)$total_quota)
-
+        if (nrow(x = dplyr::filter(.data = current_fides_data_country,
+                                   total_quota > 0 & total_quota < 0.1)) >= 1) {
+          table_2_1_information <- dplyr::left_join(x = table_2_1_information,
+                                                    y = (dplyr::filter(.data = current_fides_data_country,
+                                                                       total_quota > 0 & total_quota < 0.1) %>%
+                                                           dplyr::rename("comment_fides" = "total_quota") %>%
+                                                           select(-initial_quantity) %>%
+                                                           dplyr::mutate(comment_fides_25_rule = paste0("Sum of MS TAC's below 10% = ",
+                                                                                                        round(x = as.numeric(x = comment_fides) * 100,
+                                                                                                              digits = 4),
+                                                                                                        "% of EU TAC"))),
+                                                    by = c("ms" = "level_code")) %>%
+            dplyr::relocate(comment_fides,
+                            .before = comment_fides_bis)
         } else {
-          table_2_1_information$comment_fides <- NA
-        }
-        if (! is.na(x = fides_country)
-            && length(x = fides_country) != 0) {
-          table_2_1_information$comment_fides_bis <- paste("FIDES initial quantity mean = ",
-                                                           round(x = fides_country / length(x = reference_period_fides),
-                                                                 digits = 0))
-        } else {
-          table_2_1_information$comment_fides_bis <- NA
-        }
-        if (! is.na(x = table_2_1_information$comment_fides)) {
-          table_2_1_information$comment_fides_25_rule <- paste0("Sum of MS TAC's below 10% = ",
-                                                                round(x = as.numeric(x = table_2_1_information$comment_fides) * 100,
-                                                                      digits = 0),
-                                                                "% of EU TAC")
-        } else {
-          table_2_1_information$comment_fides_25_rule <- NA
+          table_2_1_information <- dplyr::mutate(.data = table_2_1_information,
+                                                 comment_fides = NA_real_,
+                                                 comment_fides_25_rule = NA_character_)
         }
       } else {
-        table_2_1_information$comment_fides <- NA
-        table_2_1_information$comment_fides_bis <- NA
-        table_2_1_information$comment_fides_25_rule <- NA
+        table_2_1_information <- dplyr::mutate(.data = table_2_1_information,
+                                               tac = -999,
+                                               comment_fides = NA_real_,
+                                               comment_fides_bis = NA_character_,
+                                               comment_fides_25_rule = NA_character_)
       }
     } else {
-      table_2_1_information$tac <- -999
-      table_2_1_information$comment_fides <- NA
-      table_2_1_information$comment_fides_bis <- NA
-      table_2_1_information$comment_fides_25_rule <- NA
+      table_2_1_information <- dplyr::mutate(.data = table_2_1_information,
+                                             tac = -999,
+                                             comment_fides = NA_real_,
+                                             comment_fides_bis = NA_character_,
+                                             comment_fides_25_rule = NA_character_)
     }
     table_2_1_information_final <- rbind(table_2_1_information_final,
                                          table_2_1_information)
@@ -468,34 +448,54 @@ rwp_table_2_1_template <- function(reference_period_start,
   table_2_1_information_final_2 <- table_2_1_information_final %>%
     dplyr::mutate(
       thresh = dplyr::case_when(
-        round(tac, 2) < 0.1 & tac > 0 ~ "TAC < 10%",
-        tac %in% c("NA%", "NaN%", "Inf%",-999) &
-          round(share_landing, 2) < 0.1 &
-          share_landing > 0 ~ "Landings < 10%",
+        round(x = tac,
+              digits = 2) < 0.1
+        & tac > 0 ~ "TAC < 10%",
+        tac %in% c("NA%",
+                   "NaN%",
+                   "Inf%",
+                   -999)
+        & round(x = share_landing,
+                digits = 2) < 0.1
+        & share_landing > 0 ~ "Landings < 10%",
         round(landings, 0) < 200 ~ "Landings < 200t.",
         TRUE ~ thresh
       ),
       landings = as.character(x = round(x = landings, 0)),
-      landings = dplyr::case_when(landings == 0 ~ "None", TRUE ~ landings),
-      tac = paste0(round(100 * tac, 0), "%"),
+      landings = dplyr::case_when(
+        landings == 0 ~ "None",
+        TRUE ~ landings),
+      tac = paste0(round(x = 100 * tac,
+                         digits =  0),
+                   "%"),
       tac = dplyr::case_when(
-        tac %in% c("NA%", "NaN%", "Inf%")
-        |
-          (spp == "Nephrops norvegicus" # kibi - I don't get this one
+        tac %in% c("NA%",
+                   "NaN%",
+                   "Inf%")
+        | (spp == "Nephrops norvegicus" # kibi - I don't get this one
            & !(grepl(
-             pattern = "TAC", x = area
-           ))) ~ "None",
+             pattern = "TAC",
+             x = area))) ~ "None",
         tac == "-99900%" ~ NA_character_,
         TRUE ~ tac
       ),
-      share_landing = paste0(round(x = 100 * share_landing, 0), "%"),
+      share_landing = paste0(round(x = 100 * share_landing,
+                                   digits = 0),
+                             "%"),
       share_landing = dplyr::case_when(
-        share_landing %in% c("NA%", "NaN%", "Inf%", "0%") ~ "None",
+        share_landing %in% c("NA%",
+                             "NaN%",
+                             "Inf%",
+                             "0%") ~ "None",
         TRUE ~ share_landing
       ),
       thresh = dplyr::case_when(
-        (rfmo %in% c("ICCAT", "IOTC", "WCPFC"))
-        | (spp %in% c("Anguilla anguilla", "salmo salar", "salmo trutta")) ~ "None",
+        (rfmo %in% c("ICCAT",
+                     "IOTC",
+                     "WCPFC"))
+        | (spp %in% c("Anguilla anguilla",
+                      "salmo salar",
+                      "salmo trutta")) ~ "None",
         TRUE ~ thresh
       ),
       covered_length = " ",
@@ -506,9 +506,16 @@ rwp_table_2_1_template <- function(reference_period_start,
                               "table_2_1_template_control" = table_control_final)
   names_export <- names(x = rwp_table_2_1_export)
   for (export_id in seq_len(length.out = length(x = names_export))) {
-    names(x = rwp_table_2_1_export)[export_id] <- paste(names(rwp_table_2_1_export)[export_id],
-                                                        tolower(x = country),
-                                                        sep = "_")
+    if (length(x = eu_countries) == 1) {
+      names(x = rwp_table_2_1_export)[export_id] <- paste(names(rwp_table_2_1_export)[export_id],
+                                                          tolower(x = eu_countries),
+                                                          sep = "_")
+    } else {
+      names(x = rwp_table_2_1_export)[export_id] <- paste(names(rwp_table_2_1_export)[export_id],
+                                                          length(x = eu_countries),
+                                                          "eu_countries",
+                                                          sep = "_")
+    }
   }
   # export ----
   if (! is.null(x = output_path)) {

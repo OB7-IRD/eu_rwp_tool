@@ -1,26 +1,31 @@
 geo;geopolitical_entity;level_description
 EU28;European union (28 MS);EEC
 EU27_2020;European union (27 MS);EEC
+AT;Austria;AUT
 BE;Belgium;BEL
 BG;Bulgaria;BGR
+HR;Croatia;HRV
 CY;Cyprus;CYP
+CZ;Czechia;CZE
 DK;Denmark;DNK
-DE;Germany;DEU
 EE;Estonia;EST
-EL;Greece;GRC
-ES;Spain;ESP
 FI;Finland;FIN
 FR;France;FRA
-HR;Croatia;HRV
-IE;Ireland;IRE
+DE;Germany;DEU
+GR;Greece;GRC
+HU;Hungary;HUN
+IE;Ireland;IRL
 IT;Italy;ITA
 LV;Latvia;LVA
 LT;Lithuania;LTU
+LU;Luxembourg;LUX
 MT;Malta;MLT
 NL;Netherlands;NLD
 PL;Poland;POL
 PT;Portugal;PRT
-SE;Sweden;SWE
-SI;Slovenia;SVN
-UK;United Kingdom;GBR
 RO;Romania;ROU
+SK;Slovakia;SVK
+SI;Slovenia;SVN
+ES;Spain;ESP
+SE;Sweden;SWE
+GB;United Kingdom;GBR
