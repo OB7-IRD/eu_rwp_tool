@@ -55,14 +55,26 @@ reference_period_end <- as.integer(x = 2021)
 # By default rfmo used are CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC and WECAFC. You can change that through the "rfmo" argument.
 landing_statistics <- "eurostat"
 # You can switch with "rcg_stats" in the "landing_statistics" argument to use regional database source.
-path_input <- "~/input"
+input_path_directory_eurostat <- "~/eurostat"
+input_path_file_rcg_stats <- "~/cl_landing_rdbes.csv"
+input_path_file_fides <- "~/export_quota.csv"
 output_path <- "~/output"
 
 # process ----
+# with eurostat data as input
 rwp_table_2_1_template(reference_period_start = reference_period_start,
                        reference_period_end = reference_period_end,
                        landing_statistics = landing_statistics,
-                       input_path = path_input,
+                       input_path_directory_eurostat = input_path_directory_eurostat,
+                       input_path_file_fides = input_path_file_fides,
+                       output_path = output_path)
+
+# with rcg stats data as input
+rwp_table_2_1_template(reference_period_start = reference_period_start,
+                       reference_period_end = reference_period_end,
+                       landing_statistics = landing_statistics,
+                       input_path_file_rcg_stats = input_path_file_rcg_stats,
+                       input_path_file_fides = input_path_file_fides,
                        output_path = output_path)
 ```
 
