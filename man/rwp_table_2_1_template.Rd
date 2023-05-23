@@ -13,7 +13,9 @@ rwp_table_2_1_template(
   landing_statistics,
   rfmo = c("CCAMLR", "CECAF", "GFCM", "IATTC", "ICCAT", "ICES", "IOTC", "NAFO", "SEAFO",
     "SPRFMO", "WCPFC", "WECAFC"),
-  input_path,
+  input_path_directory_eurostat = NULL,
+  input_path_file_rcg_stats = NULL,
+  input_path_file_fides,
   output_path = NULL
 )
 }
@@ -22,13 +24,17 @@ rwp_table_2_1_template(
 
 \item{reference_period_end}{{\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.}
 
-\item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default default the 27 member states.}
+\item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.}
 
 \item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").}
 
 \item{rfmo}{{\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.}
 
-\item{input_path}{{\link[base]{character}} expected. Input path for input files.}
+\item{input_path_directory_eurostat}{{\link[base]{character}} expected. Input path directory for input eurostat files.}
+
+\item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input path file for input CL landing RDBES file.}
+
+\item{input_path_file_fides}{{\link[base]{character}} expected. Input path file for input FIDES file.}
 
 \item{output_path}{{\link[base]{character}} expected. Output path. By default NULL.}
 }

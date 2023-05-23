@@ -6,7 +6,9 @@
 #' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.
 #' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.
-#' @param input_path {\link[base]{character}} expected. Input path for input files.
+#' @param input_path_directory_eurostat {\link[base]{character}} expected. Input path directory for input eurostat files.
+#' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input path file for input CL landing RDBES file.
+#' @param input_path_file_fides {\link[base]{character}} expected. Input path file for input FIDES file.
 #' @param output_path {\link[base]{character}} expected. Output path. By default NULL.
 #' @return A list with two elements: "table_2_1_template" and "table_2_1_template_control".
 #' @importFrom utils read.table
@@ -54,7 +56,9 @@ rwp_table_2_1_template <- function(reference_period_start,
                                             "SPRFMO",
                                             "WCPFC",
                                             "WECAFC"),
-                                   input_path,
+                                   input_path_directory_eurostat = NULL,
+                                   input_path_file_rcg_stats = NULL,
+                                   input_path_file_fides,
                                    output_path = NULL) {
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
@@ -95,21 +99,20 @@ rwp_table_2_1_template <- function(reference_period_start,
   }
   # data imports ----
   # asfis
-  asfis <- utils::read.table(system.file("asfis_sp_feb_2018.txt",
+  asfis <- utils::read.table(system.file("asfis_sp_2022_rev1.txt",
                                          package = "rwptool"),
                              header = TRUE,
-                             sep = "\t",
+                             sep = ",",
                              as.is = TRUE)
   # eurostat
+  geo_data <- utils::read.table(file = system.file("geo.def",
+                                                   package = "rwptool"),
+                                header = TRUE,
+                                sep = ";") %>%
+    dplyr::filter(geo != "EU28") %>%
+    dplyr::rename(country = geopolitical_entity)
   if (landing_statistics == "eurostat") {
-    eurostat_data <- global_load_eurostat_data(path = file.path(input_path,
-                                                                "eurostat"))
-    geo_data <- utils::read.table(file = system.file("geo.def",
-                                                     package = "rwptool"),
-                                  header = TRUE,
-                                  sep = ";") %>%
-      dplyr::filter(geo != "EU28") %>%
-      dplyr::rename(country = geopolitical_entity)
+    eurostat_data <- global_load_eurostat_data(path = input_path_directory_eurostat)
     reference_period_eurostat <- reference_period[which(x = reference_period %in% names(x = eurostat_data))]
     if (length(x = reference_period_eurostat) != length(x = reference_period)) {
       cat(format(x = Sys.time(),
@@ -132,15 +135,27 @@ rwp_table_2_1_template <- function(reference_period_start,
       dplyr::left_join(asfis[, c(3:6)],
                        by = c("species" = "X3A_CODE"))
   } else if (landing_statistics == "rcg_stats") {
-    stop(format(x = Sys.time(),
-                format = "%Y-%m-%d %H:%M:%S"),
-         " - Error, process associated to \"rcg_stats\" argument not developed yet.\n")
+    rcg_stats_data <- global_load_cl_landing_rdbes_data(input_path_cl_landing_rdbes_data = input_path_file_rcg_stats)
+    reference_period_rcg_stats <- reference_period[which(x = reference_period %in% unique(rcg_stats_data$year))]
+    if (length(x = reference_period_rcg_stats) != length(x = reference_period)) {
+      cat(format(x = Sys.time(),
+                 format = "%Y-%m-%d %H:%M:%S"),
+          " - Warning: years of the \"reference_period\" argument are not all available in the RCG stats data imported.\n",
+          "Year(s) available in RCG stats data are: \n",
+          paste0(reference_period_rcg_stats,
+                 collapse = ", "),
+          ".\n",
+          sep = "")
+    }
+    rcg_stats_data_final <- dplyr::filter(.data = rcg_stats_data,
+                                          year %in% !!reference_period_rcg_stats) %>%
+      dplyr::left_join(geo_data,
+                       by = c("flag_country" = "level_description")) %>%
+      dplyr::filter(! is.na(x = country))
   }
   # fides
   fides_data <- global_load_fides_data(reference_period = reference_period,
-                                       file_path = file.path(input_path,
-                                                             "fides",
-                                                             "export_quota_20220204tl.csv"),
+                                       file_path = input_path_file_fides,
                                        eu_countries = eu_countries)
   # table 2.1 linkage
   table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0.csv",
@@ -329,10 +344,7 @@ rwp_table_2_1_template <- function(reference_period_start,
           TRUE ~ eurostat_country
         ))
     } else if (landing_statistics == "rcg_stats") {
-      # from rcg data ----
-      stop(format(x = Sys.time(),
-                  format = "%Y-%m-%d %H:%M:%S"),
-           " - Error, process associated to \"rcg_stats\" argument not developed yet.\n")
+      stop("not developed yet.\n")
     }
     # from fides data ----
     if (! table_2_1_linkage[table_2_1_linkage_id,
