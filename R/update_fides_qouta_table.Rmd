@@ -1,0 +1,99 @@
+---
+title: "update_fides_qouta_table"
+output: html_document
+---
+
+** NOTE **
+The fides qouta file is considered confidential, so the detailed files should never be pushed to GitHub
+
+It is ok to push this overview to GitHub
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(dplyr)
+
+years_to_update <- c(2022)
+
+path <- "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/table_2_1_development/personal/input/fides/"
+
+filename_old <- "export_quota_20220204tl.csv"
+filename_new <- "export_quota_15_3_2023__9_26_21_PRODUCTION.xlsx"
+
+```
+
+```{r}
+
+# Get data
+
+old <- read.csv(paste0(path, filename_old), sep = ";")
+new <- read_xlsx(paste0(path, filename_new), sheet = 1)
+
+names(old)
+names(new)
+
+# Rename names in new file to names in old
+
+colnames(new) <- gsub(" ", "_", tolower(colnames(new)))
+
+
+names(old)
+names(new)
+
+# Select only varibles already in old file
+
+names_old <- names(old)
+new_1 <- select(new, one_of(names_old))
+
+
+names(old)
+names(new_1)
+
+# Subset files on years, so only the right years are updated
+
+distinct(old, definition_year)
+
+distinct(new, definition_year)
+
+old_1 <- subset(old, !(definition_year %in% years_to_update))
+
+new_2 <- subset(new_1, (definition_year %in% years_to_update))
+
+# Combine files
+
+final <- rbind(old_1, new_2)
+
+# Save file
+
+unique(final$definition_year)
+
+write.table(
+  final,
+  paste(path, "fides_quota_2018_", max(years_to_update), ".csv"),
+  row.names = F,
+  sep = ";"
+)
+
+```
+
+```{r}
+
+# Curious - do the number of quotas shift over the years?
+
+summarise(group_by(final, definition_year), no_qoutas = length(unique(paste(
+  species_code, area_code
+))))
+
+# There are many more quotas in 2022 - UK? - yes - we need to add all the UK quotas to the linkage file :-(
+
+# What quotas shift over the years?
+
+final$quota <- paste0(final$species_code, final$area_code)
+
+uniq_quota <- distinct(final, quota)
+
+
+
+```
+
