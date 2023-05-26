@@ -1,261 +1,261 @@
-Id,Code,Description,ParentArea,AreaType,Ground,_AreaCode,_AreaTypeCode
-505,27.1,1,572,43,3,27,SubArea
-506,27.10, --- (Subarea X),572,43,15,27,SubArea
-507,27.12, --- (Subarea XII),572,43,4,27,SubArea
-508,27.14.a,Northeast Greenland (Division XIVa),560,44,4,27.14,Division
-509,27.14.b,Southeast Greenland (Division XIVb),560,44,4,27.14,Division
-510,27.2,Atlantic, Northeast, Area 27 (SubArea II),572,43,3,27,SubArea
-511,27.3.c.22,Belt Sea (Subdivision 22),567,45,1,27.3.c,SubDivision
-512,27.3.b.23,Sound (Subdivision 23),566,45,1,27.3.b,SubDivision
-513,27.3.d.24,Baltic West of Bornholm (Subdivision 24),568,45,1,27.3.d,SubDivision
-514,27.3.d.25,Southern Central Baltic - West (Subdivision 25),568,45,2,27.3.d,SubDivision
-515,27.3.d.26,Southern Central Baltic - East (Subdivision 26),568,45,2,27.3.d,SubDivision
-516,27.3.d.27,West of Gotland (Subdivision 27),568,45,2,27.3.d,SubDivision
-517,27.3.d.28,East of Gotland or Gulf of Riga (Subdivision 28),568,45,2,27.3.d,SubDivision
-518,27.3.d.29,Archipelago Sea (Subdivision 29),568,45,2,27.3.d,SubDivision
-519,27.2.a,Norwegian Sea (Division IIa),510,44,3,27.2,Division
-520,27.2.b,Spitzbergen and Bear Island (Division IIb),510,44,3,27.2,Division
-521,27.3,Atlantic, Northeast, Area 27 (SubArea III),572,43,1,27,SubArea
-522,27.3.d.30,Bothnian Sea (Subdivision 30),568,45,2,27.3.d,SubDivision
-523,27.3.d.31,Bothnian Bay (Subdivision 31),568,45,2,27.3.d,SubDivision
-524,27.3.d.32,Gulf of Finland (Subdivision 32),568,45,2,27.3.d,SubDivision
-525,27.3.a.20,Skagerrak (Subdivision 3an),565,45,5,27.3.a,SubDivision
-526,27.3.a.21,Kattegat (Subdivision 3as),565,45,5,27.3.a,SubDivision
-527,27.4,Atlantic, Northeast, Area 27 (SubArea IV),572,43,6,27,SubArea
-528,27.4.a,Northern North Sea (Division IVa),527,44,6,27.4,Division
-529,27.4.b,Central North Sea (Division IVb),527,44,6,27.4,Division
-530,27.4.c,Southern North Sea (Division IVc),527,44,6,27.4,Division
-532,27.5.a,Iceland Grounds (Division Va),572,44,4,27,Division
-533,27.5.b,Faeroes Grounds (Division Vb),572,44,16,27,Division
-534,27.5.b.1,Faeroe Plateau (Subdivision Vb1),533,45,16,27.5.b,SubDivision
-535,27.5.b.2,Faeroe Bank (Subdivision Vb2),533,45,16,27.5.b,SubDivision
-536,27.6,Atlantic, Northeast, Area 27 (SubArea VI),572,43,12,27,SubArea
-537,27.6.a,Northwest Coast of Scotland and North Ireland or as the West of Scotland (Division VIa),536,44,12,27.6,Division
-538,27.6.b,Rockall (Division VIb),536,44,12,27.6,Division
-539,27.7.a,Irish Sea (Division VIIa),558,44,9,27.7,Division
-540,27.7.b,West of Ireland (Division VIIb),558,44,13,27.7,Division
-541,27.7.c,Porcupine Bank (Division VIIc),558,44,13,27.7,Division
-542,27.7.d,Eastern English Channel (Division VIId),558,44,6,27.7,Division
-543,27.7.e,Western English Channel (Division VIIe),558,44,10,27.7,Division
-544,27.7.f,Bristol Channel (Division VIIf),558,44,8,27.7,Division
-545,27.7.g,Celtic Sea North (Division VIIg),558,44,8,27.7,Division
-546,27.7.h,Celtic Sea South ( Division VIIh),558,44,8,27.7,Division
-548,27.7.j,Southwest of Ireland - East (Division VIIj),558,44,13,27.7,Division
-549,27.7.k,Southwest of Ireland - West (Division VIIk),558,44,13,27.7,Division
-550,27.8,Atlantic, Northeast, Area 27 (SubArea VIII),572,43,7,27,SubArea
-551,27.8.a,Bay of Biscay - North (Division VIIIa),550,44,7,27.8,Division
-552,27.8.b,Bay of Biscay - Central (Division VIIIb),550,44,7,27.8,Division
-553,27.8.c,Bay of Biscay - South (Division VIIIc),550,44,14,27.8,Division
-554,27.8.d,Bay of Biscay - Offshore (Division VIIId),550,44,7,27.8,Division
-555,27.8.e,West of Bay of Biscay (Division VIIIe),550,44,7,27.8,Division
-556,27.9.a,Portuguese Waters - East (Division IXa),559,44,14,27.9,Division
-557,27.9.b,Portuguese Waters - West (Division IXb),559,44,14,27.9,Division
-558,27.7,Atlantic, Northeast, Area 27 (SubArea VII),572,43,8,27,SubArea
-559,27.9,Atlantic, Northeast, Area 27 (SubArea IX),572,43,14,27,SubArea
-560,27.14,East Greenland (Subarea XIV),572,43,4,27,SubArea
-565,27.3.a,Skagerrak and Kattegat (Division IIIa),521,44,5,27.3,Division
-566,27.3.b,Sound or the Transition Area (Divisions IIIb),521,44,1,27.3,Division
-567,27.3.c,Belt Sea or the Transition Area (Divisions IIIc),521,44,1,27.3,Division
-568,27.3.d,Baltic Sea (Division IIId),521,44,1,27.3,Division
-572,27,FAO area system.  Atlantic, Northeast (Area 27),572,42,3,27,Area
-573,her_3an,Skagerrak (Subdivision 20),573,46,,her_3an,MixedHerring_47d3_3a22
-574,her_3as,Kattegar (Subdivision 21),574,46,,her_3as,MixedHerring_47d3_3a22
-575,her_TransferArea_4ab,Transfer area covering parts of Northern North Sea (Division IVa) and Central North Sea (Division IVb),575,46,,her_TransferArea_4ab,MixedHerring_47d3_3a22
-576,her_NonTransferArea_4ab,Non-Transfer area covering parts of Northern North Sea (Division IVa) and Central North Sea (Division IVb),576,46,,her_NonTransferArea_4ab,MixedHerring_47d3_3a22
-590,27.4.a.w,Northern North Sea, West (Subdivision IVaw),528,45,6,27.4.a,SubDivision
-591,27.4.a.e,Northern North Sea, East (Subdivision IVae),528,45,6,27.4.a,SubDivision
-592,27.4.b.e,Central North Sea, East (Subdivision IVbe),529,45,6,27.4.b,SubDivision
-593,27.4.b.w,Central North Sea, west (Subdivision IVbw),529,45,6,27.4.b,SubDivision
-594,34,FAO area system. Atlantic, Eastern central (Area 34),594,42,23,34,Area
-595,34.1,,594,43,19,34,SubArea
-596,34.2,,594,43,19,34,SubArea
-597,34.3,,594,43,19,34,SubArea
-598,34.4,,594,43,19,34,SubArea
-599,34.1.1,Morocco Coastal,595,44,19,34.1,Division
-600,34.1.2,Canaries/Madeira Insular,595,44,18,34.1,Division
-601,34.1.3,Sahara Coastal,595,44,19,34.1,Division
-602,34.1.1.1,,599,45,19,34.1.1,SubDivision
-603,34.1.1.2,,599,45,19,34.1.1,SubDivision
-604,34.1.1.3,,599,45,19,34.1.1,SubDivision
-605,34.1.3.1,,601,45,19,34.1.3,SubDivision
-606,34.1.3.2,,601,45,19,34.1.3,SubDivision
-607,34.3.1,Cape Verde Coastal,597,44,19,34.3,Division
-608,34.3.2,,597,44,19,34.3,Division
-609,34.3.3,,597,44,19,34.3,Division
-610,34.3.4,,597,44,19,34.3,Division
-611,34.3.5,,597,44,19,34.3,Division
-612,34.3.6,,597,44,19,34.3,Division
-613,34.3.1.1,,607,45,19,34.3.1,SubDivision
-614,34.3.1.2,,607,45,19,34.3.1,SubDivision
-615,34.3.1.3,,607,45,19,34.3.1,SubDivision
-616,34.4.1,,598,44,19,34.4,Division
-617,34.4.2,,598,44,19,34.4,Division
-618,21,FAO area system. Atlantic, Northwest (Area 21),618,42,17,21,Area
-619,21.0,,618,43,17,21,SubArea
-620,21.0.A,,619,44,17,21.0,Division
-621,21.0.B,,619,44,17,21.0,Division
-622,21.1,,618,43,17,21,SubArea
-623,21.2,,618,43,17,21,SubArea
-625,21.3,,618,43,17,21,SubArea
-626,21.4,,618,43,17,21,SubArea
-627,21.5,,618,43,17,21,SubArea
-628,21.6,,618,43,17,21,SubArea
-629,21.1.A,,622,44,17,21.1,Division
-630,21.1.B,,622,44,17,21.1,Division
-631,21.1.C,,622,44,17,21.1,Division
-632,21.1.D,,622,44,17,21.1,Division
-633,21.1.E,,622,44,17,21.1,Division
-634,21.1.F,,622,44,17,21.1,Division
-635,21.2.G,,623,44,17,21.2,Division
-636,21.2.H,,623,44,17,21.2,Division
-637,21.2.J,,623,44,17,21.2,Division
-638,21.3.K,,625,44,17,21.3,Division
-639,21.3.L,,625,44,17,21.3,Division
-640,21.3.M,,625,44,17,21.3,Division
-641,21.3.N,,625,44,17,21.3,Division
-642,21.3.O,,625,44,17,21.3,Division
-643,21.3.P,,625,44,17,21.3,Division
-644,21.3.P.n,,643,45,17,21.3.P,SubDivision
-646,21.3.P.s,,643,45,17,21.3.P,SubDivision
-647,27.6.a.n,,537,45,12,27.6.a,SubDivision
-648,27.6.a.s,,537,45,12,27.6.a,SubDivision
-649,21.4.R,,626,44,17,21.4,Division
-650,21.4.S,,626,44,17,21.4,Division
-651,21.4.T,,626,44,17,21.4,Division
-652,21.4.V,,626,44,17,21.4,Division
-653,21.4.W,,626,44,17,21.4,Division
-654,21.4.X,,626,44,17,21.4,Division
-655,21.4.V.n,,652,45,17,21.4.V,SubDivision
-656,21.4.V.s,,652,45,17,21.4.V,SubDivision
-657,21.5.Y,,627,44,17,21.5,Division
-658,21.5.Z,,627,44,17,21.5,Division
-659,21.5.Z.e,,658,45,17,21.5.Z,SubDivision
-660,21.5.Z.w,,658,45,17,21.5.Z,SubDivision
-661,21.6.A,,628,44,17,21.6,Division
-662,21.6.B,,628,44,17,21.6,Division
-663,21.6.C,,628,44,17,21.6,Division
-664,21.6.D,,628,44,17,21.6,Division
-665,21.6.E,,628,44,17,21.6,Division
-666,21.6.F,,628,44,17,21.6,Division
-667,21.6.G,,628,44,17,21.6,Division
-668,21.6.H,,628,44,17,21.6,Division
-669,41,,669,42,20,41,Area
-670,47,,670,42,21,47,Area
-671,51,,671,42,,51,Area
-672,57,,672,42,,57,Area
-673,41.1,,669,43,20,41,SubArea
-674,41.2,,669,43,20,41,SubArea
-675,41.3,,669,43,20,41,SubArea
-677,41.1.1,,673,44,20,41.1,Division
-678,41.1.2,,673,44,20,41.1,Division
-679,41.1.3,,673,44,20,41.1,Division
-680,41.1.4,,673,44,20,41.1,Division
-681,41.2.1,,674,44,20,41.2,Division
-682,41.2.2,,674,44,20,41.2,Division
-683,41.2.3,,674,44,20,41.2,Division
-684,41.2.4,,674,44,20,41.2,Division
-685,41.3.1,,675,44,20,41.3,Division
-686,41.3.2,,675,44,20,41.3,Division
-687,41.3.3,,675,44,20,41.3,Division
-688,47.1,,670,43,21,47,SubArea
-689,47.2,,670,43,21,47,SubArea
-690,47.A,,670,43,21,47,SubArea
-691,47.B,,670,43,21,47,SubArea
-692,47.C,,670,43,21,47,SubArea
-693,47.D,,670,43,21,47,SubArea
-694,51.1,,671,43,,51,SubArea
-695,51.2,,671,43,,51,SubArea
-696,51.3,,671,43,,51,SubArea
-697,51.4,,671,43,,51,SubArea
-698,51.5,,671,43,,51,SubArea
-699,51.6,,671,43,,51,SubArea
-700,51.7,,671,43,,51,SubArea
-701,51.8,,671,43,,51,SubArea
-702,57.1,,672,43,,57,SubArea
-703,57.2,,672,43,,57,SubArea
-704,57.3,,672,43,,57,SubArea
-705,57.4,,672,43,,57,SubArea
-706,57.5,,672,43,,57,SubArea
-707,57.6,,672,43,,57,SubArea
-708,47.1.1,,688,44,21,47.1,Division
-709,47.1.2,,688,44,21,47.1,Division
-710,47.1.3,,688,44,21,47.1,Division
-711,47.1.4,,688,44,21,47.1,Division
-712,47.1.5,,688,44,21,47.1,Division
-713,47.1.6,,688,44,21,47.1,Division
-714,47.2.1,,689,44,21,47.2,Division
-715,47.2.2,,689,44,21,47.2,Division
-716,47.A.0,,690,44,21,47.A,Division
-717,47.A.1,,690,44,21,47.A,Division
-718,47.B.0,,691,44,21,47.B,Division
-719,47.B.1,,691,44,21,47.B,Division
-720,47.C.0,,692,44,21,47.C,Division
-721,47.C.1,,692,44,21,47.C,Division
-722,47.D.0,,693,44,21,47.D,Division
-723,47.D.1,,693,44,21,47.D,Division
-724,27.9.b.1,Portuguese waters (Division 27.9b),557,45,14,27.9.b,SubDivision
-725,27.9.b.2,portuguese waters (Division 27.9b),557,45,14,27.9.b,SubDivision
-726,27.10.b,Portuguese waters (Subarea X),506,44,15,27.10,Division
-727,27.10.b.1,,726,45,15,27.10.b,SubDivision
-728,27.10.b.2,,726,45,15,27.10.b,SubDivision
-729,27.10.a,,506,44,15,27.10,Division
-730,27.10.a.1,,729,45,15,27.10.a,SubDivision
-731,27.10.a.2,,729,45,15,27.10.a,SubDivision
-732,27.2.a.2,,519,45,3,27.2.a,SubDivision
-733,27.14.b.1,,509,45,4,27.14.b,SubDivision
-734,27.2.b.2,,520,45,3,27.2.b,SubDivision
-735,27.14.b.2,,509,45,4,27.14.b,SubDivision
-736,27.2.a.1,,519,45,3,27.2.a,SubDivision
-737,87,Southeast Pacific, Area 87,737,42,22,87,Area
-738,87.1,,737,43,22,87,SubArea
-739,87.2,,737,43,22,87,SubArea
-740,87.3,,737,43,22,87,SubArea
-741,87.1.1,,738,44,22,87.1,Division
-742,87.1.2,,738,44,22,87.1,Division
-743,87.1.3,,738,44,22,87.1,Division
-744,87.1.4,,738,44,22,87.1,Division
-745,87.2.1,,739,44,22,87.2,Division
-746,87.2.2,,739,44,22,87.2,Division
-747,87.2.3,,739,44,22,87.2,Division
-748,87.2.4,,739,44,22,87.2,Division
-749,87.2.5,,739,44,22,87.2,Division
-750,87.2.6,,739,44,22,87.2,Division
-751,87.3.1,,740,44,22,87.3,Division
-752,87.3.2,,740,44,22,87.3,Division
-753,87.3.3,,740,44,22,87.3,Division
-754,48,Major Fishing Area 48,754,42,,48,Area
-755,48.1,Peninsular,754,43,,48,SubArea
-756,48.2,South Orkney,754,43,,48,SubArea
-757,48.3,South Georgia,754,43,,48,SubArea
-758,48.4,South Sandwich,754,43,,48,SubArea
-759,48.5,Weddel Sea,754,43,,48,SubArea
-760,48.6,Bouvet,754,43,,48,SubArea
-766,27.3.d.28.1,Gulf of Riga,517,47,2,27.3.d.28,Unit
-767,27.3.d.28.2,East of Gotland (open sea),517,47,2,27.3.d.28,Unit
-768,27.1.a,Barents Sea - NEAFC Regulatory Area,505,43,3,27.1,SubArea
-769,27.1.b,Barents Sea - Non NEAFC Regulatory Area,505,43,3,27.1,SubArea
-770,27.12.a,Southern mid-Atlantic Ridge (Southern Reykjanes Ridge south to Charlie-Gibbs Fracture Zone,507,43,4,27.12,SubArea
-771,27.12.b,Western Hatton Bank,507,43,4,27.12,SubArea
-772,27.12.c,Central Northeast Atlantic - South,507,43,4,27.12,SubArea
-773,27.2.b.1,Spitsbergen and Bear Island - NEAFC Regulatory Area,520,44,3,27.2.b,Division
-774,27.5,Iceland and Faroes Grounds,572,42,3,27,Area
-775,27.5.a.1,Northern Reykjanes ridge ,532,44,4,27.5.a,Division
-776,27.5.a.2,Icelandic Shelf,532,44,4,27.5.a,Division
-777,27.5.b.1.a,Faroe Plateau - Part of NEAFC Regulatory Area,534,45,16,27.5.b.1,SubDivision
-778,27.5.b.1.b,Faroe Plateau - Part of Non-NEAFC Regulatory Area,534,45,16,27.5.b.1,SubDivision
-779,27.6.b.1,Rockall - Part of NEAFC area I ,538,44,12,27.6.b,Division
-780,27.6.b.2,Rockall Non-NEAFC area,538,44,12,27.6.b,Division
-781,27.7.c.1,Porcupine Bank - NEAFC Regulatory Area,541,44,13,27.7.c,Division
-782,27.7.c.2,Porcupine Bank Non-NEAFC Regulatory Area,541,44,13,27.7.c,Division
-783,27.7.j.1,Southwest of Ireland - East - Parts of the NEAFC Regulatory,548,44,13,27.7.j,Division
-784,27.7.j.2,Southwest of Ireland - East Non-NEAFC Regulatory Area,548,44,13,27.7.j,Division
-785,27.7.k.1,Southwest of Ireland - West - Part of the NEAFC Regulatory Area,549,44,13,27.7.k,Division
-786,27.7.k.2,Southwest of Ireland - West - Part of the Non-NEAFC Area I,549,44,13,27.7.k,Division
-787,27.8.d.1,Bay of Biscay - Offshore - Parts in NEAFC Regulatory Area,554,44,7,27.8.d,Division
-788,27.8.d.2,Bay of Biscay - Offshore Non-NEAFC Regulatory Area,554,44,7,27.8.d,Division
-789,27.8.e.1,West of Bay of Biscay - Parts in NEAFC Regulatory Area ,555,44,7,27.8.e,Division
-790,27.8.e.2,West of Bay of Biscay Non-NEAFC Regulatory Area,555,44,7,27.8.e,Division
-791,27.12.a.1,Subdivision XIIa1 - NEAFC Regulatory Area,770,43,4,27.12.a,SubArea
-792,27.12.a.2,Subdivision XIIa2 - NEAFC Regulatory Area,770,43,4,27.12.a,SubArea
-793,27.12.a.3,Subdivision XIIa3 Non-NEAFC Regulatory Area,770,43,4,27.12.a,SubArea
-794,27.12.a.4,Subdivision XIIa4 Non-NEAFC Regulatory Area,770,43,4,27.12.a,SubArea
+Id;Code;Description;ParentArea;AreaType;Ground;_AreaCode;_AreaTypeCode
+505;27.1;1;572;43;3;27;SubArea
+506;27.10; --- (Subarea X);572;43;15;27;SubArea
+507;27.12; --- (Subarea XII);572;43;4;27;SubArea
+508;27.14.a;Northeast Greenland (Division XIVa);560;44;4;27.14;Division
+509;27.14.b;Southeast Greenland (Division XIVb);560;44;4;27.14;Division
+510;27.2;Atlantic, Northeast, Area 27 (SubArea II);572;43;3;27;SubArea
+511;27.3.c.22;Belt Sea (Subdivision 22);567;45;1;27.3.c;SubDivision
+512;27.3.b.23;Sound (Subdivision 23);566;45;1;27.3.b;SubDivision
+513;27.3.d.24;Baltic West of Bornholm (Subdivision 24);568;45;1;27.3.d;SubDivision
+514;27.3.d.25;Southern Central Baltic - West (Subdivision 25);568;45;2;27.3.d;SubDivision
+515;27.3.d.26;Southern Central Baltic - East (Subdivision 26);568;45;2;27.3.d;SubDivision
+516;27.3.d.27;West of Gotland (Subdivision 27);568;45;2;27.3.d;SubDivision
+517;27.3.d.28;East of Gotland or Gulf of Riga (Subdivision 28);568;45;2;27.3.d;SubDivision
+518;27.3.d.29;Archipelago Sea (Subdivision 29);568;45;2;27.3.d;SubDivision
+519;27.2.a;Norwegian Sea (Division IIa);510;44;3;27.2;Division
+520;27.2.b;Spitzbergen and Bear Island (Division IIb);510;44;3;27.2;Division
+521;27.3;Atlantic, Northeast, Area 27 (SubArea III);572;43;1;27;SubArea
+522;27.3.d.30;Bothnian Sea (Subdivision 30);568;45;2;27.3.d;SubDivision
+523;27.3.d.31;Bothnian Bay (Subdivision 31);568;45;2;27.3.d;SubDivision
+524;27.3.d.32;Gulf of Finland (Subdivision 32);568;45;2;27.3.d;SubDivision
+525;27.3.a.20;Skagerrak (Subdivision 3an);565;45;5;27.3.a;SubDivision
+526;27.3.a.21;Kattegat (Subdivision 3as);565;45;5;27.3.a;SubDivision
+527;27.4;Atlantic, Northeast, Area 27 (SubArea IV);572;43;6;27;SubArea
+528;27.4.a;Northern North Sea (Division IVa);527;44;6;27.4;Division
+529;27.4.b;Central North Sea (Division IVb);527;44;6;27.4;Division
+530;27.4.c;Southern North Sea (Division IVc);527;44;6;27.4;Division
+532;27.5.a;Iceland Grounds (Division Va);572;44;4;27;Division
+533;27.5.b;Faeroes Grounds (Division Vb);572;44;16;27;Division
+534;27.5.b.1;Faeroe Plateau (Subdivision Vb1);533;45;16;27.5.b;SubDivision
+535;27.5.b.2;Faeroe Bank (Subdivision Vb2);533;45;16;27.5.b;SubDivision
+536;27.6;Atlantic, Northeast, Area 27 (SubArea VI);572;43;12;27;SubArea
+537;27.6.a;Northwest Coast of Scotland and North Ireland or as the West of Scotland (Division VIa);536;44;12;27.6;Division
+538;27.6.b;Rockall (Division VIb);536;44;12;27.6;Division
+539;27.7.a;Irish Sea (Division VIIa);558;44;9;27.7;Division
+540;27.7.b;West of Ireland (Division VIIb);558;44;13;27.7;Division
+541;27.7.c;Porcupine Bank (Division VIIc);558;44;13;27.7;Division
+542;27.7.d;Eastern English Channel (Division VIId);558;44;6;27.7;Division
+543;27.7.e;Western English Channel (Division VIIe);558;44;10;27.7;Division
+544;27.7.f;Bristol Channel (Division VIIf);558;44;8;27.7;Division
+545;27.7.g;Celtic Sea North (Division VIIg);558;44;8;27.7;Division
+546;27.7.h;Celtic Sea South ( Division VIIh);558;44;8;27.7;Division
+548;27.7.j;Southwest of Ireland - East (Division VIIj);558;44;13;27.7;Division
+549;27.7.k;Southwest of Ireland - West (Division VIIk);558;44;13;27.7;Division
+550;27.8;Atlantic, Northeast, Area 27 (SubArea VIII);572;43;7;27;SubArea
+551;27.8.a;Bay of Biscay - North (Division VIIIa);550;44;7;27.8;Division
+552;27.8.b;Bay of Biscay - Central (Division VIIIb);550;44;7;27.8;Division
+553;27.8.c;Bay of Biscay - South (Division VIIIc);550;44;14;27.8;Division
+554;27.8.d;Bay of Biscay - Offshore (Division VIIId);550;44;7;27.8;Division
+555;27.8.e;West of Bay of Biscay (Division VIIIe);550;44;7;27.8;Division
+556;27.9.a;Portuguese Waters - East (Division IXa);559;44;14;27.9;Division
+557;27.9.b;Portuguese Waters - West (Division IXb);559;44;14;27.9;Division
+558;27.7;Atlantic, Northeast, Area 27 (SubArea VII);572;43;8;27;SubArea
+559;27.9;Atlantic, Northeast, Area 27 (SubArea IX);572;43;14;27;SubArea
+560;27.14;East Greenland (Subarea XIV);572;43;4;27;SubArea
+565;27.3.a;Skagerrak and Kattegat (Division IIIa);521;44;5;27.3;Division
+566;27.3.b;Sound or the Transition Area (Divisions IIIb);521;44;1;27.3;Division
+567;27.3.c;Belt Sea or the Transition Area (Divisions IIIc);521;44;1;27.3;Division
+568;27.3.d;Baltic Sea (Division IIId);521;44;1;27.3;Division
+572;27;FAO area system.  Atlantic, Northeast (Area 27);572;42;3;27;Area
+573;her_3an;Skagerrak (Subdivision 20);573;46;;her_3an;MixedHerring_47d3_3a22
+574;her_3as;Kattegar (Subdivision 21);574;46;;her_3as;MixedHerring_47d3_3a22
+575;her_TransferArea_4ab;Transfer area covering parts of Northern North Sea (Division IVa) and Central North Sea (Division IVb);575;46;;her_TransferArea_4ab;MixedHerring_47d3_3a22
+576;her_NonTransferArea_4ab;Non-Transfer area covering parts of Northern North Sea (Division IVa) and Central North Sea (Division IVb);576;46;;her_NonTransferArea_4ab;MixedHerring_47d3_3a22
+590;27.4.a.w;Northern North Sea, West (Subdivision IVaw);528;45;6;27.4.a;SubDivision
+591;27.4.a.e;Northern North Sea, East (Subdivision IVae);528;45;6;27.4.a;SubDivision
+592;27.4.b.e;Central North Sea, East (Subdivision IVbe);529;45;6;27.4.b;SubDivision
+593;27.4.b.w;Central North Sea, west (Subdivision IVbw);529;45;6;27.4.b;SubDivision
+594;34;FAO area system. Atlantic, Eastern central (Area 34);594;42;23;34;Area
+595;34.1;;594;43;19;34;SubArea
+596;34.2;;594;43;19;34;SubArea
+597;34.3;;594;43;19;34;SubArea
+598;34.4;;594;43;19;34;SubArea
+599;34.1.1;Morocco Coastal;595;44;19;34.1;Division
+600;34.1.2;Canaries/Madeira Insular;595;44;18;34.1;Division
+601;34.1.3;Sahara Coastal;595;44;19;34.1;Division
+602;34.1.1.1;;599;45;19;34.1.1;SubDivision
+603;34.1.1.2;;599;45;19;34.1.1;SubDivision
+604;34.1.1.3;;599;45;19;34.1.1;SubDivision
+605;34.1.3.1;;601;45;19;34.1.3;SubDivision
+606;34.1.3.2;;601;45;19;34.1.3;SubDivision
+607;34.3.1;Cape Verde Coastal;597;44;19;34.3;Division
+608;34.3.2;;597;44;19;34.3;Division
+609;34.3.3;;597;44;19;34.3;Division
+610;34.3.4;;597;44;19;34.3;Division
+611;34.3.5;;597;44;19;34.3;Division
+612;34.3.6;;597;44;19;34.3;Division
+613;34.3.1.1;;607;45;19;34.3.1;SubDivision
+614;34.3.1.2;;607;45;19;34.3.1;SubDivision
+615;34.3.1.3;;607;45;19;34.3.1;SubDivision
+616;34.4.1;;598;44;19;34.4;Division
+617;34.4.2;;598;44;19;34.4;Division
+618;21;FAO area system. Atlantic, Northwest (Area 21);618;42;17;21;Area
+619;21.0;;618;43;17;21;SubArea
+620;21.0.A;;619;44;17;21.0;Division
+621;21.0.B;;619;44;17;21.0;Division
+622;21.1;;618;43;17;21;SubArea
+623;21.2;;618;43;17;21;SubArea
+625;21.3;;618;43;17;21;SubArea
+626;21.4;;618;43;17;21;SubArea
+627;21.5;;618;43;17;21;SubArea
+628;21.6;;618;43;17;21;SubArea
+629;21.1.A;;622;44;17;21.1;Division
+630;21.1.B;;622;44;17;21.1;Division
+631;21.1.C;;622;44;17;21.1;Division
+632;21.1.D;;622;44;17;21.1;Division
+633;21.1.E;;622;44;17;21.1;Division
+634;21.1.F;;622;44;17;21.1;Division
+635;21.2.G;;623;44;17;21.2;Division
+636;21.2.H;;623;44;17;21.2;Division
+637;21.2.J;;623;44;17;21.2;Division
+638;21.3.K;;625;44;17;21.3;Division
+639;21.3.L;;625;44;17;21.3;Division
+640;21.3.M;;625;44;17;21.3;Division
+641;21.3.N;;625;44;17;21.3;Division
+642;21.3.O;;625;44;17;21.3;Division
+643;21.3.P;;625;44;17;21.3;Division
+644;21.3.P.n;;643;45;17;21.3.P;SubDivision
+646;21.3.P.s;;643;45;17;21.3.P;SubDivision
+647;27.6.a.n;;537;45;12;27.6.a;SubDivision
+648;27.6.a.s;;537;45;12;27.6.a;SubDivision
+649;21.4.R;;626;44;17;21.4;Division
+650;21.4.S;;626;44;17;21.4;Division
+651;21.4.T;;626;44;17;21.4;Division
+652;21.4.V;;626;44;17;21.4;Division
+653;21.4.W;;626;44;17;21.4;Division
+654;21.4.X;;626;44;17;21.4;Division
+655;21.4.V.n;;652;45;17;21.4.V;SubDivision
+656;21.4.V.s;;652;45;17;21.4.V;SubDivision
+657;21.5.Y;;627;44;17;21.5;Division
+658;21.5.Z;;627;44;17;21.5;Division
+659;21.5.Z.e;;658;45;17;21.5.Z;SubDivision
+660;21.5.Z.w;;658;45;17;21.5.Z;SubDivision
+661;21.6.A;;628;44;17;21.6;Division
+662;21.6.B;;628;44;17;21.6;Division
+663;21.6.C;;628;44;17;21.6;Division
+664;21.6.D;;628;44;17;21.6;Division
+665;21.6.E;;628;44;17;21.6;Division
+666;21.6.F;;628;44;17;21.6;Division
+667;21.6.G;;628;44;17;21.6;Division
+668;21.6.H;;628;44;17;21.6;Division
+669;41;;669;42;20;41;Area
+670;47;;670;42;21;47;Area
+671;51;;671;42;;51;Area
+672;57;;672;42;;57;Area
+673;41.1;;669;43;20;41;SubArea
+674;41.2;;669;43;20;41;SubArea
+675;41.3;;669;43;20;41;SubArea
+677;41.1.1;;673;44;20;41.1;Division
+678;41.1.2;;673;44;20;41.1;Division
+679;41.1.3;;673;44;20;41.1;Division
+680;41.1.4;;673;44;20;41.1;Division
+681;41.2.1;;674;44;20;41.2;Division
+682;41.2.2;;674;44;20;41.2;Division
+683;41.2.3;;674;44;20;41.2;Division
+684;41.2.4;;674;44;20;41.2;Division
+685;41.3.1;;675;44;20;41.3;Division
+686;41.3.2;;675;44;20;41.3;Division
+687;41.3.3;;675;44;20;41.3;Division
+688;47.1;;670;43;21;47;SubArea
+689;47.2;;670;43;21;47;SubArea
+690;47.A;;670;43;21;47;SubArea
+691;47.B;;670;43;21;47;SubArea
+692;47.C;;670;43;21;47;SubArea
+693;47.D;;670;43;21;47;SubArea
+694;51.1;;671;43;;51;SubArea
+695;51.2;;671;43;;51;SubArea
+696;51.3;;671;43;;51;SubArea
+697;51.4;;671;43;;51;SubArea
+698;51.5;;671;43;;51;SubArea
+699;51.6;;671;43;;51;SubArea
+700;51.7;;671;43;;51;SubArea
+701;51.8;;671;43;;51;SubArea
+702;57.1;;672;43;;57;SubArea
+703;57.2;;672;43;;57;SubArea
+704;57.3;;672;43;;57;SubArea
+705;57.4;;672;43;;57;SubArea
+706;57.5;;672;43;;57;SubArea
+707;57.6;;672;43;;57;SubArea
+708;47.1.1;;688;44;21;47.1;Division
+709;47.1.2;;688;44;21;47.1;Division
+710;47.1.3;;688;44;21;47.1;Division
+711;47.1.4;;688;44;21;47.1;Division
+712;47.1.5;;688;44;21;47.1;Division
+713;47.1.6;;688;44;21;47.1;Division
+714;47.2.1;;689;44;21;47.2;Division
+715;47.2.2;;689;44;21;47.2;Division
+716;47.A.0;;690;44;21;47.A;Division
+717;47.A.1;;690;44;21;47.A;Division
+718;47.B.0;;691;44;21;47.B;Division
+719;47.B.1;;691;44;21;47.B;Division
+720;47.C.0;;692;44;21;47.C;Division
+721;47.C.1;;692;44;21;47.C;Division
+722;47.D.0;;693;44;21;47.D;Division
+723;47.D.1;;693;44;21;47.D;Division
+724;27.9.b.1;Portuguese waters (Division 27.9b);557;45;14;27.9.b;SubDivision
+725;27.9.b.2;portuguese waters (Division 27.9b);557;45;14;27.9.b;SubDivision
+726;27.10.b;Portuguese waters (Subarea X);506;44;15;27.10;Division
+727;27.10.b.1;;726;45;15;27.10.b;SubDivision
+728;27.10.b.2;;726;45;15;27.10.b;SubDivision
+729;27.10.a;;506;44;15;27.10;Division
+730;27.10.a.1;;729;45;15;27.10.a;SubDivision
+731;27.10.a.2;;729;45;15;27.10.a;SubDivision
+732;27.2.a.2;;519;45;3;27.2.a;SubDivision
+733;27.14.b.1;;509;45;4;27.14.b;SubDivision
+734;27.2.b.2;;520;45;3;27.2.b;SubDivision
+735;27.14.b.2;;509;45;4;27.14.b;SubDivision
+736;27.2.a.1;;519;45;3;27.2.a;SubDivision
+737;87;Southeast Pacific, Area 87;737;42;22;87;Area
+738;87.1;;737;43;22;87;SubArea
+739;87.2;;737;43;22;87;SubArea
+740;87.3;;737;43;22;87;SubArea
+741;87.1.1;;738;44;22;87.1;Division
+742;87.1.2;;738;44;22;87.1;Division
+743;87.1.3;;738;44;22;87.1;Division
+744;87.1.4;;738;44;22;87.1;Division
+745;87.2.1;;739;44;22;87.2;Division
+746;87.2.2;;739;44;22;87.2;Division
+747;87.2.3;;739;44;22;87.2;Division
+748;87.2.4;;739;44;22;87.2;Division
+749;87.2.5;;739;44;22;87.2;Division
+750;87.2.6;;739;44;22;87.2;Division
+751;87.3.1;;740;44;22;87.3;Division
+752;87.3.2;;740;44;22;87.3;Division
+753;87.3.3;;740;44;22;87.3;Division
+754;48;Major Fishing Area 48;754;42;;48;Area
+755;48.1;Peninsular;754;43;;48;SubArea
+756;48.2;South Orkney;754;43;;48;SubArea
+757;48.3;South Georgia;754;43;;48;SubArea
+758;48.4;South Sandwich;754;43;;48;SubArea
+759;48.5;Weddel Sea;754;43;;48;SubArea
+760;48.6;Bouvet;754;43;;48;SubArea
+766;27.3.d.28.1;Gulf of Riga;517;47;2;27.3.d.28;Unit
+767;27.3.d.28.2;East of Gotland (open sea);517;47;2;27.3.d.28;Unit
+768;27.1.a;Barents Sea - NEAFC Regulatory Area;505;43;3;27.1;SubArea
+769;27.1.b;Barents Sea - Non NEAFC Regulatory Area;505;43;3;27.1;SubArea
+770;27.12.a;Southern mid-Atlantic Ridge (Southern Reykjanes Ridge south to Charlie-Gibbs Fracture Zone;507;43;4;27.12;SubArea
+771;27.12.b;Western Hatton Bank;507;43;4;27.12;SubArea
+772;27.12.c;Central Northeast Atlantic - South;507;43;4;27.12;SubArea
+773;27.2.b.1;Spitsbergen and Bear Island - NEAFC Regulatory Area;520;44;3;27.2.b;Division
+774;27.5;Iceland and Faroes Grounds;572;42;3;27;Area
+775;27.5.a.1;Northern Reykjanes ridge ;532;44;4;27.5.a;Division
+776;27.5.a.2;Icelandic Shelf;532;44;4;27.5.a;Division
+777;27.5.b.1.a;Faroe Plateau - Part of NEAFC Regulatory Area;534;45;16;27.5.b.1;SubDivision
+778;27.5.b.1.b;Faroe Plateau - Part of Non-NEAFC Regulatory Area;534;45;16;27.5.b.1;SubDivision
+779;27.6.b.1;Rockall - Part of NEAFC area I ;538;44;12;27.6.b;Division
+780;27.6.b.2;Rockall Non-NEAFC area;538;44;12;27.6.b;Division
+781;27.7.c.1;Porcupine Bank - NEAFC Regulatory Area;541;44;13;27.7.c;Division
+782;27.7.c.2;Porcupine Bank Non-NEAFC Regulatory Area;541;44;13;27.7.c;Division
+783;27.7.j.1;Southwest of Ireland - East - Parts of the NEAFC Regulatory;548;44;13;27.7.j;Division
+784;27.7.j.2;Southwest of Ireland - East Non-NEAFC Regulatory Area;548;44;13;27.7.j;Division
+785;27.7.k.1;Southwest of Ireland - West - Part of the NEAFC Regulatory Area;549;44;13;27.7.k;Division
+786;27.7.k.2;Southwest of Ireland - West - Part of the Non-NEAFC Area I;549;44;13;27.7.k;Division
+787;27.8.d.1;Bay of Biscay - Offshore - Parts in NEAFC Regulatory Area;554;44;7;27.8.d;Division
+788;27.8.d.2;Bay of Biscay - Offshore Non-NEAFC Regulatory Area;554;44;7;27.8.d;Division
+789;27.8.e.1;West of Bay of Biscay - Parts in NEAFC Regulatory Area ;555;44;7;27.8.e;Division
+790;27.8.e.2;West of Bay of Biscay Non-NEAFC Regulatory Area;555;44;7;27.8.e;Division
+791;27.12.a.1;Subdivision XIIa1 - NEAFC Regulatory Area;770;43;4;27.12.a;SubArea
+792;27.12.a.2;Subdivision XIIa2 - NEAFC Regulatory Area;770;43;4;27.12.a;SubArea
+793;27.12.a.3;Subdivision XIIa3 Non-NEAFC Regulatory Area;770;43;4;27.12.a;SubArea
+794;27.12.a.4;Subdivision XIIa4 Non-NEAFC Regulatory Area;770;43;4;27.12.a;SubArea
