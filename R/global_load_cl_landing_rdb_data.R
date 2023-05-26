@@ -13,7 +13,7 @@ global_load_cl_landing_rdb_data <- function(input_path_cl_landing_rdb_data) {
   # global arguments verifications ----
   # to do in the future
   # process ----
-  cl_landing_rdbes_data <- withCallingHandlers(expr = readr::read_csv(file = input_path_cl_landing_rdbes_data,
+  cl_landing_rdbes_data <- withCallingHandlers(expr = readr::read_csv(file = input_path_cl_landing_rdbes_data),
                                                                       col_names = c("cl_commercial_landing_id",
                                                                                     "landing_country",
                                                                                     "flag_country",
@@ -53,7 +53,7 @@ global_load_cl_landing_rdb_data <- function(input_path_cl_landing_rdb_data) {
                                                })
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
-      " - Successful process for load data from CL landing RDBES data.\n",
+      " - Successful process for load data from CL landing RDB data.\n",
       sep = "")
   return(cl_landing_rdbes_data)
 }
