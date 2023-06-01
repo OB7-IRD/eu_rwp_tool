@@ -7,8 +7,8 @@
 #' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.
 #' @param input_path_directory_eurostat {\link[base]{character}} expected. Input path directory for input eurostat files.
-#' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input path file for input CL landing RDBES file.
-#' @param input_path_file_fides {\link[base]{character}} expected. Input path file for input FIDES file.
+#' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input path and file name for input CL landing RDB file.
+#' @param input_path_file_fides {\link[base]{character}} expected. Input path and file name for input FIDES file.
 #' @param output_path {\link[base]{character}} expected. Output path. By default NULL.
 #' @return A list with two elements: "table_2_1_template" and "table_2_1_template_control".
 #' @importFrom utils read.table
