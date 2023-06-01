@@ -3,7 +3,9 @@
 #' @description Process for for load the data from CL landing RDB data file.
 #' @param input_path_cl_landing_rdb_data {\link[base]{character}} expected. Input CL landing RDB data file path (.csv format expected).
 #' @return A tibble.
-#' @importFrom readr read_csv dplyr group_by summarise rename tidyr spread
+#' @importFrom readr read_csv
+#' @importFrom dplyr group_by summarise rename
+#' @importFrom tidyr spread
 #' @export
 global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
   cat(format(x = Sys.time(),
