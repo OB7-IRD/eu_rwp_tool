@@ -175,18 +175,32 @@ rwp_table_2_1_template <- function(reference_period_start,
         ".\n",
         sep = "")
     # check id 118 for special data
-    if (landing_statistics == "eurostat") {
+    if (landing_statistics == "eurostat" | landing_statistics == "rcg_stats") {
       # from eurostat data ----
-      country_name <- dplyr::filter(.data = geo_data,
-                                    level_description %in% !!eu_countries)$country
-      species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name[table_2_1_linkage_id]),
-                                     split = ','))
-      region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_bis[table_2_1_linkage_id]),
-                                    split=','))
-      current_eurostat_data <- dplyr::filter(.data = eurostat_data_final,
-                                             scientific_name %in% !!species
-                                             & fishreg %in% !!region) %>%
-        dplyr::filter(level_description != "GBR")
+      if (landing_statistics == "eurostat") {
+        country_name <- dplyr::filter(.data = geo_data,
+                                      level_description %in% !!eu_countries)$country
+        species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name[table_2_1_linkage_id]),
+                                       split = ','))
+        region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_bis[table_2_1_linkage_id]),
+                                      split=','))
+        current_eurostat_data <- dplyr::filter(.data = eurostat_data_final,
+                                               Scientific_Name %in% !!species
+                                               & fishreg %in% !!region) %>%
+          dplyr::filter(level_description != "GBR")
+      } else if (landing_statistics == "rcg_stats") { # Need to rewrite this
+        country_name <- dplyr::filter(.data = geo_data,
+                                      level_description %in% !!eu_countries)$country
+        species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name[table_2_1_linkage_id]),
+                                       split = ','))
+        region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_bis[table_2_1_linkage_id]),
+                                      split=','))
+        current_eurostat_data <- dplyr::filter(.data = eurostat_data_final,
+                                               Scientific_Name %in% !!species
+                                               & fishreg %in% !!region) %>%
+          dplyr::filter(level_description != "GBR")
+      }
+
       if (nrow(x = current_eurostat_data) == 0) {
         current_eurostat_data <- dplyr::tibble(species = table_2_1_linkage[table_2_1_linkage_id,
                                                                            "x3a_code"],
@@ -343,8 +357,6 @@ rwp_table_2_1_template <- function(reference_period_start,
           is.na(x = eurostat_country) ~ 0,
           TRUE ~ eurostat_country
         ))
-    } else if (landing_statistics == "rcg_stats") {
-      stop("not developed yet.\n")
     }
     # from fides data ----
     if (! table_2_1_linkage[table_2_1_linkage_id,
@@ -418,7 +430,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                     y = (dplyr::filter(.data = current_fides_data_country,
                                                                        total_quota > 0 & total_quota < 0.1) %>%
                                                            dplyr::rename("comment_fides" = "total_quota") %>%
-                                                           select(-initial_quantity) %>%
+                                                           dplyr::select(-initial_quantity) %>%
                                                            dplyr::mutate(comment_fides_25_rule = paste0("Sum of MS TAC's below 10% = ",
                                                                                                         round(x = as.numeric(x = comment_fides) * 100,
                                                                                                               digits = 4),
