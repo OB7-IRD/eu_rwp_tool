@@ -1,7 +1,7 @@
 #' @name global_load_cl_landing_rdb_data
 #' @title Load CL landing RDB data
 #' @description Process for for load the data from CL landing RDB data file.
-#' @param input_path_cl_landing_rdbes_data {\link[base]{character}} expected. Input CL landing RDB data file path (.csv format expected).
+#' @param input_path_cl_landing_rdb_data {\link[base]{character}} expected. Input CL landing RDB data file path (.csv format expected).
 #' @return A tibble.
 #' @importFrom readr read_csv dplyr group_by summarise rename tidyr spread
 #' @export
@@ -96,5 +96,5 @@ global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
 
 
 
-  return(cl_landing_rdb_data)
+  return(cl_landing_rdb_data_t)
 }
