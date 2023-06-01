@@ -32,9 +32,9 @@ rwp_table_2_1_template(
 
 \item{input_path_directory_eurostat}{{\link[base]{character}} expected. Input path directory for input eurostat files.}
 
-\item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input path file for input CL landing RDBES file.}
+\item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input path and file name for input CL landing RDB file.}
 
-\item{input_path_file_fides}{{\link[base]{character}} expected. Input path file for input FIDES file.}
+\item{input_path_file_fides}{{\link[base]{character}} expected. Input path and file name for input FIDES file.}
 
 \item{output_path}{{\link[base]{character}} expected. Output path. By default NULL.}
 }
