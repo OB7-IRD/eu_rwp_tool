@@ -104,13 +104,14 @@ rwp_table_2_1_template <- function(reference_period_start,
                              header = TRUE,
                              sep = ",",
                              as.is = TRUE)
-  # eurostat
+  # geo data (country codes)
   geo_data <- utils::read.table(file = system.file("geo.def",
                                                    package = "rwptool"),
                                 header = TRUE,
                                 sep = ";") %>%
     dplyr::filter(geo != "EU28") %>%
     dplyr::rename(country = geopolitical_entity)
+  # eurostat
   if (landing_statistics == "eurostat") {
     eurostat_data <- global_load_eurostat_data(path = input_path_directory_eurostat)
     reference_period_eurostat <- reference_period[which(x = reference_period %in% names(x = eurostat_data))]
@@ -134,9 +135,11 @@ rwp_table_2_1_template <- function(reference_period_start,
       dplyr::filter(! is.na(x = country)) %>%
       dplyr::left_join(asfis[, c(3:6)],
                        by = c("species" = "X3A_CODE"))
+
   } else if (landing_statistics == "rcg_stats") {
-    rcg_stats_data <- global_load_cl_landing_rdbes_data(input_path_cl_landing_rdbes_data = input_path_file_rcg_stats)
-    reference_period_rcg_stats <- reference_period[which(x = reference_period %in% unique(rcg_stats_data$year))]
+    rcg_stats_data <- global_load_cl_landing_rdb_data(input_path_file_rcg_stats)
+
+    reference_period_rcg_stats <- reference_period[which(x = reference_period %in% names(x = rcg_stats_data))]
     if (length(x = reference_period_rcg_stats) != length(x = reference_period)) {
       cat(format(x = Sys.time(),
                  format = "%Y-%m-%d %H:%M:%S"),
@@ -147,10 +150,13 @@ rwp_table_2_1_template <- function(reference_period_start,
           ".\n",
           sep = "")
     }
-    rcg_stats_data_final <- dplyr::filter(.data = rcg_stats_data,
-                                          year %in% !!reference_period_rcg_stats) %>%
+    rcg_stats_data_final <- dplyr::select(.data = rcg_stats_data,
+                                         Scientific_Name,
+                                         Area,
+                                         geo,
+                                         as.character(x = !!reference_period_rcg_stats)) %>%
       dplyr::left_join(geo_data,
-                       by = c("flag_country" = "level_description")) %>%
+                       by = "geo") %>%
       dplyr::filter(! is.na(x = country))
   }
   # fides
@@ -158,7 +164,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        file_path = input_path_file_fides,
                                        eu_countries = eu_countries)
   # table 2.1 linkage
-  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0.csv",
+  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0_w_rdb_area.csv",
                                                           package = "rwptool"),
                                        sep = ';',
                                        header = TRUE,
@@ -188,17 +194,18 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                Scientific_Name %in% !!species
                                                & fishreg %in% !!region) %>%
           dplyr::filter(level_description != "GBR")
-      } else if (landing_statistics == "rcg_stats") { # Need to rewrite this
+      } else if (landing_statistics == "rcg_stats") {
         country_name <- dplyr::filter(.data = geo_data,
                                       level_description %in% !!eu_countries)$country
         species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name[table_2_1_linkage_id]),
                                        split = ','))
-        region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_bis[table_2_1_linkage_id]),
+        region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_rdb[table_2_1_linkage_id]),
                                       split=','))
-        current_eurostat_data <- dplyr::filter(.data = eurostat_data_final,
+        current_eurostat_data <- dplyr::filter(.data = rcg_stats_data_final,
                                                Scientific_Name %in% !!species
-                                               & fishreg %in% !!region) %>%
+                                               & Area %in% !!region) %>%
           dplyr::filter(level_description != "GBR")
+        reference_period_eurostat <- reference_period_rcg_stats
       }
 
       if (nrow(x = current_eurostat_data) == 0) {
@@ -277,12 +284,12 @@ rwp_table_2_1_template <- function(reference_period_start,
       current_eurostat_data_eu <- dplyr::filter(.data = current_eurostat_data,
                                                 geo == "EU27_2020")
       if (current_eurostat_data_eu[1, "source"] == TRUE) {
-        source_eu <- "eurostat"
+        source_eu <- landing_statistics
       } else {
         source_eu <- "-"
       }
       if (current_eurostat_data_country[1, "source"] == TRUE) {
-        source_national <- "eurostat"
+        source_national <- landing_statistics
       } else {
         source_national <- ""
       }
@@ -552,7 +559,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                  ".csv")),
                          row.names = FALSE,
                          sep = ";",
-                         dec = ",")
+                         dec = ".")
     }
     cat(format(x = Sys.time(),
                format = "%Y-%m-%d %H:%M:%S"),
@@ -567,3 +574,4 @@ rwp_table_2_1_template <- function(reference_period_start,
       sep = "")
   return(rwp_table_2_1_export)
 }
+
