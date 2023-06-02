@@ -539,7 +539,27 @@ rwp_table_2_1_template <- function(reference_period_start,
       selected_bio = " ",
       reg_coord = " "
     )
-  rwp_table_2_1_export = list("table_2_1_template" = table_2_1_information_final_2,
+
+  # Order cols correctly
+  # As agreed, only keep comment_fides_25_rule in the WP table - the other comments will go in the control file
+  table_2_1_information_final_2$comments <- table_2_1_information_final_2$comment_fides_25_rule
+  table_2_1_information_final_3 <- dplyr::select(table_2_1_information_final_2,
+                                          ms,
+                                          reference_years,
+                                          region,
+                                          rfmo,
+                                          spp,
+                                          area,
+                                          landings,
+                                          source_national,
+                                          tac,
+                                          share_landing,
+                                          source_eu,
+                                          thresh,
+                                          reg_coord, covered_length, selected_bio, comments)
+
+
+  rwp_table_2_1_export = list("table_2_1_template" = table_2_1_information_final_3,
                               "table_2_1_template_control" = table_control_final)
   names_export <- names(x = rwp_table_2_1_export)
   for (export_id in seq_len(length.out = length(x = names_export))) {
