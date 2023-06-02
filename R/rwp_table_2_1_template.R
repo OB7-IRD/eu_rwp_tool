@@ -364,6 +364,12 @@ rwp_table_2_1_template <- function(reference_period_start,
           is.na(x = eurostat_country) ~ 0,
           TRUE ~ eurostat_country
         ))
+
+      table_control <-
+        dplyr::rename(table_control,
+                      tons_country = eurostat_country,
+                      tons_eu = eurostat_eu)
+      table_control$data_source <- landing_statistics
     }
     # from fides data ----
     if (! table_2_1_linkage[table_2_1_linkage_id,
