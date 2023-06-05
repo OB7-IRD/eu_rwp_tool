@@ -164,7 +164,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        file_path = input_path_file_fides,
                                        eu_countries = eu_countries)
   # table 2.1 linkage
-  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v1.0_w_rdb_area.csv",
+  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2022_v2.4.csv",
                                                           package = "rwptool"),
                                        sep = ';',
                                        header = TRUE,
@@ -197,7 +197,7 @@ rwp_table_2_1_template <- function(reference_period_start,
       } else if (landing_statistics == "rcg_stats") {
         country_name <- dplyr::filter(.data = geo_data,
                                       level_description %in% !!eu_countries)$country
-        species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name[table_2_1_linkage_id]),
+        species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name_join[table_2_1_linkage_id]),
                                        split = ','))
         region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_rdb[table_2_1_linkage_id]),
                                       split=','))
@@ -416,8 +416,8 @@ rwp_table_2_1_template <- function(reference_period_start,
                            .groups = "drop")
         fides_country <- dplyr::filter(.data = current_fides_data_country,
                                        level_code %in% !!eu_countries)
-        fides_eu <- dplyr::filter(.data = current_fides_data_country,
-                                  level_code == "XEU")$initial_quantity
+        fides_eu <- sum(dplyr::filter(.data = current_fides_data_country,
+                                  level_code %in% !!eu_countries)$initial_quantity, na.rm = T)
         fides_tac <- dplyr::filter(.data = current_fides_data_country,
                                    level_code == "TAC")$initial_quantity
         if (nrow(x = fides_country) >= 1) {
@@ -440,12 +440,12 @@ rwp_table_2_1_template <- function(reference_period_start,
         if (nrow(x = dplyr::filter(.data = current_fides_data_country,
                                    total_quota > 0 & total_quota < 0.1)) >= 1) {
           table_2_1_information <- dplyr::left_join(x = table_2_1_information,
-                                                    y = (dplyr::filter(.data = current_fides_data_country,
+                                                    y = (dplyr::filter(.data = dplyr::ungroup(current_fides_data_country),
                                                                        total_quota > 0 & total_quota < 0.1) %>%
                                                            dplyr::rename("comment_fides" = "total_quota") %>%
                                                            dplyr::select(-initial_quantity) %>%
                                                            dplyr::mutate(comment_fides_25_rule = paste0("Sum of MS TAC's below 10% = ",
-                                                                                                        round(x = as.numeric(x = comment_fides) * 100,
+                                                                                                        round(x = as.numeric(x = sum(comment_fides)) * 100,
                                                                                                               digits = 4),
                                                                                                         "% of EU TAC"))),
                                                     by = c("ms" = "level_code")) %>%
