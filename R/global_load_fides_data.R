@@ -62,5 +62,9 @@ global_load_fides_data <- function(reference_period,
         " - Successful process for load data from FIDES data.\n",
         sep = "")
   }
+
+  # There are quotas where the initial amount is NA for all countries - replaced by 0
+  is.na(tac_final$initial_quantity) <- 0
+
   return(tac_final)
 }
