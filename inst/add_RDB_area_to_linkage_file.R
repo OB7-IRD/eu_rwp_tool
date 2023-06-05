@@ -14,8 +14,10 @@ library(data.table)
 
 
 path <- "./inst/"
-linkage_file_name <- "eumap_table_2_1_linkage_version_2022_v1.0"
-suffix_out_file <- "_w_rdb_area"
+
+linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.3"
+linkage_file_name_out <- "eumap_table_2_1_linkage_version_2022_v2.4"
+
 
 # Get area file from the RDB and keep only relevant info
 
@@ -33,7 +35,7 @@ rdb_areas <- unique(str_subset(rdb_areas$Code, "[:digit:]"))
 
 # Load linkage file
 
-linkage <- read.csv(paste0(path, linkage_file_name, ".csv"), sep = ";", header = T)
+linkage <- read.csv(paste0(path, linkage_file_name_in, ".csv"), sep = ";", header = T)
 
 names(linkage)
 
@@ -76,5 +78,5 @@ test <- distinct(linkage, area_bis, area_rdb)
 linkage$area_rdb <- gsub(",$", "", linkage$area_rdb)
 
 
-write.table(linkage, paste0(path, linkage_file_name, suffix_out_file, ".csv"), sep = ";")
+write.table(linkage, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
 
