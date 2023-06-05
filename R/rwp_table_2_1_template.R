@@ -402,7 +402,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                   & level_code != "TAC")
       if (all(! fides_area %in% c("No TAC",
                                   ""))
-          && nrow(x = current_fides_data_not_tac) > 0) {
+          && nrow(x = current_fides_data_not_tac) > 0 && sum(current_fides_data_not_tac$initial_quantity) > 0) {
         if (length(x = fides_area) != 1) {
           current_fides_data <- current_fides_data %>%
             dplyr::group_by(level_code,
