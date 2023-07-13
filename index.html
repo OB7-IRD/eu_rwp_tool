@@ -124,14 +124,26 @@
 <span><span class="co"># By default rfmo used are CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC and WECAFC. You can change that through the "rfmo" argument.</span></span>
 <span><span class="va">landing_statistics</span> <span class="op">&lt;-</span> <span class="st">"eurostat"</span></span>
 <span><span class="co"># You can switch with "rcg_stats" in the "landing_statistics" argument to use regional database source.</span></span>
-<span><span class="va">path_input</span> <span class="op">&lt;-</span> <span class="st">"~/input"</span></span>
+<span><span class="va">input_path_directory_eurostat</span> <span class="op">&lt;-</span> <span class="st">"~/eurostat"</span></span>
+<span><span class="va">input_path_file_rcg_stats</span> <span class="op">&lt;-</span> <span class="st">"~/cl_landing_rdbes.csv"</span></span>
+<span><span class="va">input_path_file_fides</span> <span class="op">&lt;-</span> <span class="st">"~/export_quota.csv"</span></span>
 <span><span class="va">output_path</span> <span class="op">&lt;-</span> <span class="st">"~/output"</span></span>
 <span></span>
 <span><span class="co"># process ----</span></span>
+<span><span class="co"># with eurostat data as input</span></span>
 <span><span class="fu"><a href="reference/rwp_table_2_1_template.html">rwp_table_2_1_template</a></span><span class="op">(</span>reference_period_start <span class="op">=</span> <span class="va">reference_period_start</span>,</span>
 <span>                       reference_period_end <span class="op">=</span> <span class="va">reference_period_end</span>,</span>
 <span>                       landing_statistics <span class="op">=</span> <span class="va">landing_statistics</span>,</span>
-<span>                       input_path <span class="op">=</span> <span class="va">path_input</span>,</span>
+<span>                       input_path_directory_eurostat <span class="op">=</span> <span class="va">input_path_directory_eurostat</span>,</span>
+<span>                       input_path_file_fides <span class="op">=</span> <span class="va">input_path_file_fides</span>,</span>
+<span>                       output_path <span class="op">=</span> <span class="va">output_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># with rcg stats data as input</span></span>
+<span><span class="fu"><a href="reference/rwp_table_2_1_template.html">rwp_table_2_1_template</a></span><span class="op">(</span>reference_period_start <span class="op">=</span> <span class="va">reference_period_start</span>,</span>
+<span>                       reference_period_end <span class="op">=</span> <span class="va">reference_period_end</span>,</span>
+<span>                       landing_statistics <span class="op">=</span> <span class="va">landing_statistics</span>,</span>
+<span>                       input_path_file_rcg_stats <span class="op">=</span> <span class="va">input_path_file_rcg_stats</span>,</span>
+<span>                       input_path_file_fides <span class="op">=</span> <span class="va">input_path_file_fides</span>,</span>
 <span>                       output_path <span class="op">=</span> <span class="va">output_path</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
