@@ -1,7 +1,7 @@
 #' @name global_load_cl_landing_rdb_data
 #' @title Load CL landing RDB data
 #' @description Process for for load the data from CL landing RDB data file.
-#' @param input_path_cl_landing_rdb_data {\link[base]{character}} expected. Input CL landing RDB data file path (.csv format expected).
+#' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input rcg stats data file path (.csv format expected).
 #' @return A tibble.
 #' @importFrom readr read_csv
 #' @importFrom dplyr group_by summarise rename
@@ -13,9 +13,14 @@ global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
       " - Start process for load data from CL landings RDB data.\n",
       sep = "")
   # global arguments verifications ----
-  # to do in the future
+  Year <- NULL
+  Species <- NULL
+  Area <- NULL
+  geo <- NULL
+  OfficialLandingCatchWeight <- NULL
+  FlagCountry <- NULL
+  TLW <- NULL
   # process ----
-
   # Define EU countries
   EU27_2020 <- c("AUT",
                  "BEL",
@@ -55,7 +60,6 @@ global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
              format = "%Y-%m-%d %H:%M:%S"),
       " - Successful process for load data from CL landings RDB data.\n",
       sep = "")
-
   # transform RDB data into the same format as EUROSTAT
   #3 Add country codes from geo data file
   geo_data <- utils::read.table(file = system.file("geo.def",
@@ -66,10 +70,7 @@ global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
   cl_landing_rdb_data_1 <- dplyr::left_join(cl_landing_rdb_data, geo_data,
                                             by = c("FlagCountry" = "level_description"),
                                             keep = T)
-
-
   # Summarise and create a EU27_2020 line
-
   cl_landing_rdb_data_ctry <-
     dplyr::summarise(
       dplyr::group_by(cl_landing_rdb_data_1, Year, Species, Area, geo),
@@ -88,15 +89,10 @@ global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
       TLW = sum(OfficialLandingCatchWeight / 1000, na.rm = T),
       .groups = "drop"
     )
-
   # Include code for EU28 + warning if UK countries are missing
-
   cl_landing_rdb_data_2 <- rbind(cl_landing_rdb_data_ctry, cl_landing_rdb_data_eu27)
 
   cl_landing_rdb_data_t <- tidyr::spread(cl_landing_rdb_data_2, key = Year, value = TLW)
   cl_landing_rdb_data_t <- dplyr::rename(cl_landing_rdb_data_t, Scientific_Name  = Species)
-
-
-
   return(cl_landing_rdb_data_t)
 }

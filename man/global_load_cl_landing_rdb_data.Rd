@@ -7,7 +7,7 @@
 global_load_cl_landing_rdb_data(input_path_file_rcg_stats)
 }
 \arguments{
-\item{input_path_cl_landing_rdb_data}{{\link[base]{character}} expected. Input CL landing RDB data file path (.csv format expected).}
+\item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input rcg stats data file path (.csv format expected).}
 }
 \value{
 A tibble.

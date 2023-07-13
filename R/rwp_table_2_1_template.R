@@ -86,7 +86,17 @@ rwp_table_2_1_template <- function(reference_period_start,
   initial_quantity <- NULL
   total_quota <- NULL
   comment_fides <- NULL
-  comment_fides_bis <-NULL
+  comment_fides_bis <- NULL
+  Scientific_Name <- NULL
+  Area <- NULL
+  ms <- NULL
+  reference_years <- NULL
+  spp <- NULL
+  thresh <- NULL
+  reg_coord <- NULL
+  covered_length <- NULL
+  selected_bio <- NULL
+  comments <- NULL
   # arguments verifications ----
   # to do in the future
   # setup ----
