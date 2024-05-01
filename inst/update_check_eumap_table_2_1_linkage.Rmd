@@ -1,0 +1,18 @@
+---
+title: "update_check_eumap_table_2_1_linkage"
+author: "Kirsten Birch Håkansson, DTU Aqua"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+
+path <- "./inst/"
+
+linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.3"
+linkage_file_name_out <- "eumap_table_2_1_linkage_version_2022_v2.4"
+
+```
+
+# Areas
