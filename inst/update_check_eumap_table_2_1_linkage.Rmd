@@ -10,9 +10,91 @@ knitr::opts_chunk$set(echo = F)
 
 path <- "./inst/"
 
-linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.3"
-linkage_file_name_out <- "eumap_table_2_1_linkage_version_2022_v2.4"
+linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
+linkage_file_name_out <- "eumap_table_2_1_linkage_version_2023_v1"
 
 ```
 
+```{r}
+# Load linkage file
+
+linkage <- read.csv(paste0(path, linkage_file_name_in, ".csv"), sep = ";", header = T)
+
+names(linkage)
+```
+
 # Areas
+## area_rdb
+There is something wrong with some of the areas. A comma is missing between lists of areas, which means that not all areas were included. The error was spotted by Estonia and Latvia.
+
+Estonia:"Table 2.1 some of our landing data is wrong, which means that total EU landing is also wrong, and it affects all MS fishing those stocks (in column J where share of EU landing is calculated). Namely FLE (49t vs 133t), TRS (12t vs 16t) and SPR (15350t vs 25858t) landings are affected. I double checked our uploaded data files – those were correct, so something has happened in the RDB either while extracting the data or during uploading... 
+a.	Also if you compare the landings between sheets “2.1 Stocks” and “2.1 Control” then some of them do not match (i.e. EST SPR 15381t vs 15350t and HER central 11403t vs 11370t ). Differences are rather small, but there should be no differences!"
+
+Latvia:"Values for Cod, Sprat and Flounder are not correct: it should be Cod - 35t, Sprat - 29780t and Flounder - 527t"
+
+**I have checked with the amount after fixing area_rdb regarding missing landings - this seems to be fixed now** - except LVA cod landings where I get a mean of 854 tons
+
+**Still need to check if there are problems with the mean**
+
+```{r}
+rdb_areas <- read.csv(paste0(path, "Area.csv"), sep = ";")
+names(rdb_areas)
+
+unique(rdb_areas$Code)
+
+# Create a list of areas
+rdb_areas <- unique(str_subset(rdb_areas$Code, "[:digit:]"))
+
+# Load linkage file
+
+linkage <- read.csv(paste0(path, linkage_file_name_in, ".csv"), sep = ";", header = T)
+
+names(linkage)
+
+# Removing blanks from areaBis
+
+unique(linkage$area_bis)
+
+linkage$area_bis <- gsub(" ", "", linkage$area_bis)
+
+
+# Coding RDB areas ----
+## Start with a copy of the EUROSTAT areas - to stop the loop
+linkage$area_rdb <- paste0(linkage$area_bis, ",")
+unique(linkage$area_rdb)
+
+# linkage$area_rdb <- paste0(",", gsub('_', '.', linkage$area_rdb), ",") # , add to make the gsub a bit easier
+
+
+# Replace areas on upper level with all underlying areas
+
+
+for (i in rdb_areas) {
+
+
+  j <- paste0(toupper(gsub("\\.", "\\_", i)), ",")
+
+  k <- paste0(i, ".")
+
+  k <- gsub("\\.", "\\\\.", k)
+
+
+  linkage$area_rdb <- gsub(j, gsub(" ", "", paste(i, paste(str_subset(rdb_areas, k), collapse = ","), ",", sep = ",")), linkage$area_rdb)
+}
+
+linkage$area_rdb <- gsub(",,,|,,", ",", linkage$area_rdb)
+linkage$area_rdb <- gsub(",*$", "", linkage$area_rdb) # Remove trailing comma
+
+test <- distinct(linkage, area_bis, area_rdb)
+test_2 <- unique(paste(linkage$area_rdb, collapse = ","))
+test_3 <- distinct(as.data.frame("x" = str_split(test_2, ",")))
+```
+
+## area_rdbes
+Same procedure as for area_rdb
+
+```{r export}
+write.table(linkage, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
+```
+
+
