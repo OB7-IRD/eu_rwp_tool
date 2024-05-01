@@ -34,7 +34,7 @@ Latvia:"Values for Cod, Sprat and Flounder are not correct: it should be Cod - 3
 
 **I have checked with the amount after fixing area_rdb regarding missing landings - this seems to be fixed now** - except LVA cod landings where I get a mean of 854 tons
 
-**Still need to check if there are problems with the mean**
+**Problems with the mean** - I have filled NA with 0 in the input data, so now the mean is correct for EST
 
 ```{r}
 rdb_areas <- read.csv(paste0(path, "Area.csv"), sep = ";")
