@@ -168,6 +168,28 @@ rwp_table_2_1_template <- function(reference_period_start,
       dplyr::left_join(geo_data,
                        by = "geo") %>%
       dplyr::filter(! is.na(x = country))
+  } else if (landing_statistics == "rdbes") {
+    rcg_stats_data <- global_load_cl_landing_rdbes_data(input_path_cl_landing_rdbes_data)
+
+    reference_period_rcg_stats <- reference_period[which(x = reference_period %in% names(x = rcg_stats_data))]
+    if (length(x = reference_period_rcg_stats) != length(x = reference_period)) {
+      cat(format(x = Sys.time(),
+                 format = "%Y-%m-%d %H:%M:%S"),
+          " - Warning: years of the \"reference_period\" argument are not all available in the RCG stats data imported.\n",
+          "Year(s) available in RCG stats data are: \n",
+          paste0(reference_period_rcg_stats,
+                 collapse = ", "),
+          ".\n",
+          sep = "")
+    }
+    rcg_stats_data_final <- dplyr::select(.data = rcg_stats_data,
+                                          Scientific_Name,
+                                          clArea,
+                                          geo,
+                                          as.character(x = !!reference_period_rcg_stats)) %>%
+      dplyr::left_join(geo_data,
+                       by = "geo") %>%
+      dplyr::filter(! is.na(x = country))
   }
   # fides
   fides_data <- global_load_fides_data(reference_period = reference_period,
