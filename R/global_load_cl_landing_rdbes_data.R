@@ -1,4 +1,4 @@
-#' @name global_load_cl_landing_rdb_data
+#' @name global_load_cl_landing_rdbes_data
 #' @title Load CL landing RDB data
 #' @description Process for for load the data from CL landing RDB data file.
 #' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input rcg stats data file path (.csv format expected).
@@ -7,7 +7,7 @@
 #' @importFrom dplyr group_by summarise rename
 #' @importFrom tidyr spread
 #' @export
-global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
+global_load_cl_landing_rdbes_data <- function(input_path_file_rcg_stats) {
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
       " - Start process for load data from CL landings RDB data.\n",
@@ -105,5 +105,5 @@ global_load_cl_landing_rdb_data <- function(input_path_file_rcg_stats) {
 
   cl_landing_rdbes_data_t <- tidyr::spread(cl_landing_rdbes_data_3, key = CLyear, value = TLW, fill = 0) # To make sure the mean get right!
   cl_landing_rdbes_data_t <- dplyr::rename(cl_landing_rdbes_data_t, Scientific_Name  = CLspeciesName)
-  return(cl_landing_rdb_data_t)
+  return(cl_landing_rdbes_data_t)
 }
