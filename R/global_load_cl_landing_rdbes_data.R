@@ -7,7 +7,7 @@
 #' @importFrom dplyr group_by summarise rename
 #' @importFrom tidyr spread
 #' @export
-global_load_cl_landing_rdbes_data <- function(input_path_file_rcg_stats) {
+global_load_cl_landing_rdbes_data <- function(input_path_file_rdbes_stats) {
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
       " - Start process for load data from CL landings RDB data.\n",
@@ -52,7 +52,7 @@ global_load_cl_landing_rdbes_data <- function(input_path_file_rcg_stats) {
 
 
   cl_landing_rdbes_data <-
-    data.table::fread(paste0(path_rdbes, "CommercialLanding.csv"),
+    data.table::fread(paste0(input_path_file_rdbes_stats, "CommercialLanding.csv"),
           sep = ",",
           quote = "") # If read.csv, then set quote="" otherwise it skips a lot of data without warning
 
