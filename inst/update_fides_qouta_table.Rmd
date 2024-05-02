@@ -14,12 +14,12 @@ knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(dplyr)
 
-years_to_update <- c(2022)
+years_to_update <- c(2023)
 
-path <- "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/2022/table_2_1_development/personal/input/fides/"
+path <- "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/2024/table_2_1_development/personal/input/fides/"
 
-filename_old <- "export_quota_20220204tl.csv"
-filename_new <- "export_quota_15_3_2023__9_26_21_PRODUCTION.xlsx"
+filename_old <- "quota_2018_2022.csv"
+filename_new <- "Quota_2023_10_4_2024.xlsx"
 
 ```
 
