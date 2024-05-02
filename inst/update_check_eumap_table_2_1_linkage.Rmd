@@ -6,6 +6,11 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+
+library(stringr)
+library(dplyr)
+library(icesVocab)
+
 knitr::opts_chunk$set(echo = F)
 
 path <- "./inst/"
@@ -45,12 +50,6 @@ unique(rdb_areas$Code)
 # Create a list of areas
 rdb_areas <- unique(str_subset(rdb_areas$Code, "[:digit:]"))
 
-# Load linkage file
-
-linkage <- read.csv(paste0(path, linkage_file_name_in, ".csv"), sep = ";", header = T)
-
-names(linkage)
-
 # Removing blanks from areaBis
 
 unique(linkage$area_bis)
@@ -60,7 +59,8 @@ linkage$area_bis <- gsub(" ", "", linkage$area_bis)
 
 # Coding RDB areas ----
 ## Start with a copy of the EUROSTAT areas - to stop the loop
-linkage$area_rdb <- paste0(linkage$area_bis, ",")
+linkage$area_rdb <- paste0("q", linkage$area_bis, "q")
+linkage$area_rdb <- gsub(",", "q,q", linkage$area_rdb)
 unique(linkage$area_rdb)
 
 # linkage$area_rdb <- paste0(",", gsub('_', '.', linkage$area_rdb), ",") # , add to make the gsub a bit easier
@@ -72,17 +72,20 @@ unique(linkage$area_rdb)
 for (i in rdb_areas) {
 
 
-  j <- paste0(toupper(gsub("\\.", "\\_", i)), ",")
+  j <- paste0("q", toupper(gsub("\\.", "\\_", i)), "q")
 
-  k <- paste0(i, ".")
+  k <- paste0("q", i, "q")
 
-  k <- gsub("\\.", "\\\\.", k)
+  l <- paste0(i, ".")
+
+  l <- gsub("\\.", "\\\\.", l)
 
 
-  linkage$area_rdb <- gsub(j, gsub(" ", "", paste(i, paste(str_subset(rdb_areas, k), collapse = ","), ",", sep = ",")), linkage$area_rdb)
+  linkage$area_rdb <- str_replace_all(linkage$area_rdb, j, paste(i, paste(str_subset(rdb_areas, l), collapse = ","), ",", sep = ","))
 }
 
-linkage$area_rdb <- gsub(",,,|,,", ",", linkage$area_rdb)
+linkage$area_rdb <- gsub("\\,,,|\\,,", "\\,", linkage$area_rdb)
+linkage$area_rdb <- gsub("q", "", linkage$area_rdb)
 linkage$area_rdb <- gsub(",*$", "", linkage$area_rdb) # Remove trailing comma
 
 test <- distinct(linkage, area_bis, area_rdb)
@@ -92,6 +95,73 @@ test_3 <- distinct(as.data.frame("x" = str_split(test_2, ",")))
 
 ## area_rdbes
 Same procedure as for area_rdb
+```{r}
+
+rdbes_areas <- icesVocab::getCodeList("ICES_Area")
+names(rdbes_areas)
+
+unique(rdbes_areas$Key)
+
+# Create a list of areas
+rdbes_areas <- unique(str_subset(rdbes_areas$Key, "[:digit:]"))
+
+# Removing blanks from areaBis
+
+unique(linkage$area_bis)
+
+linkage$area_bis <- gsub(" ", "", linkage$area_bis)
+
+
+# Coding RDBES areas ----
+## Start with a copy of the EUROSTAT areas - to stop the loop
+linkage$area_rdbes <- paste0("q", linkage$area_bis, "q")
+linkage$area_rdbes <- gsub(",", "q,q", linkage$area_rdbes)
+unique(linkage$area_rdbes)
+
+# linkage$area_rdbes <- paste0(",", gsub('_', '.', linkage$area_rdbes), ",") # , add to make the gsub a bit easier
+
+
+# Replace areas on upper level with all underlying areas
+
+
+for (i in rdb_areas) {
+
+
+  j <- paste0("q", toupper(gsub("\\.", "\\_", i)), "q")
+
+  k <- paste0("q", i, "q")
+
+  l <- paste0(i, ".")
+
+  l <- gsub("\\.", "\\\\.", l)
+
+
+  linkage$area_rdbes <- str_replace_all(linkage$area_rdbes, j, paste(i, paste(str_subset(rdb_areas, l), collapse = ","), ",", sep = ","))
+}
+
+linkage$area_rdbes <- gsub("\\,,,|\\,,", "\\,", linkage$area_rdbes)
+linkage$area_rdbes <- gsub("q", "", linkage$area_rdbes)
+linkage$area_rdbes <- gsub(",*$", "", linkage$area_rdbes) # Remove trailing comma
+
+test <- distinct(linkage, area_bis, area_rdbes)
+test_2 <- unique(paste(linkage$area_rdbes, collapse = ","))
+test_3 <- distinct(as.data.frame("x" = str_split(test_2, ",")))
+
+area_rdb_not_equal_area_rdbes <- distinct(subset(linkage, area_rdb != area_rdbes), area_bis, area_rdb, area_rdbes)
+
+```
+
+
+# Species
+## latin_name_join
+### Remove blanks
+
+```{r}
+
+linkage$latin_name_join <- gsub(", ", ",", linkage$latin_name_join)
+
+```
+
 
 ```{r export}
 write.table(linkage, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
