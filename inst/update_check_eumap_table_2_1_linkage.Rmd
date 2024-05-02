@@ -10,6 +10,7 @@ output: html_document
 library(stringr)
 library(dplyr)
 library(icesVocab)
+library(worrms)
 
 knitr::opts_chunk$set(echo = F)
 
@@ -162,9 +163,83 @@ linkage$latin_name_join <- gsub(", ", ",", linkage$latin_name_join)
 
 ```
 
+### Group of species 
+
+```{r}
+rdbes_spp <- icesVocab::getCodeList("SpecWoRMS")
+head(rdbes_spp)
+
+aphiaIds <- unique(rdbes_spp[!is.na(rdbes_spp$Key), "Key"])
+
+classi <- worrms::wm_classification_(aphiaIds)
+
+classi_1 <-
+  tidyr::spread(dplyr::select(classi,-AphiaID),
+                key = rank,
+                value = scientificname)
+
+# Rajidae per region and rfmo ----
+
+fak <- as.factor(linkage$region):as.factor(linkage$rfmo)
+
+linkage_2 <- c()
+
+for (i in levels(fak)) {
+  linkage_sub <- linkage[fak == i,]
+  
+  
+  raj_worms <- subset(classi_1, Family == "Rajidae")[, "id"]
+  raj_latin <-
+    subset(rdbes_spp, Key %in% raj_worms$id)[, "Description"]
+  
+  worms_aphia_id_raj_there <-
+    distinct(
+      subset(
+        linkage_sub,
+        latin_name != "Rajidae" &
+          worms_aphia_id %in% raj_worms$id
+      ),
+      worms_aphia_id
+    )
+  latin_name_join_raj_there <-
+    distinct(
+      subset(
+        linkage_sub,
+        latin_name != "Rajidae" &
+          worms_aphia_id %in% raj_worms$id
+      ),
+      latin_name_join
+    )
+  
+  raj_worms_2 <-
+    subset(raj_worms,
+           !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
+             !(id %in% c("105869", "711846")))
+  raj_latin_2 <-
+    subset(
+      raj_latin,
+      !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
+        !(raj_latin %in% c(
+          "Dipturus batis", "Dipturus intermedius"
+        ))
+    )
+  
+  linkage_sub$worms_aphia_id[linkage_sub$latin_name == "Rajidae"] <-
+    paste(raj_worms_2$id, collapse = ",")
+  linkage_sub$latin_name_join[linkage_sub$latin_name == "Rajidae"] <-
+    paste(raj_latin_2, collapse = ",")
+  
+  linkage_2 <- rbind(linkage_2, linkage_sub)
+  
+}
+
+```
+
 
 ```{r export}
-write.table(linkage, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
+
+write.table(linkage_2, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
+
 ```
 
 
