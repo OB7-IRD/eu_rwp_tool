@@ -184,7 +184,7 @@ rwp_table_2_1_template <- function(reference_period_start,
     }
     rcg_stats_data_final <- dplyr::select(.data = rcg_stats_data,
                                           Scientific_Name,
-                                          clArea,
+                                          CLarea,
                                           geo,
                                           as.character(x = !!reference_period_rcg_stats)) %>%
       dplyr::left_join(geo_data,
@@ -213,7 +213,7 @@ rwp_table_2_1_template <- function(reference_period_start,
         ".\n",
         sep = "")
     # check id 118 for special data
-    if (landing_statistics == "eurostat" | landing_statistics == "rcg_stats") {
+    if (landing_statistics == "eurostat" | landing_statistics == "rcg_stats" | landing_statistics == "rdbes") {
       # from eurostat data ----
       if (landing_statistics == "eurostat") {
         country_name <- dplyr::filter(.data = geo_data,
@@ -236,6 +236,18 @@ rwp_table_2_1_template <- function(reference_period_start,
         current_eurostat_data <- dplyr::filter(.data = rcg_stats_data_final,
                                                Scientific_Name %in% !!species
                                                & Area %in% !!region) %>%
+          dplyr::filter(level_description != "GBR")
+        reference_period_eurostat <- reference_period_rcg_stats
+      } else if (landing_statistics == "rdbes") {
+        country_name <- dplyr::filter(.data = geo_data,
+                                      level_description %in% !!eu_countries)$country
+        species <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$latin_name_join[table_2_1_linkage_id]),
+                                       split = ','))
+        region <- unlist(x = strsplit(x = as.character(x = table_2_1_linkage$area_rdbes[table_2_1_linkage_id]),
+                                      split=','))
+        current_eurostat_data <- dplyr::filter(.data = rcg_stats_data_final,
+                                               Scientific_Name %in% !!species
+                                               & CLarea %in% !!region) %>%
           dplyr::filter(level_description != "GBR")
         reference_period_eurostat <- reference_period_rcg_stats
       }
