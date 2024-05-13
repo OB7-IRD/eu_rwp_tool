@@ -1,5 +1,5 @@
 ---
-title: "update_check_eumap_table_2_1_linkage"
+title: "maintain_eumap_table_2_1_linkage_2024"
 author: "Kirsten Birch Håkansson, DTU Aqua"
 date: "`r Sys.Date()`"
 output: html_document
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = F)
 path <- "./inst/"
 
 linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
-linkage_file_name_out <- "eumap_table_2_1_linkage_version_2023_v1.1"
+linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.1"
 
 ```
 
@@ -162,6 +162,29 @@ area_rdb_not_equal_area_rdbes <- distinct(subset(linkage, area_rdb != area_rdbes
 linkage$latin_name_join <- gsub(", ", ",", linkage$latin_name_join)
 
 ```
+
+### Fixed outdated scientific names and aphiaid's
+
+**TODO** - find a clever way to do this
+
+```{r}
+
+linkage$latin_name_join[linkage$latin_name == "Trisopterus esmarki"] <- "Trisopterus esmarki,Trisopterus esmarkii"
+linkage$worms_aphia_id[linkage$latin_name == "Trisopterus esmarki"] <- "400596,126444"
+
+linkage$latin_name_join[linkage$latin_name == "Raja alba"] <- "Raja alba,Rostroraja alba"
+linkage$worms_aphia_id[linkage$latin_name == "Raja alba"] <- "217404,105896"
+
+linkage$latin_name_join[linkage$latin_name == "Trigla lucerna"] <- "Trigla lucerna,Chelidonichthys lucerna"
+linkage$worms_aphia_id[linkage$latin_name == "Trigla lucerna"] <- "154453,127262"
+
+linkage$latin_name_join[linkage$latin_name == "Aspitrigla cuculus"] <- "Aspitrigla cuculus,Chelidonichthys cuculus"
+linkage$worms_aphia_id[linkage$latin_name == "Aspitrigla cuculus"] <- "150662,127259"
+
+
+
+```
+
 
 ### Group of species 
 
