@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = T)
 path <- "../inst/"
 
 linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
-linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.2"
+linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.3"
 
 ```
 
@@ -30,6 +30,10 @@ names(linkage)
 
 linkage$include_in_table_2.1 <- "yes"
 linkage$comments_dev <- ""
+
+# Load classification
+
+SpecWoRMS_with_classi <- readRDS(paste0(path, "SpecWoRMS_with_classifcation.rds"))
 ```
 
 # Linkage
@@ -51,7 +55,119 @@ linkage$comments_dev[linkage$region == "North-East Atlantic" &
                linkage$latin_name == "Rajidae" &
                linkage$fides_area == "89-C."] <- "area corrected by Kirsten"
 
+# Wrong area coding in the line below, area 27.6.a is wrong and already present in another stock. it should be 27.7.a: 
+# North-East Atlantic Whiting Merlangius merlangus ICES NA WHG 126438 07A. 7a 27_6_A
+
+linkage$area_bis[linkage$region == "North-East Atlantic" &
+               linkage$latin_name == "Merlangius merlangus" &
+               linkage$fides_area == "07A."] <- "27_7_A"
+linkage$comments_dev[linkage$region == "North-East Atlantic" &
+               linkage$latin_name == "Merlangius merlangus" &
+               linkage$fides_area == "07A."] <- "area corrected by Kirsten"
+
 ```
+
+```{r}
+algae <- data.frame(
+  region = NA,
+  spp_name = "Algae",
+  latin_name = "Chromista",
+  rfmo = NA,
+  rfmo_stock_id = NA,
+  x3a_code = NA,
+  worms_aphia_id = 126417,
+  fides_area = NA,
+  area = NA,
+  area_bis = "27",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Algea",
+  latin_name_join =  NA,
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
+
+capros <- data.frame(
+  region = NA,
+  spp_name = "Caproidae",
+  latin_name = "Caproidae",
+  rfmo = NA,
+  rfmo_stock_id = NA,
+  x3a_code = NA,
+  worms_aphia_id = 125613,
+  fides_area = NA,
+  area = NA,
+  area_bis = "27_6,27_7,27_8",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong species level",
+  latin_name_join =  "Caproidae",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
+
+trachurus <- data.frame(
+  region = NA,
+  spp_name = "Trachurus",
+  latin_name = "Trachurus",
+  rfmo = NA,
+  rfmo_stock_id = NA,
+  x3a_code = NA,
+  worms_aphia_id = NA,
+  fides_area = NA,
+  area = NA,
+  area_bis = "27_2_A,27_4_B,27_4_C,27_7_D,27_8,27_9,27_10,27_4_A,27_5_B,27_6_A,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong species level",
+  latin_name_join =  "Trachurus",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
+
+coregonus <- data.frame(
+  region = NA,
+  spp_name = "Coregonus",
+  latin_name = "Coregonus",
+  rfmo = NA,
+  rfmo_stock_id = NA,
+  x3a_code = NA,
+  worms_aphia_id = NA,
+  fides_area = NA,
+  area = NA,
+  area_bis = "27_3_B,27_3_C,27_3_D",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong species level",
+  latin_name_join =  "Coregonus",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
+
+red_27 <- data.frame(
+  region = NA,
+  spp_name = "Sebastes",
+  latin_name = "Sebastes",
+  rfmo = NA,
+  rfmo_stock_id = NA,
+  x3a_code = NA,
+  worms_aphia_id = NA,
+  fides_area = NA,
+  area = NA,
+  area_bis = "27_1,27_2,27_5,27_12,27_14",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong species level",
+  latin_name_join =  "Sebastes",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
+
+
+
+linkage <- rbind(linkage, algae, capros, trachurus, coregonus, red_27)
+```
+
 
 # Areas
 
@@ -223,6 +339,78 @@ knitr::kable(test_3, caption = "Visual inspecion of area_rdbes")
 knitr::kable(area_rdbes_not_in_linkage, caption = "area_rdbes not in linkage file")
 ```
 
+# Linkage
+
+## Additions
+
+Highlights known issues with input data. These should only be included in the control / check file, not table 2.1
+
+I can't figure out how this will work with EUROSTAT data, so will start with creating a new check file for RDBES data
+
+(This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
+
+```{r, eval = T}
+
+her_28 <- data.frame(region = "Baltic Sea",
+                        spp_name = "Herring",
+                        latin_name = "Clupea harengus",
+                        rfmo = "ICES",
+                        rfmo_stock_id = NA,
+                        x3a_code = "HER",
+                        worms_aphia_id = 126417,
+                        fides_area = NA,
+                        area = NA,
+                        area_bis = NA,
+                        tac_area_description = NA,
+                        comments = "Known issue: wrong area level",
+                        latin_name_join =  "Clupea harengus",
+                        area_rdb = "27.3.d.28",
+                        area_rdbes = "27.3.d.28",
+                        include_in_table_2.1 = "no",
+                        comments_dev = NA)
+
+ple_3a <- data.frame(region = "North Sea and Eastern Arctic",
+                        spp_name = "Plaice",
+                        latin_name = "Pleuronectes platessa",
+                        rfmo = "ICES",
+                        rfmo_stock_id = NA,
+                        x3a_code = "PLE",
+                        worms_aphia_id = 127143,
+                        fides_area = NA,
+                        area = NA,
+                        area_bis = NA,
+                        tac_area_description = NA,
+                        comments = "Known issue: wrong area level",
+                        latin_name_join =  "Pleuronectes platessa",
+                        area_rdb = "27.3.a",
+                        area_rdbes = "27.3.a",
+                        include_in_table_2.1 = "no",
+                        comments_dev = NA)
+
+
+cod_3a <- data.frame(region = "North Sea and Eastern Arctic",
+                        spp_name = "Cod",
+                        latin_name = "Gadus morhua",
+                        rfmo = "ICES",
+                        rfmo_stock_id = NA,
+                        x3a_code = "COD",
+                        worms_aphia_id = 126436,
+                        fides_area = NA,
+                        area = NA,
+                        area_bis = NA,
+                        tac_area_description = NA,
+                        comments = "Known issue: wrong area level",
+                        latin_name_join =  "Gadus morhua",
+                        area_rdb = "27.3.a",
+                        area_rdbes = "27.3.a",
+                        include_in_table_2.1 = "no",
+                        comments_dev = NA)
+
+
+linkage <- rbind(linkage, her_28, ple_3a, cod_3a)
+
+```
+
 # Species
 
 ## latin_name_join
@@ -253,112 +441,88 @@ linkage$worms_aphia_id[linkage$latin_name == "Trigla lucerna"] <- "154453,127262
 linkage$latin_name_join[linkage$latin_name == "Aspitrigla cuculus"] <- "Aspitrigla cuculus,Chelidonichthys cuculus"
 linkage$worms_aphia_id[linkage$latin_name == "Aspitrigla cuculus"] <- "150662,127259"
 
-
-
 ```
 
 ### Group of species
 
 ```{r, include = F}
-rdbes_spp <- icesVocab::getCodeList("SpecWoRMS")
-head(rdbes_spp)
 
-aphiaIds <- unique(rdbes_spp[!is.na(rdbes_spp$Key), "Key"])
+# Ammodytidae
 
-classi <- worrms::wm_classification_(aphiaIds)
+san_worms <- subset(SpecWoRMS_with_classi, family == "Ammodytidae")[, "AphiaID"]
+san_latin <-
+    subset(SpecWoRMS_with_classi, family == "Ammodytidae")[, "scientificname"]
 
-classi_1 <-
-  tidyr::spread(dplyr::select(classi,-AphiaID),
-                key = rank,
-                value = scientificname)
+linkage$worms_aphia_id[linkage$latin_name == "Ammodytidae"] <-
+    paste(san_worms, collapse = ",")
+linkage$latin_name_join[linkage$latin_name == "Ammodytidae"] <-
+    paste(san_latin, collapse = ",")
+
+# Chromista
+
+algea_worms <- subset(SpecWoRMS_with_classi, kingdom == "Chromista")[, "AphiaID"]
+algea_latin <-
+    subset(SpecWoRMS_with_classi, kingdom == "Chromista")[, "scientificname"]
+
+linkage$worms_aphia_id[linkage$latin_name == "Chromista"] <-
+    paste(algea_worms, collapse = ",")
+linkage$latin_name_join[linkage$latin_name == "Chromista"] <-
+    paste(algea_latin, collapse = ",")
 
 # Rajidae per region and rfmo ----
 
 fak <- as.factor(linkage$region):as.factor(linkage$rfmo)
 
-linkage_2 <- c()
-
-for (i in levels(fak)) {
-  linkage_sub <- linkage[fak == i,]
-  
-  
-  raj_worms <- subset(classi_1, Family == "Rajidae")[, "id"]
-  raj_latin <-
-    subset(rdbes_spp, Key %in% raj_worms$id)[, "Description"]
-  
-  worms_aphia_id_raj_there <-
-    distinct(
-      subset(
-        linkage_sub,
-        latin_name != "Rajidae" &
-          worms_aphia_id %in% raj_worms$id
-      ),
-      worms_aphia_id
-    )
-  latin_name_join_raj_there <-
-    distinct(
-      subset(
-        linkage_sub,
-        latin_name != "Rajidae" &
-          worms_aphia_id %in% raj_worms$id
-      ),
-      latin_name_join
-    )
-  
-  raj_worms_2 <-
-    subset(raj_worms,
-           !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
-             !(id %in% c("105869", "711846")))
-  raj_latin_2 <-
-    subset(
-      raj_latin,
-      !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
-        !(raj_latin %in% c(
-          "Dipturus batis", "Dipturus intermedius"
-        ))
-    )
-  
-  linkage_sub$worms_aphia_id[linkage_sub$latin_name == "Rajidae"] <-
-    paste(raj_worms_2$id, collapse = ",")
-  linkage_sub$latin_name_join[linkage_sub$latin_name == "Rajidae"] <-
-    paste(raj_latin_2, collapse = ",")
-  
-  linkage_2 <- rbind(linkage_2, linkage_sub)
-  
-}
-
-```
-
-# Linkage
-
-## Additions
-
-Highlights known issues with input data. These should only be included in the control file, not table 2.1
-
-(This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
-
-```{r, eval = F}
-
-her_28 <- as.data.frame(region = "Baltic Sea",
-                        spp_name = "Herring",
-                        latin_name = "Clupea harengus",
-                        rfmo = "ICES",
-                        rfmo_stock_id = NA,
-                        x3a_code = NA,
-                        worms_aphia_id = 126417,
-                        fides_area = NA,
-                        area = "27.3.d.28",
-                        area_bis = NA,
-                        tac_area_description = NA,
-                        comments = "Known issue: wrong area level",
-                        latin_name_join =  "Clupea harengus",
-                        area_rdb = "27.3.d.28",
-                        area_rdbes = "27.3.d.28",
-                        include_in_table_2.1 = "no",
-                        comments_dev = NA)
-
-linkage_3 <- rbind(linkage_2, her_28)
-
+# linkage_2 <- c()
+# 
+# for (i in levels(fak)) {
+#   linkage_sub <- linkage[fak == i,]
+#   
+#   
+#   raj_worms <- subset(classi_1, Family == "Rajidae")[, "id"]
+#   raj_latin <-
+#     subset(rdbes_spp, Key %in% raj_worms$id)[, "Description"]
+#   
+#   worms_aphia_id_raj_there <-
+#     distinct(
+#       subset(
+#         linkage_sub,
+#         latin_name != "Rajidae" &
+#           worms_aphia_id %in% raj_worms$id
+#       ),
+#       worms_aphia_id
+#     )
+#   latin_name_join_raj_there <-
+#     distinct(
+#       subset(
+#         linkage_sub,
+#         latin_name != "Rajidae" &
+#           worms_aphia_id %in% raj_worms$id
+#       ),
+#       latin_name_join
+#     )
+#   
+#   raj_worms_2 <-
+#     subset(raj_worms,
+#            !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
+#              !(id %in% c("105869", "711846")))
+#   raj_latin_2 <-
+#     subset(
+#       raj_latin,
+#       !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
+#         !(raj_latin %in% c(
+#           "Dipturus batis", "Dipturus intermedius"
+#         ))
+#     )
+#   
+#   linkage_sub$worms_aphia_id[linkage_sub$latin_name == "Rajidae"] <-
+#     paste(raj_worms_2$id, collapse = ",")
+#   linkage_sub$latin_name_join[linkage_sub$latin_name == "Rajidae"] <-
+#     paste(raj_latin_2, collapse = ",")
+#   
+#   linkage_2 <- rbind(linkage_2, linkage_sub)
+#   
+# }
 
 ```
 
@@ -366,6 +530,6 @@ linkage_3 <- rbind(linkage_2, her_28)
 
 ```{r export}
 
-write.table(linkage_2, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
+write.table(linkage, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
 
 ```
