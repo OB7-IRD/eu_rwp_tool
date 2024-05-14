@@ -12,7 +12,7 @@ library(dplyr)
 library(icesVocab)
 library(worrms)
 
-knitr::opts_chunk$set(echo = F)
+knitr::opts_chunk$set(echo = T)
 
 path <- "../inst/"
 
@@ -21,15 +21,40 @@ linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.2"
 
 ```
 
-```{r}
+```{r, include = F}
 # Load linkage file
 
 linkage <- read.csv(paste0(path, linkage_file_name_in, ".csv"), sep = ";", header = T)
 
 names(linkage)
+
+linkage$include_in_table_2.1 <- "yes"
+linkage$comments_dev <- ""
+```
+
+# Linkage
+
+## Corrections
+
+```{r}
+
+# Wrong area coding in the line below, area 27.9.c is not an area. it should be Union waters of 8 and 9 (SRX/89-C.): 
+# 283	North-East Atlantic	All skates and rays	Rajidae	ICES	NA	SRX	########	89-C.	8, 9c	27_8,27_9_C	Extra row and FIDES code stands for rays not elsewhere reported
+
+linkage$area[linkage$region == "North-East Atlantic" &
+               linkage$latin_name == "Rajidae" &
+               linkage$fides_area == "89-C."] <- "8, 9"
+linkage$area_bis[linkage$region == "North-East Atlantic" &
+               linkage$latin_name == "Rajidae" &
+               linkage$fides_area == "89-C."] <- "27_8,27_9"
+linkage$comments_dev[linkage$region == "North-East Atlantic" &
+               linkage$latin_name == "Rajidae" &
+               linkage$fides_area == "89-C."] <- "area corrected by Kirsten"
+
 ```
 
 # Areas
+
 ## Check and correct area_bis
 
 ```{r, include = F}
@@ -41,6 +66,10 @@ test_1 <- arrange(distinct(as.data.frame("x" = str_split(test, ","))))
 names(test_1) <- "area_bis"
 test_1 <- arrange(test_1, area_bis)
 
+```
+
+```{r}
+
 # Correcting area_bis
 
 linkage$area_bis <- gsub("12_6", "21_6", linkage$area_bis)
@@ -49,7 +78,9 @@ linkage$area_bis <- gsub("81.870000000000005", "81,87", linkage$area_bis) # Area
 linkage$area_bis <- gsub("_21_2", "21_2", linkage$area_bis) 
 linkage$area_bis <- gsub("28_7_8", "27_8", linkage$area_bis) 
 linkage$area_bis <- gsub("21_3_0", "21_3_O", linkage$area_bis) 
+```
 
+```{r, include = F}
 # Removing blanks from area_bis - one more time, just to be sure
 linkage$area_bis <- gsub(" ", "", linkage$area_bis)
 
@@ -63,13 +94,13 @@ test_1 <- arrange(test_1, area_bis)
 knitr::kable(test_1, caption = "Visual inspecion of area_bis")
 ```
 
-
 ## Check and correct area_rdb
+
 ### Notes from 2023
+
 There is something wrong with some of the areas. A comma is missing between lists of areas, which means that not all areas were included. The error was spotted by Estonia and Latvia.
 
-Estonia:"Table 2.1 some of our landing data is wrong, which means that total EU landing is also wrong, and it affects all MS fishing those stocks (in column J where share of EU landing is calculated). Namely FLE (49t vs 133t), TRS (12t vs 16t) and SPR (15350t vs 25858t) landings are affected. I double checked our uploaded data files – those were correct, so something has happened in the RDB either while extracting the data or during uploading... 
-a.	Also if you compare the landings between sheets “2.1 Stocks” and “2.1 Control” then some of them do not match (i.e. EST SPR 15381t vs 15350t and HER central 11403t vs 11370t ). Differences are rather small, but there should be no differences!"
+Estonia:"Table 2.1 some of our landing data is wrong, which means that total EU landing is also wrong, and it affects all MS fishing those stocks (in column J where share of EU landing is calculated). Namely FLE (49t vs 133t), TRS (12t vs 16t) and SPR (15350t vs 25858t) landings are affected. I double checked our uploaded data files -- those were correct, so something has happened in the RDB either while extracting the data or during uploading... a. Also if you compare the landings between sheets "2.1 Stocks" and "2.1 Control" then some of them do not match (i.e. EST SPR 15381t vs 15350t and HER central 11403t vs 11370t ). Differences are rather small, but there should be no differences!"
 
 Latvia:"Values for Cod, Sprat and Flounder are not correct: it should be Cod - 35t, Sprat - 29780t and Flounder - 527t"
 
@@ -126,7 +157,9 @@ knitr::kable(test_3, caption = "Visual inspecion of area_rdb")
 ```
 
 ## Check and correct area_rdbes
+
 Same procedure as for area_rdb
+
 ```{r, include = F}
 
 rdbes_areas <- icesVocab::getCodeList("ICES_Area")
@@ -191,7 +224,9 @@ knitr::kable(area_rdbes_not_in_linkage, caption = "area_rdbes not in linkage fil
 ```
 
 # Species
+
 ## latin_name_join
+
 ### Remove blanks
 
 ```{r, include = F}
@@ -222,8 +257,7 @@ linkage$worms_aphia_id[linkage$latin_name == "Aspitrigla cuculus"] <- "150662,12
 
 ```
 
-
-### Group of species 
+### Group of species
 
 ```{r, include = F}
 rdbes_spp <- icesVocab::getCodeList("SpecWoRMS")
@@ -295,11 +329,43 @@ for (i in levels(fak)) {
 
 ```
 
+# Linkage
+
+## Additions
+
+Highlights known issues with input data. These should only be included in the control file, not table 2.1
+
+(This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
+
+```{r, eval = F}
+
+her_28 <- as.data.frame(region = "Baltic Sea",
+                        spp_name = "Herring",
+                        latin_name = "Clupea harengus",
+                        rfmo = "ICES",
+                        rfmo_stock_id = NA,
+                        x3a_code = NA,
+                        worms_aphia_id = 126417,
+                        fides_area = NA,
+                        area = "27.3.d.28",
+                        area_bis = NA,
+                        tac_area_description = NA,
+                        comments = "Known issue: wrong area level",
+                        latin_name_join =  "Clupea harengus",
+                        area_rdb = "27.3.d.28",
+                        area_rdbes = "27.3.d.28",
+                        include_in_table_2.1 = "no",
+                        comments_dev = NA)
+
+linkage_3 <- rbind(linkage_2, her_28)
+
+
+```
+
+# Output
 
 ```{r export}
 
 write.table(linkage_2, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
 
 ```
-
-

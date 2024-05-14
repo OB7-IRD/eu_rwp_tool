@@ -196,7 +196,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        file_path = input_path_file_fides,
                                        eu_countries = eu_countries)
   # table 2.1 linkage
-  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2024_v1.1.csv",
+  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2024_v1.2.csv",
                                                           package = "rwptool"),
                                        sep = ';',
                                        header = TRUE,
