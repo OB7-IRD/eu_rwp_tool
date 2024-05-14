@@ -414,6 +414,10 @@ rwp_table_2_1_template <- function(reference_period_start,
                       tons_country = eurostat_country,
                       tons_eu = eurostat_eu)
       table_control$data_source <- landing_statistics
+      table_control$comment <- table_2_1_linkage[table_2_1_linkage_id,
+                                                 "comments"]
+      table_control$included_in_table_2.1 <- table_2_1_linkage[table_2_1_linkage_id,
+                                                               "include_in_table_2.1"]
     }
     # from fides data ----
     if (! table_2_1_linkage[table_2_1_linkage_id,
