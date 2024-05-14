@@ -202,6 +202,12 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        header = TRUE,
                                        as.is = TRUE,
                                        encoding = 'UTF-8')
+
+  table_2_1_linkage <- subset( table_2_1_linkage, include_in_table_2.1 == "yes")
+
+  table_2_1_linkage$id <- row.names(table_2_1_linkage)
+  table_2_1_linkage <- dplyr::arrange(table_2_1_linkage, as.numeric(id))
+
   # table 2.1 design ----
   table_2_1_information_final <- data.frame()
   table_control_final <- data.frame()
@@ -415,9 +421,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                       tons_eu = eurostat_eu)
       table_control$data_source <- landing_statistics
       table_control$comment <- table_2_1_linkage[table_2_1_linkage_id,
-                                                 "comments"]
-      table_control$included_in_table_2.1 <- table_2_1_linkage[table_2_1_linkage_id,
-                                                               "include_in_table_2.1"]
+                                                 "comment"]
     }
     # from fides data ----
     if (! table_2_1_linkage[table_2_1_linkage_id,
