@@ -9,6 +9,7 @@
 #' @param input_path_directory_eurostat {\link[base]{character}} expected. Input path directory for input eurostat files.
 #' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input path and file name for input CL landing RDB file.
 #' @param input_path_file_fides {\link[base]{character}} expected. Input path and file name for input FIDES file.
+#' @param linkage_file {\link[base]{character}} expected. Name of linkage file. By default NULL.
 #' @param output_path {\link[base]{character}} expected. Output path. By default NULL.
 #' @return A list with two elements: "table_2_1_template" and "table_2_1_template_control".
 #' @importFrom utils read.table
@@ -59,6 +60,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                    input_path_directory_eurostat = NULL,
                                    input_path_file_rcg_stats = NULL,
                                    input_path_file_fides,
+                                   linkage_file = NULL,
                                    output_path = NULL) {
   cat(format(x = Sys.time(),
              format = "%Y-%m-%d %H:%M:%S"),
@@ -196,7 +198,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                        file_path = input_path_file_fides,
                                        eu_countries = eu_countries)
   # table 2.1 linkage
-  table_2_1_linkage <- utils::read.csv(file = system.file("eumap_table_2_1_linkage_version_2024_v1.2.csv",
+  table_2_1_linkage <- utils::read.csv(file = system.file(paste0(linkage_file, ".csv"),
                                                           package = "rwptool"),
                                        sep = ';',
                                        header = TRUE,
