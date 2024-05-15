@@ -65,6 +65,9 @@ linkage$comments_dev[linkage$region == "North-East Atlantic" &
                linkage$latin_name == "Merlangius merlangus" &
                linkage$fides_area == "07A."] <- "area corrected by Kirsten"
 
+# Duplicated row for Lepidorhombus whiffiagonis in North-East Atlantic. One of them should have been an extra row for Lepidorhombus spp.
+
+linkage <- subset(linkage, !(x3a_code == "LEZ" & region == "North-East Atlantic" & area == "8c, 9a"))
 ```
 
 ```{r}
@@ -171,20 +174,24 @@ linkage <- rbind(linkage, algae, capros, trachurus, coregonus, red_27)
 
 # Areas
 
-## Check and correct area_bis
+## Correct fides_area
+```{r}
 
-```{r, include = F}
-# Removing blanks from area_bis
-linkage$area_bis <- gsub(" ", "", linkage$area_bis)
+linkage$fides_area[linkage$latin_name == "Pleuronectes platessa" &
+                     linkage$region == "North-East Atlantic" &
+                     linkage$area == "8, 9, 10"] <- "8/3411"
 
-test <- unique(paste(linkage$area_bis, collapse = ","))
-test_1 <- arrange(distinct(as.data.frame("x" = str_split(test, ","))))
-names(test_1) <- "area_bis"
-test_1 <- arrange(test_1, area_bis)
-
+# Removing blanks from fides_area
+linkage$fides_area <- gsub(" ", "", linkage$fides_area)
 ```
 
+
+## Check and correct area_bis
+
+
 ```{r}
+# Removing blanks from area_bis
+linkage$area_bis <- gsub(" ", "", linkage$area_bis)
 
 # Correcting area_bis
 
@@ -473,56 +480,57 @@ linkage$latin_name_join[linkage$latin_name == "Chromista"] <-
 
 fak <- as.factor(linkage$region):as.factor(linkage$rfmo)
 
-# linkage_2 <- c()
-# 
-# for (i in levels(fak)) {
-#   linkage_sub <- linkage[fak == i,]
-#   
-#   
-#   raj_worms <- subset(classi_1, Family == "Rajidae")[, "id"]
-#   raj_latin <-
-#     subset(rdbes_spp, Key %in% raj_worms$id)[, "Description"]
-#   
-#   worms_aphia_id_raj_there <-
-#     distinct(
-#       subset(
-#         linkage_sub,
-#         latin_name != "Rajidae" &
-#           worms_aphia_id %in% raj_worms$id
-#       ),
-#       worms_aphia_id
-#     )
-#   latin_name_join_raj_there <-
-#     distinct(
-#       subset(
-#         linkage_sub,
-#         latin_name != "Rajidae" &
-#           worms_aphia_id %in% raj_worms$id
-#       ),
-#       latin_name_join
-#     )
-#   
-#   raj_worms_2 <-
-#     subset(raj_worms,
-#            !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
-#              !(id %in% c("105869", "711846")))
-#   raj_latin_2 <-
-#     subset(
-#       raj_latin,
-#       !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
-#         !(raj_latin %in% c(
-#           "Dipturus batis", "Dipturus intermedius"
-#         ))
-#     )
-#   
-#   linkage_sub$worms_aphia_id[linkage_sub$latin_name == "Rajidae"] <-
-#     paste(raj_worms_2$id, collapse = ",")
-#   linkage_sub$latin_name_join[linkage_sub$latin_name == "Rajidae"] <-
-#     paste(raj_latin_2, collapse = ",")
-#   
-#   linkage_2 <- rbind(linkage_2, linkage_sub)
-#   
-# }
+linkage_2 <- c()
+
+for (i in levels(fak)) {
+  linkage_sub <- linkage[fak == i,]
+
+
+  raj_worms <- data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "AphiaID"])
+  raj_latin <-
+    data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "scientificname"])
+
+  worms_aphia_id_raj_there <-
+    distinct(
+      subset(
+        linkage_sub,
+        latin_name != "Rajidae" &
+          worms_aphia_id %in% raj_worms$id
+      ),
+      worms_aphia_id
+    )
+  latin_name_join_raj_there <-
+    distinct(
+      subset(
+        linkage_sub,
+        latin_name != "Rajidae" &
+          worms_aphia_id %in% raj_worms$id
+      ),
+      latin_name_join
+    )
+
+  raj_worms_2 <- 
+    subset(raj_worms,
+           !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
+             !(id %in% c("105869", "711846")))
+  
+  raj_latin_2 <-
+    subset(
+      raj_latin,
+      !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
+        !(raj_latin %in% c(
+          "Dipturus batis", "Dipturus intermedius"
+        ))
+    )
+
+  linkage_sub$worms_aphia_id[linkage_sub$latin_name == "Rajidae"] <-
+    paste(raj_worms_2$id, collapse = ",")
+  linkage_sub$latin_name_join[linkage_sub$latin_name == "Rajidae"] <-
+    paste(raj_latin_2$id, collapse = ",")
+
+  linkage_2 <- rbind(linkage_2, linkage_sub)
+
+}
 
 ```
 
