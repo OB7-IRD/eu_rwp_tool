@@ -25,8 +25,8 @@ differens_between_outputs <- function(path = NULL,
   path <-
     "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/2024/table_2_1_development/personal/output/"
 
-  output_version_old <- "20240513_094524"
-  output_version_new <- "20240514_203733"
+  output_version_new <- "20240517_094805"
+  output_version_old <- "20240515_132424"
   rfmos <- c("ICES")
   type <- "control"
 
@@ -79,11 +79,23 @@ differens_between_outputs <- function(path = NULL,
 
     comb_diff <-
       subset(comb,
-             tons_country_old != tons_country_new | tons_eu_old != tons_eu_new)
+             tons_country_old != tons_country_new )#| tons_eu_old != tons_eu_new)
 
     comb_diff <-
       subset(comb_diff,
              rfmo %in% rfmos)
+
+    write.table(
+      comb_diff,
+      paste0(
+        path,
+        format(x = Sys.time(),
+               format = "%Y%m%d_%H%M%S_"),
+        "difference_between_control_files.csv"
+      ),
+      row.names = F,
+      sep = ";"
+    )
 
 
 
