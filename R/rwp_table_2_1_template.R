@@ -5,6 +5,7 @@
 #' @param reference_period_end {\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.
 #' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.
 #' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").
+#' @param tab_2.1_data_source expected. EUROSTAT, FIDES, National statistics, RCG agreed statistics, RFMO statistics
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.
 #' @param input_path_directory_eurostat {\link[base]{character}} expected. Input path directory for input eurostat files.
 #' @param input_path_file_rcg_stats {\link[base]{character}} expected. Input path and file name for input CL landing RDB file.
@@ -45,6 +46,7 @@ rwp_table_2_1_template <- function(reference_period_start,
                                                     "ESP",
                                                     "SWE"),
                                    landing_statistics,
+                                   tab_2.1_data_source = "RCG agreed statistics",
                                    rfmo = c("CCAMLR",
                                             "CECAF",
                                             "GFCM",
@@ -336,12 +338,12 @@ rwp_table_2_1_template <- function(reference_period_start,
       current_eurostat_data_eu <- dplyr::filter(.data = current_eurostat_data,
                                                 geo == "EU27_2020")
       if (current_eurostat_data_eu[1, "source"] == TRUE) {
-        source_eu <- landing_statistics
+        source_eu <- tab_2.1_data_source
       } else {
         source_eu <- "-"
       }
       if (current_eurostat_data_country[1, "source"] == TRUE) {
-        source_national <- landing_statistics
+        source_national <- tab_2.1_data_source
       } else {
         source_national <- ""
       }
