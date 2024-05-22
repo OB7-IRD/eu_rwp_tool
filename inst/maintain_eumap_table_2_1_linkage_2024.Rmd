@@ -476,61 +476,170 @@ linkage$worms_aphia_id[linkage$latin_name == "Chromista"] <-
 linkage$latin_name_join[linkage$latin_name == "Chromista"] <-
     paste(algea_latin, collapse = ",")
 
-# Rajidae per region and rfmo ----
-
-fak <- as.factor(linkage$region):as.factor(linkage$rfmo)
-
-linkage_2 <- c()
-
-for (i in levels(fak)) {
-  linkage_sub <- linkage[fak == i,]
+# Rajidae - populate latin_name_join with rajidaes not mentioned elsewhere
 
 
-  raj_worms <- data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "AphiaID"])
-  raj_latin <-
-    data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "scientificname"])
+raj_worms <-
+  data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "AphiaID"])
+raj_latin <-
+  data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "scientificname"])
 
-  worms_aphia_id_raj_there <-
-    distinct(
-      subset(
-        linkage_sub,
-        latin_name != "Rajidae" &
-          worms_aphia_id %in% raj_worms$id
-      ),
-      worms_aphia_id
+linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
+                         linkage$area == "3a"] <-
+  paste(subset(raj_worms, !(id %in% c(
+    "105876", "105883", "105887"
+  )))[, "id"], collapse = ",")
+
+linkage$latin_name_join[linkage$latin_name == "Rajidae" &
+                          linkage$area == "3a"] <-
+  paste(subset(raj_latin, !(
+    id %in% c("Leucoraja naevus", "Raja clavata", "Raja montagui")
+  ))[, "id"], collapse = ",")
+
+
+linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
+                         linkage$area == "2a, 4"] <-
+  paste(subset(raj_worms, !(
+    id %in% c("105876", "105882", "105883", "105887")
+  ))[, "id"], collapse = ",")
+
+linkage$latin_name_join[linkage$latin_name == "Rajidae" &
+                          linkage$area == "2a, 4"] <-
+  paste(subset(raj_latin, !(
+    id %in% c(
+      "Leucoraja naevus",
+      "Raja brachyura",
+      "Raja clavata",
+      "Raja montagui"
     )
-  latin_name_join_raj_there <-
-    distinct(
-      subset(
-        linkage_sub,
-        latin_name != "Rajidae" &
-          worms_aphia_id %in% raj_worms$id
-      ),
-      latin_name_join
-    )
+  ))[, "id"], collapse = ",")
 
-  raj_worms_2 <- 
-    subset(raj_worms,
-           !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
-             !(id %in% c("105869", "711846")))
-  
-  raj_latin_2 <-
+
+linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
+                         linkage$area == "7d"] <-
+  paste(
+    subset(
+      raj_worms,
+      !(
+        id %in% c(
+          "105882",
+          "105883",
+          "105885",
+          "105887",
+          "105891"
+          )
+  ))[, "id"], collapse = ",
+  ")
+
+linkage$latin_name_join[linkage$latin_name == "Rajidae" &
+                          linkage$area == "7d"] <-
+  paste(
     subset(
       raj_latin,
-      !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
-        !(raj_latin %in% c(
-          "Dipturus batis", "Dipturus intermedius"
-        ))
+      !(
+        id %in% c(
+          "Raja brachyura",
+          "Raja clavata",
+          "Raja microocellata",
+          "Raja montagui",
+          "Raja undulata"
+          
+        )
+  ))[, "id"], collapse = ",")
+  
+
+
+linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
+                         linkage$area == "8, 9"] <-
+  paste(subset(raj_worms,!(
+    id %in% c(
+      "105869",
+      "711846",
+      "105876",
+      "105882",
+      "105883",
+      "105887",
+      "105891"
     )
+  ))[, "id"], collapse = ",
+  ")
 
-  linkage_sub$worms_aphia_id[linkage_sub$latin_name == "Rajidae"] <-
-    paste(raj_worms_2$id, collapse = ",")
-  linkage_sub$latin_name_join[linkage_sub$latin_name == "Rajidae"] <-
-    paste(raj_latin_2$id, collapse = ",")
+linkage$latin_name_join[linkage$latin_name == "Rajidae" &
+                          linkage$area == "8, 9"] <-
+  paste(subset(raj_latin,!(
+    id %in% c(
+      "Dipturus batis",
+      "Dipturus intermedius",
+      "Leucoraja naevus",
+      "Raja brachyura",
+      "Raja clavata",
+      "Raja montagui",
+      "Raja undulata"
+      
+    )
+  ))[, "id"], collapse = ",")
 
-  linkage_2 <- rbind(linkage_2, linkage_sub)
 
-}
+
+
+
+linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
+                         linkage$area == "6a, 6b, 7a-c, 7e-k"] <-
+  paste(subset(raj_worms,!(
+    id %in% c(
+      "105869",
+      "711846",
+      "105873",
+"105874",
+"105876",
+"105882",
+"105883",
+
+"105885",
+"105887",
+"105891"
+
+    )
+  ))[, "id"], collapse = ",
+  ")
+
+linkage$latin_name_join[linkage$latin_name == "Rajidae" &
+                          linkage$area == "6a, 6b, 7a-c, 7e-k"] <-
+  paste(subset(raj_latin,!(
+    id %in% c(
+      "Dipturus batis",
+      "Dipturus intermedius",
+"Leucoraja circularis",
+"Leucoraja fullonica",
+"Leucoraja naevus",
+"Raja brachyura",
+"Raja clavata",
+"Raja microocellata",
+"Raja montagui",
+"Raja undulata"
+
+      
+    )
+  ))[, "id"], collapse = ",")
+
+
+
+  # linkage_2 <- rbind(linkage_2, linkage_sub)
+  # 
+  # raj_worms_2 <- 
+  #   subset(raj_worms,
+  #          !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
+  #            !(id %in% c("105869", "711846")))
+  # 
+  # raj_latin_2 <-
+  #   subset(
+  #     raj_latin,
+  #     !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
+  #       !(raj_latin %in% c(
+  #         "Dipturus batis", "Dipturus intermedius"
+  #       ))
+  #   )
+
 
 ```
 

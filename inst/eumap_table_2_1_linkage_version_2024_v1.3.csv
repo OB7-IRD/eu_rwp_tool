@@ -98,9 +98,36 @@
 "97";"North Sea and Eastern Arctic";"Small-eyed ray";"Raja microocellata";"ICES";NA;"RJE";"105885";"07D.";"7d";"27_7_D";"";"FIDES match";"Raja microocellata";"27.7.d";"yes";"";"27.7.d"
 "98";"North Sea and Eastern Arctic";"Spotted ray";"Raja montagui";"ICES";NA;"RJM";"105887";"07D.,03A-C.,2AC4-C";"3a, 4, 7d";"27_3_A,27_4,27_7_D";"";"FIDES match but difference with area";"Raja montagui";"27.3.a,27.3.a.20,27.3.a.21,27.4,27.4.a,27.4.b,27.4.c,27.4.a.w,27.4.a.e,27.4.b.e,27.4.b.w,27.7.d";"yes";"";"27.3.a,27.3.a.20,27.3.a.21,27.4,27.4.a,27.4.b,27.4.c,27.7.d"
 "99";"North Sea and Eastern Arctic";"Undulate ray";"Raja undulata";"ICES";NA;"RJU";"105891";"07DE.";"7d";"27_7_D";"";"FIDES match";"Raja undulata";"27.7.d";"yes";"";"27.7.d"
-"100";"North Sea and Eastern Arctic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"105711";"03A-C";"3a";"27_3_A";"to be coded as all other rays in the script";"FIDES code for area 3a-c";"Rajidae";"27.3.a,27.3.a.20,27.3.a.21";"yes";"";"27.3.a,27.3.a.20,27.3.a.21"
-"101";"North Sea and Eastern Arctic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"105711";"2AC4-C";"2a, 4";"27_2_A,27_4";"to be coded as all other rays in the script";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajidae";"27.2.a,27.2.a.2,27.2.a.1,27.4,27.4.a,27.4.b,27.4.c,27.4.a.w,27.4.a.e,27.4.b.e,27.4.b.w";"yes";"";"27.2.a,27.2.a.1,27.2.a.2,27.4,27.4.a,27.4.b,27.4.c"
-"102";"North Sea and Eastern Arctic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"105711";"07D.";"7d";"27_7_D";"to be coded as all other rays in the script";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajidae";"27.7.d";"yes";"";"27.7.d"
+"100";"North Sea and Eastern Arctic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"1019159,105711,105766,105863,105864,105865,105869,105871,105872,105873,105874,105875,105881,105884,105885,105886,105888,105891,105892,105893,105894,105896,158554,217393,217410,271553,367297,398306,711846";"03A-C";"3a";"27_3_A";"to be coded as all other rays in the script";"FIDES code for area 3a-c";"Rajella lintea,Rajidae,Raja,Amblyraja hyperborea,Amblyraja jenseni,Amblyraja radiata,Dipturus batis,Dipturus nidarosiensis,Dipturus oxyrinchus,Leucoraja circularis,Leucoraja fullonica,Leucoraja melitensis,Raja asterias,Raja maderensis,Raja microocellata,Raja miraletus,Raja polystigma,Raja undulata,Rajella bathyphila,Rajella bigelowi,Rajella fyllae,Rostroraja alba,Malacoraja senta,Dipturus campbelli,Rajella barnardi,Dipturus macrocauda,Raja brachyura,Neoraja iberica,Dipturus intermedius";"27.3.a,27.3.a.20,27.3.a.21";"yes";"";"27.3.a,27.3.a.20,27.3.a.21"
+"101";"North Sea and Eastern Arctic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"1019159,105711,105766,105863,105864,105865,105869,105871,105872,105873,105874,105875,105881,105884,105885,105886,105888,105891,105892,105893,105894,105896,158554,217393,217410,271553,367297,398306,711846";"2AC4-C";"2a, 4";"27_2_A,27_4";"to be coded as all other rays in the script";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajella lintea,Rajidae,Raja,Amblyraja hyperborea,Amblyraja jenseni,Amblyraja radiata,Dipturus batis,Dipturus nidarosiensis,Dipturus oxyrinchus,Leucoraja circularis,Leucoraja fullonica,Leucoraja melitensis,Raja asterias,Raja maderensis,Raja microocellata,Raja miraletus,Raja polystigma,Raja undulata,Rajella bathyphila,Rajella bigelowi,Rajella fyllae,Rostroraja alba,Malacoraja senta,Dipturus campbelli,Rajella barnardi,Dipturus macrocauda,Neoraja iberica,Dipturus intermedius";"27.2.a,27.2.a.2,27.2.a.1,27.4,27.4.a,27.4.b,27.4.c,27.4.a.w,27.4.a.e,27.4.b.e,27.4.b.w";"yes";"";"27.2.a,27.2.a.1,27.2.a.2,27.4,27.4.a,27.4.b,27.4.c"
+"102";"North Sea and Eastern Arctic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"1019159,
+  105711,
+  105766,
+  105863,
+  105864,
+  105865,
+  105869,
+  105871,
+  105872,
+  105873,
+  105874,
+  105875,
+  105876,
+  105881,
+  105884,
+  105886,
+  105888,
+  105892,
+  105893,
+  105894,
+  105896,
+  158554,
+  217393,
+  217410,
+  271553,
+  367297,
+  398306,
+  711846";"07D.";"7d";"27_7_D";"to be coded as all other rays in the script";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajella lintea,Rajidae,Raja,Amblyraja hyperborea,Amblyraja jenseni,Amblyraja radiata,Dipturus batis,Dipturus nidarosiensis,Dipturus oxyrinchus,Leucoraja circularis,Leucoraja fullonica,Leucoraja melitensis,Leucoraja naevus,Raja asterias,Raja maderensis,Raja miraletus,Raja polystigma,Rajella bathyphila,Rajella bigelowi,Rajella fyllae,Rostroraja alba,Malacoraja senta,Dipturus campbelli,Rajella barnardi,Dipturus macrocauda,Neoraja iberica,Dipturus intermedius";"27.7.d";"yes";"";"27.7.d"
 "103";"North Sea and Eastern Arctic";"Greenland halibut";"Reinhardtius hippoglossoides";"ICES";NA;"GHL";"127144";"2A-C46";"4";"27_4";"EU waters of IIa and IV,   EU and international waters of Vb and VI";"FIDES match but difference with area";"Reinhardtius hippoglossoides";"27.4,27.4.a,27.4.b,27.4.c,27.4.a.w,27.4.a.e,27.4.b.e,27.4.b.w";"yes";"";"27.4,27.4.a,27.4.b,27.4.c"
 "104";"North Sea and Eastern Arctic";"Salmon";"Salmo salar";"ICES";NA;"SAL";"127186";"NoTAC";"3a, 4, 7d";"27_3_A,27_4,27_7_D";"";"";"Salmo salar";"27.3.a,27.3.a.20,27.3.a.21,27.4,27.4.a,27.4.b,27.4.c,27.4.a.w,27.4.a.e,27.4.b.e,27.4.b.w,27.7.d";"yes";"";"27.3.a,27.3.a.20,27.3.a.21,27.4,27.4.a,27.4.b,27.4.c,27.7.d"
 "105";"North Sea and Eastern Arctic";"Sea trout";"Salmo trutta";"ICES";NA;"TRS";"127187";"NoTAC";"3a, 4, 7d";"27_3_A,27_4,27_7_D";"";"";"Salmo trutta";"27.3.a,27.3.a.20,27.3.a.21,27.4,27.4.a,27.4.b,27.4.c,27.4.a.w,27.4.a.e,27.4.b.e,27.4.b.w,27.7.d";"yes";"";"27.3.a,27.3.a.20,27.3.a.21,27.4,27.4.a,27.4.b,27.4.c,27.7.d"
@@ -265,7 +292,29 @@
 "265";"North-East Atlantic";"Thornback ray";"Raja clavata";"ICES";NA;"RJC";"105883";"89-C.";"8";"27_8";"";"FIDES match but difference with area";"Raja clavata";"27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.e,27.8.d.1,27.8.d.2,27.8.e.1,27.8.e.2";"yes";"";"27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.d.1,27.8.d.2,27.8.e,27.8.e.1,27.8.e.2"
 "266";"North-East Atlantic";"Thornback ray";"Raja clavata";"ICES";NA;"RJC";"105883";"89-C.";"9a";"27_9_A";"";"FIDES match but difference with area";"Raja clavata";"27.9.a";"yes";"";"27.9.a"
 "267";"North-East Atlantic";"Thornback ray";"Raja clavata";"ICES";NA;"RJC";"105883";"NoTAC";"10, 12";"27_10,27_12";"";"";"Raja clavata";"27.10,27.10.b,27.10.b.1,27.10.b.2,27.10.a,27.10.a.1,27.10.a.2,27.12,27.12.a,27.12.b,27.12.c,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4";"yes";"";"27.10,27.10.a,27.10.a.1,27.10.a.2,27.10.b,27.12,27.12.a,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.12.b,27.12.c"
-"268";"North-East Atlantic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"105711";"67AKXD";"6a, 6b, 7a-c, 7e-k";"27_6_A,27_6_B,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K";"";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajidae";"27.6.a,27.6.a.n,27.6.a.s,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2";"yes";"";"27.6.a,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2"
+"268";"North-East Atlantic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"1019159,
+  105711,
+  105766,
+  105863,
+  105864,
+  105865,
+  105871,
+  105872,
+  105875,
+  105881,
+  105884,
+  105886,
+  105888,
+  105892,
+  105893,
+  105894,
+  105896,
+  158554,
+  217393,
+  217410,
+  271553,
+  367297,
+  398306";"67AKXD";"6a, 6b, 7a-c, 7e-k";"27_6_A,27_6_B,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K";"";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajella lintea,Rajidae,Raja,Amblyraja hyperborea,Amblyraja jenseni,Amblyraja radiata,Dipturus nidarosiensis,Dipturus oxyrinchus,Leucoraja melitensis,Raja asterias,Raja maderensis,Raja miraletus,Raja polystigma,Rajella bathyphila,Rajella bigelowi,Rajella fyllae,Rostroraja alba,Malacoraja senta,Dipturus campbelli,Rajella barnardi,Dipturus macrocauda,Neoraja iberica";"27.6.a,27.6.a.n,27.6.a.s,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2";"yes";"";"27.6.a,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2"
 "269";"North-East Atlantic";"Small-eyed ray";"Raja microocellata";"ICES";NA;"RJE";"105885";"07D.";"7e";"27_7_E";"";"FIDES match but difference with area";"Raja microocellata";"27.7.e";"yes";"";"27.7.e"
 "270";"North-East Atlantic";"Small-eyed ray";"Raja microocellata";"ICES";NA;"RJE";"105885";"7FG.";"7fg";"27_7_F,27_7_G";"";"FIDES match";"Raja microocellata";"27.7.f,27.7.g";"yes";"";"27.7.f,27.7.g"
 "271";"North-East Atlantic";"Spotted ray";"Raja montagui";"ICES";NA;"RJM";"105887";"67AKXD";"6, 7b, 7j";"27_6,27_7_B,27_7_J";"";"FIDES match but difference with area";"Raja montagui";"27.6,27.6.a,27.6.b,27.6.a.n,27.6.a.s,27.6.b.1,27.6.b.2,27.7.b,27.7.j,27.7.j.1,27.7.j.2";"yes";"";"27.6,27.6.a,27.6.b,27.6.b.1,27.6.b.2,27.7.b,27.7.j,27.7.j.1,27.7.j.2"
@@ -280,7 +329,32 @@
 "280";"North-East Atlantic";"Greenland halibut";"Reinhardtius hippoglossoides";"ICES";NA;"GHL";"127144";"5-14GL";"5a, 14";"27_5_A,27_14";"Greenland zone: V & XIV";"FIDES match";"Reinhardtius hippoglossoides";"27.5.a,27.5.a.1,27.5.a.2,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2";"yes";"";"27.5.a,27.5.a.1,27.5.a.2,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2"
 "281";"North-East Atlantic";"Greenland halibut";"Reinhardtius hippoglossoides";"ICES";NA;"GHL";"127144";"2A-C46";"5b, 6";"27_5_B,27_6";"EU waters of IIa and VI. In VI";"FIDES match but difference with area";"Reinhardtius hippoglossoides";"27.5.b,27.5.b.1,27.5.b.2,27.5.b.1.a,27.5.b.1.b,27.6,27.6.a,27.6.b,27.6.a.n,27.6.a.s,27.6.b.1,27.6.b.2";"yes";"";"27.5.b,27.5.b.1,27.5.b.1.a,27.5.b.1.b,27.5.b.2,27.6,27.6.a,27.6.b,27.6.b.1,27.6.b.2"
 "282";"North-East Atlantic";"White skate";"Raja alba";"ICES";NA;"RJA";"217404,105896";"NoTAC";"All areas";"27_5,27_6,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8,27_9,27_10,27_12,27_14";"";"";"Raja alba,Rostroraja alba";"27.5,27.5.a,27.5.b,27.5.b.1,27.5.b.2,27.5.a.1,27.5.a.2,27.5.b.1.a,27.5.b.1.b,27.6,27.6.a,27.6.b,27.6.a.n,27.6.a.s,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2,27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.e,27.8.d.1,27.8.d.2,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2,27.10,27.10.b,27.10.b.1,27.10.b.2,27.10.a,27.10.a.1,27.10.a.2,27.12,27.12.a,27.12.b,27.12.c,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2";"yes";"";"27.5,27.5.a,27.5.a.1,27.5.a.2,27.5.b,27.5.b.1,27.5.b.1.a,27.5.b.1.b,27.5.b.2,27.6,27.6.a,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2,27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.d.1,27.8.d.2,27.8.e,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2,27.10,27.10.a,27.10.a.1,27.10.a.2,27.10.b,27.12,27.12.a,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.12.b,27.12.c,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2"
-"283";"North-East Atlantic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"105711";"89-C.";"8, 9";"27_8,27_9";"";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajidae";"27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.e,27.8.d.1,27.8.d.2,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2";"yes";"area corrected by Kirsten";"27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.d.1,27.8.d.2,27.8.e,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2"
+"283";"North-East Atlantic";"All skates and rays";"Rajidae";"ICES";NA;"SRX";"1019159,
+  105711,
+  105766,
+  105863,
+  105864,
+  105865,
+  105871,
+  105872,
+  105873,
+  105874,
+  105875,
+  105881,
+  105884,
+  105885,
+  105886,
+  105888,
+  105892,
+  105893,
+  105894,
+  105896,
+  158554,
+  217393,
+  217410,
+  271553,
+  367297,
+  398306";"89-C.";"8, 9";"27_8,27_9";"";"Extra row and FIDES code stands for rays not elsewhere reported";"Rajella lintea,Rajidae,Raja,Amblyraja hyperborea,Amblyraja jenseni,Amblyraja radiata,Dipturus nidarosiensis,Dipturus oxyrinchus,Leucoraja circularis,Leucoraja fullonica,Leucoraja melitensis,Raja asterias,Raja maderensis,Raja microocellata,Raja miraletus,Raja polystigma,Rajella bathyphila,Rajella bigelowi,Rajella fyllae,Rostroraja alba,Malacoraja senta,Dipturus campbelli,Rajella barnardi,Dipturus macrocauda,Neoraja iberica";"27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.e,27.8.d.1,27.8.d.2,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2";"yes";"area corrected by Kirsten";"27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.d.1,27.8.d.2,27.8.e,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2"
 "284";"North-East Atlantic";"Salmon";"Salmo salar";"ICES";NA;"SAL";"127186";"NoTAC";"All areas";"27_5,27_6,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8,27_9,27_10,27_12,27_14";"";"";"Salmo salar";"27.5,27.5.a,27.5.b,27.5.b.1,27.5.b.2,27.5.a.1,27.5.a.2,27.5.b.1.a,27.5.b.1.b,27.6,27.6.a,27.6.b,27.6.a.n,27.6.a.s,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2,27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.e,27.8.d.1,27.8.d.2,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2,27.10,27.10.b,27.10.b.1,27.10.b.2,27.10.a,27.10.a.1,27.10.a.2,27.12,27.12.a,27.12.b,27.12.c,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2";"yes";"";"27.5,27.5.a,27.5.a.1,27.5.a.2,27.5.b,27.5.b.1,27.5.b.1.a,27.5.b.1.b,27.5.b.2,27.6,27.6.a,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2,27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.d.1,27.8.d.2,27.8.e,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2,27.10,27.10.a,27.10.a.1,27.10.a.2,27.10.b,27.12,27.12.a,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.12.b,27.12.c,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2"
 "285";"North-East Atlantic";"Sea trout";"Salmo trutta";"ICES";NA;"TRS";"127187";"NoTAC";"All areas";"27_5,27_6,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8,27_9,27_10,27_12,27_14";"";"";"Salmo trutta";"27.5,27.5.a,27.5.b,27.5.b.1,27.5.b.2,27.5.a.1,27.5.a.2,27.5.b.1.a,27.5.b.1.b,27.6,27.6.a,27.6.b,27.6.a.n,27.6.a.s,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2,27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.e,27.8.d.1,27.8.d.2,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2,27.10,27.10.b,27.10.b.1,27.10.b.2,27.10.a,27.10.a.1,27.10.a.2,27.12,27.12.a,27.12.b,27.12.c,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2";"yes";"";"27.5,27.5.a,27.5.a.1,27.5.a.2,27.5.b,27.5.b.1,27.5.b.1.a,27.5.b.1.b,27.5.b.2,27.6,27.6.a,27.6.b,27.6.b.1,27.6.b.2,27.7.a,27.7.b,27.7.c,27.7.c.1,27.7.c.2,27.7.e,27.7.f,27.7.g,27.7.h,27.7.j,27.7.j.1,27.7.j.2,27.7.k,27.7.k.1,27.7.k.2,27.8,27.8.a,27.8.b,27.8.c,27.8.d,27.8.d.1,27.8.d.2,27.8.e,27.8.e.1,27.8.e.2,27.9,27.9.a,27.9.b,27.9.b.1,27.9.b.2,27.10,27.10.a,27.10.a.1,27.10.a.2,27.10.b,27.12,27.12.a,27.12.a.1,27.12.a.2,27.12.a.3,27.12.a.4,27.12.b,27.12.c,27.14,27.14.a,27.14.b,27.14.b.1,27.14.b.2"
 "286";"North-East Atlantic";"Sardine";"Sardina pilchardus";"ICES";NA;"PIL";"126421";"NoTAC";"8abd";"27_8_A,27_8_B,27_8_D";"";"";"Sardina pilchardus";"27.8.a,27.8.b,27.8.d,27.8.d.1,27.8.d.2";"yes";"";"27.8.a,27.8.b,27.8.d,27.8.d.1,27.8.d.2"
