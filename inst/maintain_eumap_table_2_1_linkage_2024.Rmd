@@ -47,7 +47,7 @@ knitr::opts_chunk$set(echo = T)
 
 years_of_interest <- c(2021:2023)
 
-path <- "./inst/"
+path <- "../inst/"
 
 linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
 linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.4"
@@ -116,6 +116,28 @@ Relevant for Sebastes, Caproidae, Trachurus
 ## Fixing overlapping stocks
 
 ## Recode 'All areas' to proper areas
+
+**Problem:** Aggregation by region, IFMO, species and area in the resulting table 2.1 is not always unique (Probably only a problem for the 'All areas') For some stocks this gives duplicated rows, since the area given in table 1 header (EUMAP) is not a part of the key, e.g., Squalus acanthias in the North Sea and Eastern Arctic ICES
+
+**Solution:** From MARE's Q&A - Use the area in the header of table 1 (EU-MAP)
+
+**Future solution:** This could also be implemented in North-East Atlantic
+
+```{r}
+
+linkage$area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Squalus acanthias" &
+  linkage$area_bis == "27_4,27_7_D"] <- "1, 2"
+
+linkage$area_bis[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Squalus acanthias" &
+  linkage$area_bis == "27_4,27_7_D"] <- "27_1, 27_2" # Wrong area_bis
+
+linkage$area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Squalus acanthias" &
+  linkage$area_bis == "27_3_A,27_4,27_7_D"] <- "3a, 4, 7d"
+
+```
 
 ## Known issues - not to be displayed in table 2.1 \| control file
 
@@ -388,11 +410,11 @@ knitr::kable(test_3, caption = "Visual inspecion of area_rdbes")
 knitr::kable(area_rdbes_not_in_linkage, caption = "area_rdbes not in linkage file")
 ```
 
-# Linkage
-
-## Additions
+# Linkage manipulations
 
 (This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
+
+## Additions
 
 Highlights known issues with input data. These should only be included in the control / check file, not table 2.1
 
