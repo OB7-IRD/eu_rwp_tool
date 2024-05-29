@@ -9,7 +9,7 @@ output: html_document
 
 ## 2022_v2.4
 
-Linkage file from 2023. This file is use as inputs to all the ammendments made in 2024
+Linkage file from 2023. This file is used as the inputs to all the amendments made in 2024
 
 ## 2024_v1.3
 
@@ -25,7 +25,7 @@ Main improvements:
 
 ## 2024_v1.4
 
-Linkage file use to create table 2.1 the 30th of May.
+Linkage file used to create table 2.1 the 30th of May.
 
 Main improvements:
 
@@ -37,8 +37,7 @@ Main improvements:
 
 4.  Recode 'All areas' to proper areas
 
-```{r setup, include=FALSE}
-
+```{r setup, include=T, message = T}
 library(stringr)
 library(dplyr)
 library(icesVocab)
@@ -48,14 +47,13 @@ knitr::opts_chunk$set(echo = T)
 
 years_of_interest <- c(2021:2023)
 
-path <- "../inst/"
+path <- "./inst/"
 
 linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
 linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.4"
 
 path_fides <- "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/2024/table_2_1_development/personal/input/fides/"
 filename_fides <- "fides_quota_2018_2023.rds"
-
 ```
 
 ```{r, include = F}
@@ -78,29 +76,28 @@ SpecWoRMS_with_classi <- readRDS(paste0(path, "SpecWoRMS_with_classifcation.rds"
 ## Corrections
 
 ```{r}
-
-# Wrong area coding in the line below, area 27.9.c is not an area. it should be Union waters of 8 and 9 (SRX/89-C.): 
+# Wrong area coding in the line below, area 27.9.c is not an area. it should be Union waters of 8 and 9 (SRX/89-C.):
 # 283	North-East Atlantic	All skates and rays	Rajidae	ICES	NA	SRX	########	89-C.	8, 9c	27_8,27_9_C	Extra row and FIDES code stands for rays not elsewhere reported
 
 linkage$area[linkage$region == "North-East Atlantic" &
-               linkage$latin_name == "Rajidae" &
-               linkage$fides_area == "89-C."] <- "8, 9"
+  linkage$latin_name == "Rajidae" &
+  linkage$fides_area == "89-C."] <- "8, 9"
 linkage$area_bis[linkage$region == "North-East Atlantic" &
-               linkage$latin_name == "Rajidae" &
-               linkage$fides_area == "89-C."] <- "27_8,27_9"
+  linkage$latin_name == "Rajidae" &
+  linkage$fides_area == "89-C."] <- "27_8,27_9"
 linkage$comments_dev[linkage$region == "North-East Atlantic" &
-               linkage$latin_name == "Rajidae" &
-               linkage$fides_area == "89-C."] <- "area corrected by Kirsten"
+  linkage$latin_name == "Rajidae" &
+  linkage$fides_area == "89-C."] <- "area corrected by Kirsten"
 
-# Wrong area coding in the line below, area 27.6.a is wrong and already present in another stock. it should be 27.7.a: 
+# Wrong area coding in the line below, area 27.6.a is wrong and already present in another stock. it should be 27.7.a:
 # North-East Atlantic Whiting Merlangius merlangus ICES NA WHG 126438 07A. 7a 27_6_A
 
 linkage$area_bis[linkage$region == "North-East Atlantic" &
-               linkage$latin_name == "Merlangius merlangus" &
-               linkage$fides_area == "07A."] <- "27_7_A"
+  linkage$latin_name == "Merlangius merlangus" &
+  linkage$fides_area == "07A."] <- "27_7_A"
 linkage$comments_dev[linkage$region == "North-East Atlantic" &
-               linkage$latin_name == "Merlangius merlangus" &
-               linkage$fides_area == "07A."] <- "area corrected by Kirsten"
+  linkage$latin_name == "Merlangius merlangus" &
+  linkage$fides_area == "07A."] <- "area corrected by Kirsten"
 
 # Duplicated row for Lepidorhombus whiffiagonis in North-East Atlantic. One of them should have been an extra row for Lepidorhombus spp.
 
@@ -114,7 +111,6 @@ linkage <- subset(linkage, !(x3a_code == "LEZ" & region == "North-East Atlantic"
 Relevant for Sebastes, Caproidae, Trachurus
 
 ```{r}
-
 ```
 
 ## Fixing overlapping stocks
@@ -140,7 +136,7 @@ algae <- data.frame(
   area_rdb = NA,
   tac_area_description = NA,
   comments = "Algea",
-  latin_name_join =  NA,
+  latin_name_join = NA,
   include_in_table_2.1 = "no",
   comments_dev = NA
 )
@@ -197,7 +193,7 @@ coregonus <- data.frame(
   area_rdb = NA,
   tac_area_description = NA,
   comments = "Known issue: wrong species level",
-  latin_name_join =  "Coregonus",
+  latin_name_join = "Coregonus",
   include_in_table_2.1 = "no",
   comments_dev = NA
 )
@@ -231,10 +227,9 @@ linkage <- rbind(linkage, algae, coregonus)
 ## Correct fides_area
 
 ```{r}
-
 linkage$fides_area[linkage$latin_name == "Pleuronectes platessa" &
-                     linkage$region == "North-East Atlantic" &
-                     linkage$area == "8, 9, 10"] <- "8/3411"
+  linkage$region == "North-East Atlantic" &
+  linkage$area == "8, 9, 10"] <- "8/3411"
 
 # Removing blanks from fides_area
 linkage$fides_area <- gsub(" ", "", linkage$fides_area)
@@ -251,9 +246,9 @@ linkage$area_bis <- gsub(" ", "", linkage$area_bis)
 linkage$area_bis <- gsub("12_6", "21_6", linkage$area_bis)
 linkage$area_bis <- gsub("51.57", "51,57", linkage$area_bis) # Area code copied from a very old linkage file
 linkage$area_bis <- gsub("81.870000000000005", "81,87", linkage$area_bis) # Area code copied from a very old linkage file
-linkage$area_bis <- gsub("_21_2", "21_2", linkage$area_bis) 
-linkage$area_bis <- gsub("28_7_8", "27_8", linkage$area_bis) 
-linkage$area_bis <- gsub("21_3_0", "21_3_O", linkage$area_bis) 
+linkage$area_bis <- gsub("_21_2", "21_2", linkage$area_bis)
+linkage$area_bis <- gsub("28_7_8", "27_8", linkage$area_bis)
+linkage$area_bis <- gsub("21_3_0", "21_3_O", linkage$area_bis)
 ```
 
 ```{r, include = F}
@@ -261,7 +256,7 @@ linkage$area_bis <- gsub("21_3_0", "21_3_O", linkage$area_bis)
 linkage$area_bis <- gsub(" ", "", linkage$area_bis)
 
 test <- unique(paste(linkage$area_bis, collapse = ","))
-test_1<- arrange(distinct(as.data.frame("x" = str_split(test, ","))))
+test_1 <- arrange(distinct(as.data.frame("x" = str_split(test, ","))))
 names(test_1) <- "area_bis"
 test_1 <- arrange(test_1, area_bis)
 ```
@@ -302,8 +297,6 @@ unique(linkage$area_rdb)
 # Replace areas on upper level with all underlying areas present in the rdb code list
 
 for (i in rdb_areas) {
-
-
   j <- paste0("q", toupper(gsub("\\.", "\\_", i)), "q")
 
   k <- paste0("q", i, "q")
@@ -337,7 +330,6 @@ knitr::kable(test_3, caption = "Visual inspecion of area_rdb")
 Same procedure as for area_rdb
 
 ```{r, include = F}
-
 rdbes_areas <- icesVocab::getCodeList("ICES_Area")
 names(rdbes_areas)
 
@@ -361,8 +353,6 @@ unique(linkage$area_rdbes)
 
 
 for (i in rdbes_areas) {
-
-
   j <- paste0("q", toupper(gsub("\\.", "\\_", i)), "q")
 
   k <- paste0("q", i, "q")
@@ -390,7 +380,6 @@ area_rdb_not_equal_area_rdbes <- distinct(subset(linkage, area_rdb != area_rdbes
 
 rdbes_areas <- icesVocab::getCodeList("ICES_Area")
 area_rdbes_not_in_linkage <- distinct(subset(rdbes_areas, !(Key %in% test_3$area_rdbes)))
-
 ```
 
 ```{r}
@@ -410,65 +399,69 @@ Highlights known issues with input data. These should only be included in the co
 I can't figure out how this will work with EUROSTAT data, so will start with creating a new check file for RDBES data
 
 ```{r, eval = T}
+her_28 <- data.frame(
+  region = "Baltic Sea",
+  spp_name = "Herring",
+  latin_name = "Clupea harengus",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "HER",
+  worms_aphia_id = 126417,
+  fides_area = NA,
+  area = NA,
+  area_bis = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong area level",
+  latin_name_join = "Clupea harengus",
+  area_rdb = "27.3.d.28",
+  area_rdbes = "27.3.d.28",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
 
-her_28 <- data.frame(region = "Baltic Sea",
-                        spp_name = "Herring",
-                        latin_name = "Clupea harengus",
-                        rfmo = "ICES",
-                        rfmo_stock_id = NA,
-                        x3a_code = "HER",
-                        worms_aphia_id = 126417,
-                        fides_area = NA,
-                        area = NA,
-                        area_bis = NA,
-                        tac_area_description = NA,
-                        comments = "Known issue: wrong area level",
-                        latin_name_join =  "Clupea harengus",
-                        area_rdb = "27.3.d.28",
-                        area_rdbes = "27.3.d.28",
-                        include_in_table_2.1 = "no",
-                        comments_dev = NA)
-
-ple_3a <- data.frame(region = "North Sea and Eastern Arctic",
-                        spp_name = "Plaice",
-                        latin_name = "Pleuronectes platessa",
-                        rfmo = "ICES",
-                        rfmo_stock_id = NA,
-                        x3a_code = "PLE",
-                        worms_aphia_id = 127143,
-                        fides_area = NA,
-                        area = NA,
-                        area_bis = NA,
-                        tac_area_description = NA,
-                        comments = "Known issue: wrong area level",
-                        latin_name_join =  "Pleuronectes platessa",
-                        area_rdb = "27.3.a",
-                        area_rdbes = "27.3.a",
-                        include_in_table_2.1 = "no",
-                        comments_dev = NA)
+ple_3a <- data.frame(
+  region = "North Sea and Eastern Arctic",
+  spp_name = "Plaice",
+  latin_name = "Pleuronectes platessa",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "PLE",
+  worms_aphia_id = 127143,
+  fides_area = NA,
+  area = NA,
+  area_bis = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong area level",
+  latin_name_join = "Pleuronectes platessa",
+  area_rdb = "27.3.a",
+  area_rdbes = "27.3.a",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
 
 
-cod_3a <- data.frame(region = "North Sea and Eastern Arctic",
-                        spp_name = "Cod",
-                        latin_name = "Gadus morhua",
-                        rfmo = "ICES",
-                        rfmo_stock_id = NA,
-                        x3a_code = "COD",
-                        worms_aphia_id = 126436,
-                        fides_area = NA,
-                        area = NA,
-                        area_bis = NA,
-                        tac_area_description = NA,
-                        comments = "Known issue: wrong area level",
-                        latin_name_join =  "Gadus morhua",
-                        area_rdb = "27.3.a",
-                        area_rdbes = "27.3.a",
-                        include_in_table_2.1 = "no",
-                        comments_dev = NA)
+cod_3a <- data.frame(
+  region = "North Sea and Eastern Arctic",
+  spp_name = "Cod",
+  latin_name = "Gadus morhua",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "COD",
+  worms_aphia_id = 126436,
+  fides_area = NA,
+  area = NA,
+  area_bis = NA,
+  tac_area_description = NA,
+  comments = "Known issue: wrong area level",
+  latin_name_join = "Gadus morhua",
+  area_rdb = "27.3.a",
+  area_rdbes = "27.3.a",
+  include_in_table_2.1 = "no",
+  comments_dev = NA
+)
 
 
 linkage <- rbind(linkage, her_28, ple_3a, cod_3a)
-
 ```
 
 # Species
@@ -478,9 +471,7 @@ linkage <- rbind(linkage, her_28, ple_3a, cod_3a)
 ### Remove blanks
 
 ```{r, include = F}
-
 linkage$latin_name_join <- gsub(", ", ",", linkage$latin_name_join)
-
 ```
 
 ### Fixed outdated scientific names and aphiaid's
@@ -488,7 +479,6 @@ linkage$latin_name_join <- gsub(", ", ",", linkage$latin_name_join)
 **TODO** - find a clever way to do this
 
 ```{r, include = F}
-
 linkage$latin_name_join[linkage$latin_name == "Trisopterus esmarki"] <- "Trisopterus esmarki,Trisopterus esmarkii"
 linkage$worms_aphia_id[linkage$latin_name == "Trisopterus esmarki"] <- "400596,126444"
 
@@ -500,34 +490,32 @@ linkage$worms_aphia_id[linkage$latin_name == "Trigla lucerna"] <- "154453,127262
 
 linkage$latin_name_join[linkage$latin_name == "Aspitrigla cuculus"] <- "Aspitrigla cuculus,Chelidonichthys cuculus"
 linkage$worms_aphia_id[linkage$latin_name == "Aspitrigla cuculus"] <- "150662,127259"
-
 ```
 
 ### Group of species
 
 ```{r, include = F}
-
 # Ammodytidae
 
 san_worms <- subset(SpecWoRMS_with_classi, family == "Ammodytidae")[, "AphiaID"]
 san_latin <-
-    subset(SpecWoRMS_with_classi, family == "Ammodytidae")[, "scientificname"]
+  subset(SpecWoRMS_with_classi, family == "Ammodytidae")[, "scientificname"]
 
 linkage$worms_aphia_id[linkage$latin_name == "Ammodytidae"] <-
-    paste(san_worms, collapse = ",")
+  paste(san_worms, collapse = ",")
 linkage$latin_name_join[linkage$latin_name == "Ammodytidae"] <-
-    paste(san_latin, collapse = ",")
+  paste(san_latin, collapse = ",")
 
 # Chromista
 
 algea_worms <- subset(SpecWoRMS_with_classi, kingdom == "Chromista")[, "AphiaID"]
 algea_latin <-
-    subset(SpecWoRMS_with_classi, kingdom == "Chromista")[, "scientificname"]
+  subset(SpecWoRMS_with_classi, kingdom == "Chromista")[, "scientificname"]
 
 linkage$worms_aphia_id[linkage$latin_name == "Chromista"] <-
-    paste(algea_worms, collapse = ",")
+  paste(algea_worms, collapse = ",")
 linkage$latin_name_join[linkage$latin_name == "Chromista"] <-
-    paste(algea_latin, collapse = ",")
+  paste(algea_latin, collapse = ",")
 
 # Rajidae - populate latin_name_join with rajidaes not mentioned elsewhere
 
@@ -538,26 +526,26 @@ raj_latin <-
   data.frame(id = subset(SpecWoRMS_with_classi, family == "Rajidae")[, "scientificname"])
 
 linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
-                         linkage$area == "3a"] <-
+  linkage$area == "3a"] <-
   paste(subset(raj_worms, !(id %in% c(
     "105876", "105883", "105887"
   )))[, "id"], collapse = ",")
 
 linkage$latin_name_join[linkage$latin_name == "Rajidae" &
-                          linkage$area == "3a"] <-
+  linkage$area == "3a"] <-
   paste(subset(raj_latin, !(
     id %in% c("Leucoraja naevus", "Raja clavata", "Raja montagui")
   ))[, "id"], collapse = ",")
 
 
 linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
-                         linkage$area == "2a, 4"] <-
+  linkage$area == "2a, 4"] <-
   paste(subset(raj_worms, !(
     id %in% c("105876", "105882", "105883", "105887")
   ))[, "id"], collapse = ",")
 
 linkage$latin_name_join[linkage$latin_name == "Rajidae" &
-                          linkage$area == "2a, 4"] <-
+  linkage$area == "2a, 4"] <-
   paste(subset(raj_latin, !(
     id %in% c(
       "Leucoraja naevus",
@@ -569,7 +557,7 @@ linkage$latin_name_join[linkage$latin_name == "Rajidae" &
 
 
 linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
-                         linkage$area == "7d"] <-
+  linkage$area == "7d"] <-
   paste(
     subset(
       raj_worms,
@@ -580,12 +568,15 @@ linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
           "105885",
           "105887",
           "105891"
-          )
-  ))[, "id"], collapse = ",
-  ")
+        )
+      )
+    )[, "id"],
+    collapse = ",
+  "
+  )
 
 linkage$latin_name_join[linkage$latin_name == "Rajidae" &
-                          linkage$area == "7d"] <-
+  linkage$area == "7d"] <-
   paste(
     subset(
       raj_latin,
@@ -596,15 +587,17 @@ linkage$latin_name_join[linkage$latin_name == "Rajidae" &
           "Raja microocellata",
           "Raja montagui",
           "Raja undulata"
-          
         )
-  ))[, "id"], collapse = ",")
-  
+      )
+    )[, "id"],
+    collapse = ","
+  )
+
 
 
 linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
-                         linkage$area == "8, 9"] <-
-  paste(subset(raj_worms,!(
+  linkage$area == "8, 9"] <-
+  paste(subset(raj_worms, !(
     id %in% c(
       "105869",
       "711846",
@@ -618,8 +611,8 @@ linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
   ")
 
 linkage$latin_name_join[linkage$latin_name == "Rajidae" &
-                          linkage$area == "8, 9"] <-
-  paste(subset(raj_latin,!(
+  linkage$area == "8, 9"] <-
+  paste(subset(raj_latin, !(
     id %in% c(
       "Dipturus batis",
       "Dipturus intermedius",
@@ -628,7 +621,6 @@ linkage$latin_name_join[linkage$latin_name == "Rajidae" &
       "Raja clavata",
       "Raja montagui",
       "Raja undulata"
-      
     )
   ))[, "id"], collapse = ",")
 
@@ -637,63 +629,57 @@ linkage$latin_name_join[linkage$latin_name == "Rajidae" &
 
 
 linkage$worms_aphia_id[linkage$latin_name == "Rajidae" &
-                         linkage$area == "6a, 6b, 7a-c, 7e-k"] <-
-  paste(subset(raj_worms,!(
+  linkage$area == "6a, 6b, 7a-c, 7e-k"] <-
+  paste(subset(raj_worms, !(
     id %in% c(
       "105869",
       "711846",
       "105873",
-"105874",
-"105876",
-"105882",
-"105883",
-
-"105885",
-"105887",
-"105891"
-
+      "105874",
+      "105876",
+      "105882",
+      "105883",
+      "105885",
+      "105887",
+      "105891"
     )
   ))[, "id"], collapse = ",
   ")
 
 linkage$latin_name_join[linkage$latin_name == "Rajidae" &
-                          linkage$area == "6a, 6b, 7a-c, 7e-k"] <-
-  paste(subset(raj_latin,!(
+  linkage$area == "6a, 6b, 7a-c, 7e-k"] <-
+  paste(subset(raj_latin, !(
     id %in% c(
       "Dipturus batis",
       "Dipturus intermedius",
-"Leucoraja circularis",
-"Leucoraja fullonica",
-"Leucoraja naevus",
-"Raja brachyura",
-"Raja clavata",
-"Raja microocellata",
-"Raja montagui",
-"Raja undulata"
-
-      
+      "Leucoraja circularis",
+      "Leucoraja fullonica",
+      "Leucoraja naevus",
+      "Raja brachyura",
+      "Raja clavata",
+      "Raja microocellata",
+      "Raja montagui",
+      "Raja undulata"
     )
   ))[, "id"], collapse = ",")
 
 
 
-  # linkage_2 <- rbind(linkage_2, linkage_sub)
-  # 
-  # raj_worms_2 <- 
-  #   subset(raj_worms,
-  #          !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
-  #            !(id %in% c("105869", "711846")))
-  # 
-  # raj_latin_2 <-
-  #   subset(
-  #     raj_latin,
-  #     !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
-  #       !(raj_latin %in% c(
-  #         "Dipturus batis", "Dipturus intermedius"
-  #       ))
-  #   )
-
-
+# linkage_2 <- rbind(linkage_2, linkage_sub)
+#
+# raj_worms_2 <-
+#   subset(raj_worms,
+#          !(id %in% worms_aphia_id_raj_there$worms_aphia_id) &
+#            !(id %in% c("105869", "711846")))
+#
+# raj_latin_2 <-
+#   subset(
+#     raj_latin,
+#     !(raj_latin %in% latin_name_join_raj_there$latin_name_join) &
+#       !(raj_latin %in% c(
+#         "Dipturus batis", "Dipturus intermedius"
+#       ))
+#   )
 ```
 
 # Quotas
@@ -715,9 +701,7 @@ fides <- fides[!grepl("\\*", fides$area_code), ]
 ### Remove blanks
 
 ```{r, include = F}
-
 linkage$x3a_code <- gsub(", ", ",", linkage$x3a_code)
-
 ```
 
 ## Quotas area in linkage not in fides
@@ -725,9 +709,7 @@ linkage$x3a_code <- gsub(", ", ",", linkage$x3a_code)
 ### Remove blanks
 
 ```{r, include = F}
-
 linkage$area_bis <- gsub(", ", ",", linkage$area_bis)
-
 ```
 
 ### Correct misspellings
@@ -735,7 +717,6 @@ linkage$area_bis <- gsub(", ", ",", linkage$area_bis)
 Don't know how to solve this one Greater Forkbeard Phycis blennoides ICES NA GFB 126501 567-,89-,1012-
 
 ```{r}
-
 linkage$fides_area <- gsub("noTAC", "NoTAC", linkage$fides_area)
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "03A-C(?!.)", "03A-C.")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "07DE.", "7DE.")
@@ -745,20 +726,18 @@ linkage$fides_area <- stringr::str_replace(linkage$fides_area, "8ABDE(?!.)", "8A
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "juil-11", "7/3411")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "7E.(?!.)", "07E.")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "N1GRM.", "N1GRN.")
-
-
 ```
 
 ### Checking for misspellings
 
 ```{r}
-
 fides_areas <- fides$area_code
-linkage_fides_areas <- unlist(x = strsplit(x = as.character(x = linkage$fides_area),
-                                        split = ","))
+linkage_fides_areas <- unlist(x = strsplit(
+  x = as.character(x = linkage$fides_area),
+  split = ","
+))
 
 fides_area_wrong <- unique(linkage_fides_areas[!(linkage_fides_areas %in% fides_areas)])
-
 ```
 
 ```{r}
@@ -768,20 +747,22 @@ knitr::kable(fides_area_wrong)
 ## Quotas in fides not linkage and the other way around
 
 ```{r}
-
 linkage_quotas <- c()
 
 for (i in 1:nrow(linkage)) {
-  
-  areas <- data.frame(area = unlist(x = strsplit(x = as.character(x = linkage$fides_area[i]),
-                                        split = ",")))
-  
-  species <- data.frame(species = unlist(x = strsplit(x = as.character(x = linkage$x3a_code[i]),
-                                        split = ",")))
-  
-  
+  areas <- data.frame(area = unlist(x = strsplit(
+    x = as.character(x = linkage$fides_area[i]),
+    split = ","
+  )))
+
+  species <- data.frame(species = unlist(x = strsplit(
+    x = as.character(x = linkage$x3a_code[i]),
+    split = ","
+  )))
+
+
   linkage_quotas_0 <- dplyr::cross_join(species, areas)
-  
+
   linkage_quotas <- rbind(linkage_quotas, linkage_quotas_0)
 }
 
@@ -800,7 +781,5 @@ write.table(linkage_quotas_not_in_fides, paste0(path_fides, "linkage_quotas_not_
 # Output
 
 ```{r export}
-
 write.table(linkage, paste0(path, linkage_file_name_out, ".csv"), sep = ";")
-
 ```
