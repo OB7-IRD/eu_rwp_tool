@@ -1,15 +1,16 @@
 ---
 title: "update_fides_qouta_table"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
-** NOTE **
+**NOTE:**
 The fides qouta file is considered confidential, so the detailed files should never be pushed to GitHub
 
 It is ok to push this overview to GitHub
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=T, message = F, warning = F}
+knitr::opts_chunk$set(echo = T)
 
 library(readxl)
 library(dplyr)
