@@ -5,6 +5,38 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+# Versions
+
+## 2022_v2.4
+
+Linkage file from 2023. This file is use as inputs to all the ammendments made in 2024
+
+## 2024_v1.3
+
+Linkage file from 2024. This version was used to create the table 2.1 sent to NC's for review the 20th of May 2024.
+
+Main improvements:
+
+1.  Checking and correcting areas
+
+2.  Fixed outdated scientific names and aphiaid's
+
+3.  Fixed groups of species
+
+## 2024_v1.4
+
+Linkage file use to create table 2.1 the 30th of May.
+
+Main improvements:
+
+1.  Checking and correcting quotas
+
+2.  Fixing overlapping stocks
+
+3.  Adding extra lines for Caproidae, Sebastes and Trachurus, so there is a line on a higher taxonomical level. Argument for this is that the quotas are on higher levels than in EUMAP tabel 1
+
+4.  Recode 'All areas' to proper areas
+
 ```{r setup, include=FALSE}
 
 library(stringr)
@@ -14,10 +46,15 @@ library(worrms)
 
 knitr::opts_chunk$set(echo = T)
 
+years_of_interest <- c(2021:2023)
+
 path <- "../inst/"
 
 linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
-linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.3"
+linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.4"
+
+path_fides <- "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/2024/table_2_1_development/personal/input/fides/"
+filename_fides <- "fides_quota_2018_2023.rds"
 
 ```
 
@@ -36,7 +73,7 @@ linkage$comments_dev <- ""
 SpecWoRMS_with_classi <- readRDS(paste0(path, "SpecWoRMS_with_classifcation.rds"))
 ```
 
-# Linkage
+# Linkage manipulations that requires the assingmen to RDB / RDBES areas
 
 ## Corrections
 
@@ -70,6 +107,24 @@ linkage$comments_dev[linkage$region == "North-East Atlantic" &
 linkage <- subset(linkage, !(x3a_code == "LEZ" & region == "North-East Atlantic" & area == "8c, 9a"))
 ```
 
+# Additions
+
+## Extra lines for 'stocks' where the qouta is on higher taxonomical level
+
+Relevant for Sebastes, Caproidae, Trachurus
+
+```{r}
+
+```
+
+## Fixing overlapping stocks
+
+## Recode 'All areas' to proper areas
+
+## Known issues - not to be displayed in table 2.1 \| control file
+
+Highlights known issues with input data. These should only be included in the control / check file, not table 2.1
+
 ```{r}
 algae <- data.frame(
   region = NA,
@@ -90,43 +145,43 @@ algae <- data.frame(
   comments_dev = NA
 )
 
-capros <- data.frame(
-  region = NA,
-  spp_name = "Caproidae",
-  latin_name = "Caproidae",
-  rfmo = NA,
-  rfmo_stock_id = NA,
-  x3a_code = NA,
-  worms_aphia_id = 125613,
-  fides_area = NA,
-  area = NA,
-  area_bis = "27_6,27_7,27_8",
-  area_rdb = NA,
-  tac_area_description = NA,
-  comments = "Known issue: wrong species level",
-  latin_name_join =  "Caproidae",
-  include_in_table_2.1 = "no",
-  comments_dev = NA
-)
+# capros <- data.frame(
+#   region = NA,
+#   spp_name = "Caproidae",
+#   latin_name = "Caproidae",
+#   rfmo = NA,
+#   rfmo_stock_id = NA,
+#   x3a_code = NA,
+#   worms_aphia_id = 125613,
+#   fides_area = NA,
+#   area = NA,
+#   area_bis = "27_6,27_7,27_8",
+#   area_rdb = NA,
+#   tac_area_description = NA,
+#   comments = "Known issue: wrong species level",
+#   latin_name_join =  "Caproidae",
+#   include_in_table_2.1 = "no",
+#   comments_dev = NA
+# ) # 20240529 - Since the quota in general is for caproidae, then a line with caproidae will be added appropriated places
 
-trachurus <- data.frame(
-  region = NA,
-  spp_name = "Trachurus",
-  latin_name = "Trachurus",
-  rfmo = NA,
-  rfmo_stock_id = NA,
-  x3a_code = NA,
-  worms_aphia_id = NA,
-  fides_area = NA,
-  area = NA,
-  area_bis = "27_2_A,27_4_B,27_4_C,27_7_D,27_8,27_9,27_10,27_4_A,27_5_B,27_6_A,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8",
-  area_rdb = NA,
-  tac_area_description = NA,
-  comments = "Known issue: wrong species level",
-  latin_name_join =  "Trachurus",
-  include_in_table_2.1 = "no",
-  comments_dev = NA
-)
+# trachurus <- data.frame(
+#   region = NA,
+#   spp_name = "Trachurus",
+#   latin_name = "Trachurus",
+#   rfmo = NA,
+#   rfmo_stock_id = NA,
+#   x3a_code = NA,
+#   worms_aphia_id = NA,
+#   fides_area = NA,
+#   area = NA,
+#   area_bis = "27_2_A,27_4_B,27_4_C,27_7_D,27_8,27_9,27_10,27_4_A,27_5_B,27_6_A,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8",
+#   area_rdb = NA,
+#   tac_area_description = NA,
+#   comments = "Known issue: wrong species level",
+#   latin_name_join =  "Trachurus",
+#   include_in_table_2.1 = "no",
+#   comments_dev = NA
+# ) # 20240529 - Since the quota in general is for JAX, then a line with Trachurus will be added appropriated places
 
 coregonus <- data.frame(
   region = NA,
@@ -147,34 +202,34 @@ coregonus <- data.frame(
   comments_dev = NA
 )
 
-red_27 <- data.frame(
-  region = NA,
-  spp_name = "Sebastes",
-  latin_name = "Sebastes",
-  rfmo = NA,
-  rfmo_stock_id = NA,
-  x3a_code = NA,
-  worms_aphia_id = NA,
-  fides_area = NA,
-  area = NA,
-  area_bis = "27_1,27_2,27_5,27_12,27_14",
-  area_rdb = NA,
-  tac_area_description = NA,
-  comments = "Known issue: wrong species level",
-  latin_name_join =  "Sebastes",
-  include_in_table_2.1 = "no",
-  comments_dev = NA
-)
+# red_27 <- data.frame(
+#   region = NA,
+#   spp_name = "Sebastes",
+#   latin_name = "Sebastes",
+#   rfmo = NA,
+#   rfmo_stock_id = NA,
+#   x3a_code = NA,
+#   worms_aphia_id = NA,
+#   fides_area = NA,
+#   area = NA,
+#   area_bis = "27_1,27_2,27_5,27_12,27_14",
+#   area_rdb = NA,
+#   tac_area_description = NA,
+#   comments = "Known issue: wrong species level",
+#   latin_name_join =  "Sebastes",
+#   include_in_table_2.1 = "no",
+#   comments_dev = NA
+# ) # 20240529 - Since the quota in general is for RED, then a line with Sebastes will be added appropriated places
 
 
 
-linkage <- rbind(linkage, algae, capros, trachurus, coregonus, red_27)
+linkage <- rbind(linkage, algae, coregonus)
 ```
-
 
 # Areas
 
 ## Correct fides_area
+
 ```{r}
 
 linkage$fides_area[linkage$latin_name == "Pleuronectes platessa" &
@@ -185,9 +240,7 @@ linkage$fides_area[linkage$latin_name == "Pleuronectes platessa" &
 linkage$fides_area <- gsub(" ", "", linkage$fides_area)
 ```
 
-
 ## Check and correct area_bis
-
 
 ```{r}
 # Removing blanks from area_bis
@@ -350,11 +403,11 @@ knitr::kable(area_rdbes_not_in_linkage, caption = "area_rdbes not in linkage fil
 
 ## Additions
 
+(This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
+
 Highlights known issues with input data. These should only be included in the control / check file, not table 2.1
 
 I can't figure out how this will work with EUROSTAT data, so will start with creating a new check file for RDBES data
-
-(This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
 
 ```{r, eval = T}
 
@@ -641,6 +694,107 @@ linkage$latin_name_join[linkage$latin_name == "Rajidae" &
   #   )
 
 
+```
+
+# Quotas
+
+```{r, include = F}
+# Load fides file and subset
+
+fides <- readRDS(paste0(path_fides, filename_fides))
+
+fides <- subset(fides, definition_year %in% years_of_interest)
+
+## Exclude quotas with *
+
+fides <- fides[!grepl("\\*", fides$area_code), ]
+```
+
+## x3a_code
+
+### Remove blanks
+
+```{r, include = F}
+
+linkage$x3a_code <- gsub(", ", ",", linkage$x3a_code)
+
+```
+
+## Quotas area in linkage not in fides
+
+### Remove blanks
+
+```{r, include = F}
+
+linkage$area_bis <- gsub(", ", ",", linkage$area_bis)
+
+```
+
+### Correct misspellings
+
+Don't know how to solve this one Greater Forkbeard Phycis blennoides ICES NA GFB 126501 567-,89-,1012-
+
+```{r}
+
+linkage$fides_area <- gsub("noTAC", "NoTAC", linkage$fides_area)
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "03A-C(?!.)", "03A-C.")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "07DE.", "7DE.")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "7G-K(?!.)", "7G-K.")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "sept-11", "9/3411")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "8ABDE(?!.)", "8ABDE.")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "juil-11", "7/3411")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "7E.(?!.)", "07E.")
+linkage$fides_area <- stringr::str_replace(linkage$fides_area, "N1GRM.", "N1GRN.")
+
+
+```
+
+### Checking for misspellings
+
+```{r}
+
+fides_areas <- fides$area_code
+linkage_fides_areas <- unlist(x = strsplit(x = as.character(x = linkage$fides_area),
+                                        split = ","))
+
+fides_area_wrong <- unique(linkage_fides_areas[!(linkage_fides_areas %in% fides_areas)])
+
+```
+
+```{r}
+knitr::kable(fides_area_wrong)
+```
+
+## Quotas in fides not linkage and the other way around
+
+```{r}
+
+linkage_quotas <- c()
+
+for (i in 1:nrow(linkage)) {
+  
+  areas <- data.frame(area = unlist(x = strsplit(x = as.character(x = linkage$fides_area[i]),
+                                        split = ",")))
+  
+  species <- data.frame(species = unlist(x = strsplit(x = as.character(x = linkage$x3a_code[i]),
+                                        split = ",")))
+  
+  
+  linkage_quotas_0 <- dplyr::cross_join(species, areas)
+  
+  linkage_quotas <- rbind(linkage_quotas, linkage_quotas_0)
+}
+
+fides$quota <- paste(fides$species_code, fides$area_code, sep = "/")
+linkage_quotas$quota <- paste(linkage_quotas$species, linkage_quotas$area, sep = "/")
+
+fides_quotas_not_in_linkage <- subset(fides, !(quota %in% linkage_quotas$quota) & level_code == "TAC")
+
+write.table(fides_quotas_not_in_linkage, paste0(path_fides, "fides_quotas_not_in_linkage.csv"), sep = ";", row.names = F)
+
+linkage_quotas_not_in_fides <- subset(linkage_quotas, !(quota %in% fides$quota) & area != "NoTAC")
+
+write.table(linkage_quotas_not_in_fides, paste0(path_fides, "linkage_quotas_not_in_fides.csv"), sep = ";", row.names = F)
 ```
 
 # Output
