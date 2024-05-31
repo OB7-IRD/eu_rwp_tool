@@ -2,10 +2,16 @@
 title: "maintain_eumap_table_2_1_linkage_2024"
 author: "Kirsten Birch Håkansson, DTU Aqua"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 3
 ---
 
 # Versions
+
+In 2024 the focus has been on data from area 27
 
 ## 2022_v2.4
 
@@ -71,7 +77,9 @@ linkage$comments_dev <- ""
 SpecWoRMS_with_classi <- readRDS(paste0(path, "SpecWoRMS_with_classifcation.rds"))
 ```
 
-# Linkage manipulations that requires the assingmen to RDB / RDBES areas
+# Linkage additions / corrections part 1
+
+(This needs to come before the work with area, so isn't needed to add all the RDB / RDBES areas)
 
 ## Corrections
 
@@ -770,11 +778,9 @@ knitr::kable(test_3, caption = "Visual inspecion of area_rdbes")
 knitr::kable(area_rdbes_not_in_linkage, caption = "area_rdbes not in linkage file")
 ```
 
-# Linkage manipulations
+# Linkage additions part 2
 
 (This needs to come after the work with area, so e.g. too high area levels are not corrected by the area loops above)
-
-## Additions
 
 Highlights known issues with input data. These should only be included in the control / check file, not table 2.1
 
