@@ -31,7 +31,7 @@ Main improvements:
 
 1.  Checking and correcting quotas
 
-2.  Fixing overlapping stocks
+2.  Started to Fix overlapping stocks, but I'm unsure about a lot of them, so not done.
 
 3.  Adding extra lines for Caproidae, Sebastes and Trachurus, so there is a line on a higher taxonomical level. Argument for this is that the quotas are on higher levels than in EUMAP tabel 1
 
@@ -47,7 +47,7 @@ knitr::opts_chunk$set(echo = T)
 
 years_of_interest <- c(2021:2023)
 
-path <- "../inst/"
+path <- "Q:/mynd/kibi/projects_wks_wgs_rcgs/ISSG_RWP/2024/table_2_1_development/rwptool_old/inst/"
 
 linkage_file_name_in <- "eumap_table_2_1_linkage_version_2022_v2.4"
 linkage_file_name_out <- "eumap_table_2_1_linkage_version_2024_v1.4"
@@ -111,9 +111,354 @@ linkage <- subset(linkage, !(x3a_code == "LEZ" & region == "North-East Atlantic"
 Relevant for Sebastes, Caproidae, Trachurus
 
 ```{r}
+# Caproidae ----
+cap <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Boarfishes",
+  latin_name = "Caproidae spp.",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "BOR,BOC",
+  worms_aphia_id = "125613,127419",
+  fides_area = "678-",
+  area = "6, 7, 8",
+  area_bis = "27_6,27_7,27_8",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Caproidae spp., FIDES match",
+  latin_name_join = "Capros aper,Caproidae",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, cap)
+
+# Wrong x3a_code, fides_area and comment for capros aper - the TAC is on BOR
+linkage$x3a_code[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Capros aper" &
+  linkage$area == "6, 7, 8"] <- "BOC"
+linkage$fides_area[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Capros aper" &
+  linkage$area == "6, 7, 8"] <- "No TAC"
+linkage$comments[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Capros aper" &
+  linkage$area == "6, 7, 8"] <- "No FIDES match on species. The TAC is on BOR"
+
+# Trachurus 2a ----
+
+tra_2a <- data.frame(
+  region = "North Sea and Eastern Arctic",
+  spp_name = "Jack and horse mackerels",
+  latin_name = "Trachurus spp.",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "HOM,JAA,JJM,CJM,PJM,HMM,RSC,HMC,HMZ,HMG,TUD,TUJ,TUZ,JAX",
+  worms_aphia_id = "170023000401,170023000402,170023000403,170023000405,170023000406,170023000408,170023000411,170023000413,170023000414,170023000415,170023000416,170023000417,170023000418",
+  fides_area = "2A-14",
+  area = "2a",
+  area_bis = "27_2_A",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Trachurus spp. FIDES match but difference with area (area < TAC)",
+  latin_name_join = "Trachurus trachurus,Trachurus picturatus,Trachurus japonicus,Trachurus murphyi,Trachurus symmetricus,Trachurus mediterraneus,Trachurus lathami,Trachurus capensis,Trachurus trecae,Trachurus declivis,Trachurus delagoa,Trachurus indicus,Trachurus novaezelandiae,Trachurus,Trachurus spp",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, tra_2a)
+
+# Wrong x3a_code, fides_area and comment
+linkage$x3a_code[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "2a"] <- "HOM"
+linkage$fides_area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "2a"] <- "No TAC"
+linkage$comments[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "2a"] <- "No FIDES match on species. The TAC is on JAX"
+
+# Trachurus 47 ----
+
+tra_47 <- data.frame(
+  region = "North Sea and Eastern Arctic",
+  spp_name = "Jack and horse mackerels",
+  latin_name = "Trachurus spp.",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "HOM,JAA,JJM,CJM,PJM,HMM,RSC,HMC,HMZ,HMG,TUD,TUJ,TUZ,JAX",
+  worms_aphia_id = "170023000401,170023000402,170023000403,170023000405,170023000406,170023000408,170023000411,170023000413,170023000414,170023000415,170023000416,170023000417,170023000418",
+  fides_area = "4BC7D",
+  area = "Union waters of 4b, 4c and 7d",
+  area_bis = "27_4_B,27_4_C,27_7_D",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Trachurus spp., FIDES match",
+  latin_name_join = "Trachurus trachurus,Trachurus picturatus,Trachurus japonicus,Trachurus murphyi,Trachurus symmetricus,Trachurus mediterraneus,Trachurus lathami,Trachurus capensis,Trachurus trecae,Trachurus declivis,Trachurus delagoa,Trachurus indicus,Trachurus novaezelandiae,Trachurus,Trachurus spp",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, tra_47)
+
+# Wrong x3a_code, fides_area and comment
+linkage$x3a_code[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "Union waters of 4b, 4c and 7d"] <- "HOM"
+linkage$fides_area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "Union waters of 4b, 4c and 7d"] <- "No TAC"
+linkage$comments[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "Union waters of 4b, 4c and 7d"] <- "No FIDES match on species. The TAC is on JAX"
+
+
+# Trachurus 4a, 5b, 6a, 7a-c, 7e-k, 8 ----
+
+tra_48 <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Jack and horse mackerels",
+  latin_name = "Trachurus spp.",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "HOM,JAA,JJM,CJM,PJM,HMM,RSC,HMC,HMZ,HMG,TUD,TUJ,TUZ,JAX",
+  worms_aphia_id = "170023000401,170023000402,170023000403,170023000405,170023000406,170023000408,170023000411,170023000413,170023000414,170023000415,170023000416,170023000417,170023000418",
+  fides_area = "2A-14,08C.",
+  area = "4a, 5b, 6a, 7a-c, 7e-k, 8",
+  area_bis = "27_4_A,27_5_B,27_6_A,27_7_A,27_7_B,27_7_C,27_7_E,27_7_F,27_7_G,27_7_H,27_7_J,27_7_K,27_8",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Trachurus spp., FIDES match but difference with area (area < TAC)",
+  latin_name_join = "Trachurus trachurus,Trachurus picturatus,Trachurus japonicus,Trachurus murphyi,Trachurus symmetricus,Trachurus mediterraneus,Trachurus lathami,Trachurus capensis,Trachurus trecae,Trachurus declivis,Trachurus delagoa,Trachurus indicus,Trachurus novaezelandiae,Trachurus,Trachurus spp",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, tra_48)
+
+# Wrong x3a_code, fides_area and comment
+linkage$x3a_code[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "4a, 5b, 6a, 7a-c, 7e-k, 8"] <- "HOM"
+linkage$fides_area[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "4a, 5b, 6a, 7a-c, 7e-k, 8"] <- "No TAC"
+linkage$comments[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "4a, 5b, 6a, 7a-c, 7e-k, 8"] <- "No FIDES match on species. The TAC is on JAX"
+
+
+# Trachurus 9 - new line ----
+
+tra_9 <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Jack and horse mackerels",
+  latin_name = "Trachurus spp.",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "HOM,JAA,JJM,CJM,PJM,HMM,RSC,HMC,HMZ,HMG,TUD,TUJ,TUZ,JAX",
+  worms_aphia_id = "170023000401,170023000402,170023000403,170023000405,170023000406,170023000408,170023000411,170023000413,170023000414,170023000415,170023000416,170023000417,170023000418",
+  fides_area = "09.",
+  area = "9",
+  area_bis = "27_9",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Trachurus spp. in area 27.9, since TAC",
+  latin_name_join = "Trachurus trachurus,Trachurus picturatus,Trachurus japonicus,Trachurus murphyi,Trachurus symmetricus,Trachurus mediterraneus,Trachurus lathami,Trachurus capensis,Trachurus trecae,Trachurus declivis,Trachurus delagoa,Trachurus indicus,Trachurus novaezelandiae,Trachurus,Trachurus spp",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, tra_9)
+
+# Wrong x3a_code, fides_area and comment
+linkage$x3a_code[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "9a"] <- "HOM"
+linkage$fides_area[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "9a"] <- "No TAC"
+linkage$comments[linkage$region == "North-East Atlantic" &
+  linkage$latin_name == "Trachurus trachurus" &
+  linkage$area == "9a"] <- "No FIDES match on species. The TAC is on JAX"
+
+# Sebastes 12 ----
+red_12 <- data.frame(
+  region = "North Sea and Eastern Arctic",
+  spp_name = "Redfish",
+  latin_name = "Sebastes spp.",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "REG,SFV,WRO,YRO,SFP,SEQ,SED,SFY,OPP,SBC,SFW,REB,REC,REN,SPG,SGO,SFO,SFT,SFB,SFJ,SFD,SFE,SFQ,SFK,SFG,SEJ,SFL,SFZ,SWD,SBY,RMG,RNV,RPJ,RRV,RVW,RVC,RVT,RVU,RVP,RVN,RVH,RVB,RVR,RVZ,RVM,RFC,REQ,QYR,QYS,QYT,QYV,RIQ,RED",
+  worms_aphia_id = "178001000101,178001000102,178001000103,178001000104,178001000105,178001000106,178001000107,178001000108,178001000109,178001000110,178001000111,178001000112,178001000113,178001000114,178001000115,178001000116,178001000117,178001000119,178001000120,178001000121,178001000122,178001000123,178001000124,178001000125,178001000126,178001000127,178001000128,178001000129,178001000130,178001000131,178001000132,178001000133,178001000134,178001000135,178001000136,178001000137,178001000138,178001000139,178001000140,178001000141,178001000142,178001000143,178001000144,178001000145,178001000146,178001000147,178001000148,178001000149,178001000150,178001000151,178001000153,178001000154",
+  fides_area = "1/2INT,1N2AB.",
+  area = "1, 2",
+  area_bis = "27_1,27_2",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Sebastes spp. FIDES match",
+  latin_name_join = "Sebastes norvegicus,Sebastes viviparus,Sebastes entomelas,Sebastes flavidus,Sebastes serriceps,Sebastes rosaceus,Sebastes serranoides,Sebastes mystinus,Sebastes alutus,Sebastes paucispinis,Sebastes miniatus,Sebastes mentella,Sebastes capensis,Sebastes fasciatus,Sebastes pinniger,Sebastes goodei,Sebastes constellatus,Sebastes aleutianus,Sebastes borealis,Sebastes caurinus,Sebastes diploproa,Sebastes elongatus,Sebastes inermis,Sebastes jordani,Sebastes maliger,Sebastes minor,Sebastes schlegeli,Sebastes taczanowskii,Sebastes reedi,Sebastes brevispinis,Sebastes melanops,Sebastes nigrocinctus,Sebastes proriger,Sebastes ruberrimus,Sebastes wilsoni,Sebastes ciliatus,Sebastes saxicola,Sebastes variegatus,Sebastes polyspinis,Sebastes nebulosus,Sebastes helvomaculatus,Sebastes babcocki,Sebastes aurora,Sebastes zacentrus,Sebastes melanostomus,Sebastes crameri,Sebastes oculatus,Sebastes chlorostictus,Sebastes carnatus,Sebastes levis,Sebastes rufus,Sebastes auriculatus,Sebastes,Sebastes spp
+",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, red_12)
+
+# Wrong x3a_code, fides_area and comment
+linkage$comments[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Sebastes mentella" &
+  linkage$area == "1, 2"] <- "FIDES match (area > TAC). The TAC on Sebastes mentella is only for Norwegain water"
 ```
 
+## Extra lines for 'stocks' with quota
+```{r}
+
+# Nephrops ----
+
+nep <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Norway lobster",
+  latin_name = "Nephrops norvegicus",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "NEP",
+  worms_aphia_id = "107254",
+  fides_area = "8CU31,8CU25",
+  area = "10",
+  area_bis = "27_10",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Nephrops in FU 25 and 31, FIDES match (area > TAC)",
+  latin_name_join = "Nephrops norvegicus",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, nep)
+
+# Herring 7ef ----
+
+her <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Herring",
+  latin_name = "Clupea harengus",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "HER",
+  worms_aphia_id = "107254",
+  fides_area = "7EF.",
+  area = "7e, f",
+  area_bis = "27_7_E,27_7_F",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for herring in area 27.7.e and 27.7.f, FIDES match",
+  latin_name_join = "Clupea harengus",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, her)
+
+
+# Roughhead grenadier ----
+
+rhg_567 <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Roughhead grenadier",
+  latin_name = "Macrourus berglax",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "RHG",
+  worms_aphia_id = "126472",
+  fides_area = "5B67-",
+  area = "5b, 6, 7",
+  area_bis = "27_5_B,27_6,27_7",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Roughhead grenadier in area 5b, 6, 7, FIDES match",
+  latin_name_join = "Macrourus berglax",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, rhg_567)
+
+rhg_3 <- data.frame(
+  region = "North-East Atlantic",
+  spp_name = "Roughhead grenadier",
+  latin_name = "Macrourus berglax",
+  rfmo = "ICES",
+  rfmo_stock_id = NA,
+  x3a_code = "RHG",
+  worms_aphia_id = "126472",
+  fides_area = "03-",
+  area = "3a",
+  area_bis = "27_3_A",
+  area_rdb = NA,
+  tac_area_description = NA,
+  comments = "Extra row for Roughhead grenadier in area 3a, FIDES match",
+  latin_name_join = "Macrourus berglax",
+  include_in_table_2.1 = "yes",
+  comments_dev = NA
+)
+
+linkage <- rbind(linkage, rhg_3)
+```
+
+
 ## Fixing overlapping stocks
+
+```{r}
+# Argentina silus - not sure about this one
+# linkage$area[linkage$region == "North-East Atlantic" &
+#   linkage$latin_name == "Argentina silus" &
+#   linkage$area == "5, 6, 7"] <- "5b, 6, 7"
+# 
+# linkage$area_bis[linkage$region == "North-East Atlantic" &
+#   linkage$latin_name == "Argentina silus" &
+#   linkage$area == "5b, 6, 7"] <- "27_5_B,27_6,27_7"
+# 
+# linkage$comments_dev[linkage$region == "North-East Atlantic" &
+#   linkage$latin_name == "Argentina silus" &
+#   linkage$area == "5b, 6, 7"] <- "Overlapping with another stock, removed 27.5.a from this stock"
+
+# Mustelus
+linkage$area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Mustelus spp." &
+  linkage$area == "1, 2, 14"] <- "1, 2"
+
+linkage$area_bis[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Mustelus spp." &
+  linkage$area == "1, 2"] <- "27_1,27_2"
+  
+linkage$comments[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Mustelus spp." &
+  linkage$area == "1, 2"] <- "Overlapping with another stock, removed 27.14 from this stock"
+
+
+# Solea solea
+linkage$area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Solea solea" &
+  linkage$area == "Union waters of 2a, 3a and 4"] <- "Union waters of 2a and 4"
+
+linkage$fides_area[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Solea solea" &
+  linkage$area == "Union waters of 2a and 4"] <- "24-C."
+
+linkage$area_bis[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Solea solea" &
+  linkage$area == "Union waters of 2a and 4"] <- "27_2_A,27_4"
+
+linkage$comments_dev[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Solea solea" &
+  linkage$area == "Union waters of 2a and 4"] <- "Overlapping with another stock, removed 27.3.a from this stock"
+
+linkage$area_bis[linkage$region == "Baltic Sea" &
+  linkage$latin_name == "Solea solea" &
+  linkage$area == "20-24"] <- "27_3_A,27_3_C_22,27_3_B_23,27_3_D_24"
+```
+
 
 ## Recode 'All areas' to proper areas
 
@@ -121,13 +466,17 @@ Relevant for Sebastes, Caproidae, Trachurus
 
 **Solution:** From MARE's Q&A - Use the area in the header of table 1 (EU-MAP)
 
-**Future solution:** This could also be implemented in North-East Atlantic
+**Future solution:** This could also be implemented for other areas
 
 ```{r}
-
+# North Sea and Eastern Arctic, Squalus acanthias ----
 linkage$area[linkage$region == "North Sea and Eastern Arctic" &
   linkage$latin_name == "Squalus acanthias" &
   linkage$area_bis == "27_4,27_7_D"] <- "1, 2"
+
+linkage$comments_dev[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Squalus acanthias" &
+  linkage$area_bis == "27_4,27_7_D"] <- "Recoded from 'All areas' to specific areas"
 
 linkage$area_bis[linkage$region == "North Sea and Eastern Arctic" &
   linkage$latin_name == "Squalus acanthias" &
@@ -137,6 +486,16 @@ linkage$area[linkage$region == "North Sea and Eastern Arctic" &
   linkage$latin_name == "Squalus acanthias" &
   linkage$area_bis == "27_3_A,27_4,27_7_D"] <- "3a, 4, 7d"
 
+linkage$comments_dev[linkage$region == "North Sea and Eastern Arctic" &
+  linkage$latin_name == "Squalus acanthias" &
+  linkage$area_bis == "27_3_A,27_4,27_7_D"] <- "Recoded from 'All areas' to specific areas"
+
+# North-East Atlantic ----
+linkage$comments_dev[linkage$region == "North-East Atlantic" &
+  linkage$area == "All areas"] <- "Recoded from 'All areas' to specific areas"
+
+linkage$area[linkage$region == "North-East Atlantic" &
+  linkage$area == "All areas"] <- "5, 6, 7 (excl. 7d), 8, 9, 10, 12, 14"
 ```
 
 ## Known issues - not to be displayed in table 2.1 \| control file
@@ -211,7 +570,7 @@ coregonus <- data.frame(
   worms_aphia_id = NA,
   fides_area = NA,
   area = NA,
-  area_bis = "27_3_B,27_3_C,27_3_D",
+  area_bis = "27_3_C_22,27_3_B_23,27_3_D_24,27_3_D_25,27_3_D_26,27_3_D_27,27_3_D_28,27_3_D_29,27_3_D_30,27_3_D_31,27_3_D_32",
   area_rdb = NA,
   tac_area_description = NA,
   comments = "Known issue: wrong species level",
@@ -255,6 +614,7 @@ linkage$fides_area[linkage$latin_name == "Pleuronectes platessa" &
 
 # Removing blanks from fides_area
 linkage$fides_area <- gsub(" ", "", linkage$fides_area)
+linkage$fides_area[linkage$fides_area == "NoTAC"] <- "No TAC"
 ```
 
 ## Check and correct area_bis
@@ -718,6 +1078,49 @@ fides <- subset(fides, definition_year %in% years_of_interest)
 fides <- fides[!grepl("\\*", fides$area_code), ]
 ```
 
+## Add missing quotas
+
+```{r}
+
+# Add missing ----
+
+linkage$fides_area[linkage$x3a_code == "MAC" & linkage$fides_area == "2A34."] <- "2A34.,2A34-N"
+linkage$fides_area[linkage$x3a_code == "NOP" & linkage$fides_area == "2A3A4_Q1"] <- "2A3A4_Q1,2A3A4."
+linkage$x3a_code[linkage$latin_name == "Lophius spp."] <- "ANF,MON,ANK,ANG,MVA,MVO,MVJ,MVN,MNZ"
+linkage$fides_area[linkage$x3a_code == "PRA" & linkage$fides_area == "2AC4-C"] <- "2AC4-C,03A.2"
+linkage$fides_area[linkage$x3a_code == "HKE" & linkage$fides_area == "03A.,2AC4."] <- "03A.,2AC4.,2AC4-C"
+linkage$fides_area[linkage$x3a_code == "RNG" & linkage$area == "5b, 6, 7"] <- "5B67-"
+linkage$fides_area[linkage$x3a_code == "RNG" & linkage$area == "8, 9, 10, 12, 14"] <- "8X14-"
+linkage$fides_area[linkage$x3a_code == "DGS" & linkage$area == "3a, 4, 7d"] <- "2AC4-C,03A-C."
+linkage$comments[linkage$x3a_code == "DGS" & linkage$area == "1, 2"] <- "FIDES match but difference with area (area < TAC)"
+linkage$comments[linkage$x3a_code == "DGS" & linkage$area == "5, 6, 7 (excl. 7d), 8, 9, 10, 12, 14"] <- "FIDES match but difference with area (area < TAC)"
+linkage$fides_area[linkage$x3a_code == "SOL" & linkage$area == "8cde, 9, 10"] <- "8CDE34"
+linkage$comments[linkage$x3a_code == "SOL" & linkage$area == "8cde, 9, 10"] <- "FIDES match"
+
+linkage$fides_area[linkage$x3a_code == "RHG" & linkage$area == "8, 9, 10, 12, 14"] <- "8X14-,514GRN"
+
+linkage$fides_area[linkage$x3a_code == "SPR" & linkage$area == "7d"] <- "7DE.,7DE.2"
+
+linkage$fides_area[linkage$x3a_code == "SOL" & linkage$area == "20-24"] <- "3ABC24"
+linkage$comments[linkage$x3a_code == "SOL" & linkage$area == "20-24"] <- "FIDES match"
+
+# linkage$fides_area[linkage$x3a_code == "SOL" & linkage$area == "Union waters of 2a, 3a and 4"] <- "3ABC24"  # HUSK
+
+
+
+# Add species where quota on more than one
+linkage$x3a_code[linkage$latin_name == "Scophthalmus maximus" & linkage$area == "3a, 4, 7d"] <- "TUR,T/B"
+linkage$x3a_code[linkage$latin_name == "Scophthalmus rhombus" & linkage$area == "3a, 4, 7d"] <- "BLL,T/B"
+linkage$fides_area[linkage$latin_name == "Scophthalmus maximus" & linkage$area == "3a, 4, 7d"] <- "2AC4-C"
+linkage$comments[linkage$latin_name == "Scophthalmus maximus" & linkage$area == "3a, 4, 7d"] <- "FIDES match but difference with area (area > TAC)"
+linkage$comments[linkage$latin_name == "Scophthalmus rhombus" & linkage$area == "3a, 4, 7d"] <- "FIDES match but difference with area (area > TAC)"
+
+
+
+
+```
+
+
 ## x3a_code
 
 ### Remove blanks
@@ -739,7 +1142,7 @@ linkage$area_bis <- gsub(", ", ",", linkage$area_bis)
 Don't know how to solve this one Greater Forkbeard Phycis blennoides ICES NA GFB 126501 567-,89-,1012-
 
 ```{r}
-linkage$fides_area <- gsub("noTAC", "NoTAC", linkage$fides_area)
+linkage$fides_area <- gsub("noTAC", "No TAC", linkage$fides_area)
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "03A-C(?!.)", "03A-C.")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "07DE.", "7DE.")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "7G-K(?!.)", "7G-K.")
@@ -748,6 +1151,11 @@ linkage$fides_area <- stringr::str_replace(linkage$fides_area, "8ABDE(?!.)", "8A
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "juil-11", "7/3411")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "7E.(?!.)", "07E.")
 linkage$fides_area <- stringr::str_replace(linkage$fides_area, "N1GRM.", "N1GRN.")
+
+# Greater Forkbeard Phycis blennoides ICES NA GFB 126501 567-,89-,1012- - TAC areas do not excist - change to No TAC
+
+linkage$fides_area[linkage$fides_area == "567-,89-,1012-"] <- "No TAC"
+
 ```
 
 ### Checking for misspellings
