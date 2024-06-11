@@ -11,11 +11,13 @@ rwp_table_2_1_template(
     "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "POL", "PRT",
     "ROU", "SVK", "SVN", "ESP", "SWE"),
   landing_statistics,
+  tab_2.1_data_source = "RCG agreed statistics",
   rfmo = c("CCAMLR", "CECAF", "GFCM", "IATTC", "ICCAT", "ICES", "IOTC", "NAFO", "SEAFO",
     "SPRFMO", "WCPFC", "WECAFC"),
   input_path_directory_eurostat = NULL,
   input_path_file_rcg_stats = NULL,
   input_path_file_fides,
+  linkage_file = NULL,
   output_path = NULL
 )
 }
@@ -26,7 +28,9 @@ rwp_table_2_1_template(
 
 \item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.}
 
-\item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").}
+\item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/fr/web/fisheries/database), regional database source (use argument "rcg_stats") or RDBES data sources (use argument "rdbes").}
+
+\item{tab_2.1_data_source}{expected. EUROSTAT, FIDES, National statistics, RCG agreed statistics, RFMO statistics}
 
 \item{rfmo}{{\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.}
 
@@ -35,6 +39,8 @@ rwp_table_2_1_template(
 \item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input path and file name for input CL landing RDB file.}
 
 \item{input_path_file_fides}{{\link[base]{character}} expected. Input path and file name for input FIDES file.}
+
+\item{linkage_file}{{\link[base]{character}} expected. Name of linkage file. By default NULL.}
 
 \item{output_path}{{\link[base]{character}} expected. Output path. By default NULL.}
 }

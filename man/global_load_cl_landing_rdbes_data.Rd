@@ -2,16 +2,16 @@
 % Please edit documentation in R/global_load_cl_landing_rdbes_data.R
 \name{global_load_cl_landing_rdbes_data}
 \alias{global_load_cl_landing_rdbes_data}
-\title{Load CL landing RDBES data}
+\title{Load CL landing RDB data}
 \usage{
-global_load_cl_landing_rdbes_data(input_path_cl_landing_rdbes_data)
+global_load_cl_landing_rdbes_data(input_path_file_rdbes_stats)
 }
 \arguments{
-\item{input_path_cl_landing_rdbes_data}{{\link[base]{character}} expected. Input CL landing RDBES data file path (.csv format expected).}
+\item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input rcg stats data file path (.csv format expected).}
 }
 \value{
 A tibble.
 }
 \description{
-Process for for load the data from CL landing RDBES data file.
+Process for for load the data from CL landing RDB data file.
 }

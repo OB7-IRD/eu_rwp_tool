@@ -4,23 +4,10 @@
 #' @param path {\link[base]{character}} expected. Input path directory where tsv EUROSTAT landings files are located.
 #' @return The function return a {\link[base]{data.frame}}.
 #' @export
-#' @importFrom stringr str_detect str_extract
-#' @importFrom tidyr separate
 global_load_eurostat_data <- function(path) {
-  cat(format(x = Sys.time(),
-             format = "%Y-%m-%d %H:%M:%S"),
-      " - Start process for load data from eurostat file(s).\n",
-      sep = "")
-  # arguments verifications ----
-  # if (codama::r_type_checking(r_object = path,
-  #                             type = "character",
-  #                             length = as.integer(x = 1),
-  #                             output = "logical") != TRUE) {
-  #   return(codama::r_type_checking(r_object = path,
-  #                                  type = "character",
-  #                                  length = as.integer(x = 1),
-  #                                  output = "message"))
-  # }
+  message(format(x = Sys.time(),
+                 format = "%Y-%m-%d %H:%M:%S"),
+          " - Start process for load data from eurostat file(s).")
   # process ----
   eurostat_files <- list.files(path = path)
   eurostat_files <- eurostat_files[stringr::str_detect(string = eurostat_files,
@@ -54,15 +41,13 @@ global_load_eurostat_data <- function(path) {
                                    })
     eurostat_files_final <- do.call(what = rbind,
                                     args = eurostat_files_final)
-    cat(format(x = Sys.time(),
-               format = "%Y-%m-%d %H:%M:%S"),
-        " - Successful process for load data from eurostat file(s).\n",
-        sep = "")
+    message(format(x = Sys.time(),
+                   format = "%Y-%m-%d %H:%M:%S"),
+            " - Successful process for load data from eurostat file(s).")
     return(eurostat_files_final)
   } else {
     stop(format(x = Sys.time(),
                 format = "%Y-%m-%d %H:%M:%S"),
-         " - Error, no eurostat file found for the path selected.\n",
-         sep = "")
+         " - No eurostat file found for the path selected.")
   }
 }

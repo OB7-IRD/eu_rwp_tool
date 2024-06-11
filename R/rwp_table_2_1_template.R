@@ -4,7 +4,7 @@
 #' @param reference_period_start {\link[base]{integer}} expected. Start of reference period. Be careful, the process needs 3 years at least to run.
 #' @param reference_period_end {\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.
 #' @param eu_countries {\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.
-#' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/web/fisheries/data/database) or regional database source (use argument "rcg_stats").
+#' @param landing_statistics {\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/fr/web/fisheries/database), regional database source (use argument "rcg_stats") or RDBES data sources (use argument "rdbes").
 #' @param tab_2.1_data_source expected. EUROSTAT, FIDES, National statistics, RCG agreed statistics, RFMO statistics
 #' @param rfmo {\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.
 #' @param input_path_directory_eurostat {\link[base]{character}} expected. Input path directory for input eurostat files.
@@ -13,8 +13,6 @@
 #' @param linkage_file {\link[base]{character}} expected. Name of linkage file. By default NULL.
 #' @param output_path {\link[base]{character}} expected. Output path. By default NULL.
 #' @return A list with two elements: "table_2_1_template" and "table_2_1_template_control".
-#' @importFrom utils read.table
-#' @importFrom dplyr filter rename select left_join tibble relocate group_by summarise mutate case_when
 #' @export
 rwp_table_2_1_template <- function(reference_period_start,
                                    reference_period_end,
@@ -64,10 +62,9 @@ rwp_table_2_1_template <- function(reference_period_start,
                                    input_path_file_fides,
                                    linkage_file = NULL,
                                    output_path = NULL) {
-  cat(format(x = Sys.time(),
-             format = "%Y-%m-%d %H:%M:%S"),
-      " - Start process on RWP table 2.1 generation.\n",
-      sep = "")
+  message(format(x = Sys.time(),
+                 format = "%Y-%m-%d %H:%M:%S"),
+          " - Start process on RWP table 2.1 generation.")
   # global variables assignement ----
   geo <- NULL
   geopolitical_entity <- NULL
@@ -108,8 +105,7 @@ rwp_table_2_1_template <- function(reference_period_start,
   if (length(x = reference_period) < 3) {
     stop(format(x = Sys.time(),
                 format = "%Y-%m-%d %H:%M:%S"),
-         " - Error, the reference period contains less than 3 years.\n",
-         sep = "")
+         " - The reference period contains less than 3 years.")
   }
   # data imports ----
   # asfis
@@ -129,15 +125,15 @@ rwp_table_2_1_template <- function(reference_period_start,
   if (landing_statistics == "eurostat") {
     eurostat_data <- global_load_eurostat_data(path = input_path_directory_eurostat)
     reference_period_eurostat <- reference_period[which(x = reference_period %in% names(x = eurostat_data))]
-    if (length(x = reference_period_eurostat) != length(x = reference_period)) {
-      cat(format(x = Sys.time(),
-                 format = "%Y-%m-%d %H:%M:%S"),
-          " - Warning: years of the \"reference_period\" argument are not all available in the EUROSTAT data imported.\n",
-          "Year(s) available in EUROSTAT data are: \n",
-          paste0(reference_period_eurostat,
-                 collapse = ", "),
-          ".\n",
-          sep = "")
+    if (! all(reference_period %in% reference_period_eurostat)) {
+      warning(format(x = Sys.time(),
+                     format = "%Y-%m-%d %H:%M:%S"),
+              " - Year(s) of the \"reference_period\" argument are not all available in the EUROSTAT data imported.\n",
+              "Year(s) not available in EUROSTAT data are: \n",
+              paste0(dplyr::setdiff(x = reference_period,
+                                    y = reference_period_eurostat),
+                     collapse = ", "),
+              ".")
     }
     eurostat_data_final <- dplyr::select(.data = eurostat_data,
                                          species,
@@ -155,20 +151,19 @@ rwp_table_2_1_template <- function(reference_period_start,
 
     reference_period_rcg_stats <- reference_period[which(x = reference_period %in% names(x = rcg_stats_data))]
     if (length(x = reference_period_rcg_stats) != length(x = reference_period)) {
-      cat(format(x = Sys.time(),
-                 format = "%Y-%m-%d %H:%M:%S"),
-          " - Warning: years of the \"reference_period\" argument are not all available in the RCG stats data imported.\n",
-          "Year(s) available in RCG stats data are: \n",
-          paste0(reference_period_rcg_stats,
-                 collapse = ", "),
-          ".\n",
-          sep = "")
+      warning(format(x = Sys.time(),
+                     format = "%Y-%m-%d %H:%M:%S"),
+              " - Years of the \"reference_period\" argument are not all available in the RCG stats data imported.\n",
+              "Year(s) available in RCG stats data are: \n",
+              paste0(reference_period_rcg_stats,
+                     collapse = ", "),
+              ".")
     }
     rcg_stats_data_final <- dplyr::select(.data = rcg_stats_data,
-                                         Scientific_Name,
-                                         Area,
-                                         geo,
-                                         as.character(x = !!reference_period_rcg_stats)) %>%
+                                          Scientific_Name,
+                                          Area,
+                                          geo,
+                                          as.character(x = !!reference_period_rcg_stats)) %>%
       dplyr::left_join(geo_data,
                        by = "geo") %>%
       dplyr::filter(! is.na(x = country))
@@ -177,14 +172,13 @@ rwp_table_2_1_template <- function(reference_period_start,
 
     reference_period_rcg_stats <- reference_period[which(x = reference_period %in% names(x = rcg_stats_data))]
     if (length(x = reference_period_rcg_stats) != length(x = reference_period)) {
-      cat(format(x = Sys.time(),
-                 format = "%Y-%m-%d %H:%M:%S"),
-          " - Warning: years of the \"reference_period\" argument are not all available in the RCG stats data imported.\n",
-          "Year(s) available in RCG stats data are: \n",
-          paste0(reference_period_rcg_stats,
-                 collapse = ", "),
-          ".\n",
-          sep = "")
+      warning(format(x = Sys.time(),
+                     format = "%Y-%m-%d %H:%M:%S"),
+              " - Years of the \"reference_period\" argument are not all available in the RCG stats data imported.\n",
+              "Year(s) available in RCG stats data are: \n",
+              paste0(reference_period_rcg_stats,
+                     collapse = ", "),
+              ".")
     }
     rcg_stats_data_final <- dplyr::select(.data = rcg_stats_data,
                                           Scientific_Name,
@@ -194,36 +188,42 @@ rwp_table_2_1_template <- function(reference_period_start,
       dplyr::left_join(geo_data,
                        by = "geo") %>%
       dplyr::filter(! is.na(x = country))
+  } else {
+    stop(format(x = Sys.time(),
+                format = "%Y-%m-%d %H:%M:%S"),
+         " - Value \"",
+         landing_statistics,
+         "\" of argument \"landing_statistics\" not associated to a process yet.")
   }
   # fides
   fides_data <- global_load_fides_data(reference_period = reference_period,
                                        file_path = input_path_file_fides,
                                        eu_countries = eu_countries)
   # table 2.1 linkage
-  table_2_1_linkage <- utils::read.csv(file = system.file(paste0(linkage_file, ".csv"),
+  table_2_1_linkage <- utils::read.csv(file = system.file(paste0(linkage_file,
+                                                                 ".csv"),
                                                           package = "rwptool"),
                                        sep = ';',
                                        header = TRUE,
                                        as.is = TRUE,
                                        encoding = 'UTF-8')
-
-  table_2_1_linkage <- subset( table_2_1_linkage, include_in_table_2.1 == "yes")
-
-  table_2_1_linkage$id <- row.names(table_2_1_linkage)
-  table_2_1_linkage <- dplyr::arrange(table_2_1_linkage, as.numeric(id))
-
+  table_2_1_linkage <- subset(table_2_1_linkage,
+                              include_in_table_2.1 == "yes")
+  table_2_1_linkage$id <- row.names(x = table_2_1_linkage)
+  table_2_1_linkage <- dplyr::arrange(table_2_1_linkage,
+                                      as.numeric(id))
   # table 2.1 design ----
   table_2_1_information_final <- data.frame()
   table_control_final <- data.frame()
   for (table_2_1_linkage_id in seq_len(length.out = nrow(x = table_2_1_linkage))) {
-    cat(format(x = Sys.time(),
-               format = "%Y-%m-%d %H:%M:%S"),
-        " - Be patient, work in progress on row id ",
-        table_2_1_linkage_id,
-        ".\n",
-        sep = "")
+    message(format(x = Sys.time(),
+                   format = "%Y-%m-%d %H:%M:%S"),
+            " - Be patient, work in progress on row id ",
+            table_2_1_linkage_id)
     # check id 118 for special data
-    if (landing_statistics == "eurostat" | landing_statistics == "rcg_stats" | landing_statistics == "rdbes") {
+    if (landing_statistics == "eurostat"
+        || landing_statistics == "rcg_stats"
+        || landing_statistics == "rdbes") {
       # from eurostat data ----
       if (landing_statistics == "eurostat") {
         country_name <- dplyr::filter(.data = geo_data,
@@ -261,7 +261,6 @@ rwp_table_2_1_template <- function(reference_period_start,
           dplyr::filter(level_description != "GBR")
         reference_period_eurostat <- reference_period_rcg_stats
       }
-
       if (nrow(x = current_eurostat_data) == 0) {
         current_eurostat_data <- dplyr::tibble(species = table_2_1_linkage[table_2_1_linkage_id,
                                                                            "x3a_code"],
@@ -438,14 +437,13 @@ rwp_table_2_1_template <- function(reference_period_start,
                                           split = ","))
       reference_period_fides <- reference_period[which(x = reference_period %in% unique(x = fides_data$definition_year))]
       if (length(x = reference_period_fides) != length(x = reference_period)) {
-        cat(format(x = Sys.time(),
-                   format = "%Y-%m-%d %H:%M:%S"),
-            " - Warning: years of the \"reference_period\" argument are not all available in the FIDES data imported.\n",
-            "Year(s) available in FIDES data are: \n",
-            paste0(reference_period_fides,
-                   collapse = ", "),
-            ".\n",
-            sep = "")
+        warning(format(x = Sys.time(),
+                       format = "%Y-%m-%d %H:%M:%S"),
+                " - Years of the \"reference_period\" argument are not all available in the FIDES data imported.\n",
+                "Year(s) available in FIDES data are: \n",
+                paste0(reference_period_fides,
+                       collapse = ", "),
+                ".")
       }
       current_fides_data <- dplyr::filter(.data = fides_data,
                                           species_code %in% !!fides_specie
@@ -473,7 +471,7 @@ rwp_table_2_1_template <- function(reference_period_start,
         fides_country <- dplyr::filter(.data = current_fides_data_country,
                                        level_code %in% !!eu_countries)
         fides_eu <- sum(dplyr::filter(.data = current_fides_data_country,
-                                  level_code %in% !!eu_countries)$initial_quantity, na.rm = T)
+                                      level_code %in% !!eu_countries)$initial_quantity, na.rm = T)
         fides_tac <- dplyr::filter(.data = current_fides_data_country,
                                    level_code == "TAC")$initial_quantity
         if (nrow(x = fides_country) >= 1) {
@@ -530,12 +528,11 @@ rwp_table_2_1_template <- function(reference_period_start,
                                          table_2_1_information)
     table_control_final <- rbind(table_control_final,
                                  table_control)
-    cat(format(x = Sys.time(),
-               format = "%Y-%m-%d %H:%M:%S"),
-        " - Work done on row id ",
-        table_2_1_linkage_id,
-        ".\n",
-        sep = "")
+    message(format(x = Sys.time(),
+                   format = "%Y-%m-%d %H:%M:%S"),
+            " - Work done on row id ",
+            table_2_1_linkage_id,
+            ".")
   }
   # formatting ----
   table_2_1_information_final_2 <- table_2_1_information_final %>%
@@ -595,25 +592,24 @@ rwp_table_2_1_template <- function(reference_period_start,
       selected_bio = " ",
       reg_coord = " "
     )
-
   # Order cols correctly
   # As agreed, only keep comment_fides_25_rule in the WP table - the other comments will go in the control file
   table_2_1_information_final_2$comments <- table_2_1_information_final_2$comment_fides_25_rule
   table_2_1_information_final_2$comments[is.na(table_2_1_information_final_2$comments)] <- ""
   table_2_1_information_final_3 <- dplyr::select(table_2_1_information_final_2,
-                                          ms,
-                                          reference_years,
-                                          region,
-                                          rfmo,
-                                          spp,
-                                          area,
-                                          landings,
-                                          source_national,
-                                          tac,
-                                          share_landing,
-                                          source_eu,
-                                          thresh,
-                                          reg_coord, covered_length, selected_bio, comments)
+                                                 ms,
+                                                 reference_years,
+                                                 region,
+                                                 rfmo,
+                                                 spp,
+                                                 area,
+                                                 landings,
+                                                 source_national,
+                                                 tac,
+                                                 share_landing,
+                                                 source_eu,
+                                                 thresh,
+                                                 reg_coord, covered_length, selected_bio, comments)
 
 
   rwp_table_2_1_export = list("table_2_1_template" = table_2_1_information_final_3,
@@ -644,17 +640,14 @@ rwp_table_2_1_template <- function(reference_period_start,
                          sep = ";",
                          dec = ".")
     }
-    cat(format(x = Sys.time(),
-               format = "%Y-%m-%d %H:%M:%S"),
-        " - Successful output generation in the folder:\n",
-        output_path,
-        "\n",
-        sep = "")
+    message(format(x = Sys.time(),
+                   format = "%Y-%m-%d %H:%M:%S"),
+            " - Successful output generation in the folder:\n",
+            output_path)
   }
-  cat(format(x = Sys.time(),
-             format = "%Y-%m-%d %H:%M:%S"),
-      " - Process RWP table 2.1 generation successfully ended.\n",
-      sep = "")
+  message(format(x = Sys.time(),
+                 format = "%Y-%m-%d %H:%M:%S"),
+          " - Process RWP table 2.1 generation successfully ended.")
   return(rwp_table_2_1_export)
 }
 
