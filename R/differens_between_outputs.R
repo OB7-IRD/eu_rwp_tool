@@ -1,11 +1,3 @@
-#' Title
-#'
-#' @param variables
-#'
-#' @return
-#' @export
-#'
-#' @examples
 differens_between_outputs <- function(path = NULL,
                                       type = "control",
                                       output_version_old = NULL,

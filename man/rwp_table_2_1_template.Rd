@@ -10,15 +10,16 @@ rwp_table_2_1_template(
   eu_countries = c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA",
     "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "POL", "PRT",
     "ROU", "SVK", "SVN", "ESP", "SWE"),
-  landing_statistics,
-  tab_2.1_data_source = "RCG agreed statistics",
+  rcg_countries = NULL,
+  landing_data_source,
   rfmo = c("CCAMLR", "CECAF", "GFCM", "IATTC", "ICCAT", "ICES", "IOTC", "NAFO", "SEAFO",
     "SPRFMO", "WCPFC", "WECAFC"),
   input_path_directory_eurostat = NULL,
-  input_path_file_rcg_stats = NULL,
+  input_path_file_rcg_agreed_statistics = NULL,
   input_path_file_fides,
-  linkage_file = NULL,
-  output_path = NULL
+  linkage_file,
+  output_path = NULL,
+  full_name_output = FALSE
 )
 }
 \arguments{
@@ -26,21 +27,21 @@ rwp_table_2_1_template(
 
 \item{reference_period_end}{{\link[base]{integer}} expected. End of reference period. Be careful, the process needs 3 years at least to run.}
 
-\item{eu_countries}{{\link[base]{character}} expected. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country. By default the 27 EU member states.}
+\item{eu_countries}{{\link[base]{character}} expected. By default the 27 EU member states. European Union country(ies) id(s) for data extraction associated. Use 3-alpha country.}
 
-\item{landing_statistics}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use argument "eurostat", https://ec.europa.eu/eurostat/fr/web/fisheries/database), regional database source (use argument "rcg_stats") or RDBES data sources (use argument "rdbes").}
+\item{rcg_countries}{{\link[base]{character}} expected. By default NULL. You can choose between "lp", "nansea" or "baltic" to select automatically EU countries associated with the RCG. If the value if not one of this, value(s) of "eu_countries" (for lp, nansea and baltic) and "rfmo" (for lp) arguments will be used instead.}
 
-\item{tab_2.1_data_source}{expected. EUROSTAT, FIDES, National statistics, RCG agreed statistics, RFMO statistics}
+\item{landing_data_source}{{\link[base]{character}} expected. Landing data statistics source. You can choose between EUROSTAT source (use value "eurostat", https://ec.europa.eu/eurostat/fr/web/fisheries/database) or RCG agreed statistics (use value "rcg_agreed_statistics"). So far value "rcg_agreed_statistics" is associated to RDBES data.}
 
 \item{rfmo}{{\link[base]{character}} expected. RFMO's list to include in output. By default CCAMLR, CECAF, GFCM, IATTC, ICCAT, ICES, IOTC, NAFO, SEAFO, SPRFMO, WCPFC, WECAFC.}
 
 \item{input_path_directory_eurostat}{{\link[base]{character}} expected. Input path directory for input eurostat files.}
 
-\item{input_path_file_rcg_stats}{{\link[base]{character}} expected. Input path and file name for input CL landing RDB file.}
+\item{input_path_file_rcg_agreed_statistics}{{\link[base]{character}} expected. Input path and file name for input RDBES CL landing file.}
 
 \item{input_path_file_fides}{{\link[base]{character}} expected. Input path and file name for input FIDES file.}
 
-\item{linkage_file}{{\link[base]{character}} expected. Name of linkage file. By default NULL.}
+\item{linkage_file}{{\link[base]{character}} expected. Name of linkage file.}
 
 \item{output_path}{{\link[base]{character}} expected. Output path. By default NULL.}
 }
